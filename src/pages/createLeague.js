@@ -207,8 +207,8 @@ const CreateLeague = () => {
         />
 
         <Input
-          label="Number of Players per Team"
-          placeholder="Number of Players per Team"
+          label="Max number of Players per Team"
+          placeholder="Max number of Players per Team"
           value={numOfPlayers}
           onChange={(e) => setNumOfPlayers(e.target.value)}
         />
@@ -225,8 +225,8 @@ const CreateLeague = () => {
         />
 
         <Input
-          label="Number of Teams"
-          placeholder="Number of Teams"
+          label="Max number of Teams"
+          placeholder="Max number of Teams"
           value={numOfTeams}
           onChange={(e) => setNumOfTeams(e.target.value)}
         />

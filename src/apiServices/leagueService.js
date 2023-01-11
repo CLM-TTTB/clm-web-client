@@ -89,6 +89,19 @@ export const updateKnockoutScheduleTree = async (leagueID) => {
   }
 };
 
+export const updateGameDetails = async (leagueID, gameID, data) => {
+  try {
+    const response = await request.private.patch(
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/games/${gameID}`,
+      data,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const generateKnockoutScheduleTree = async (leagueID) => {
   try {
     const response = await request.private.post(

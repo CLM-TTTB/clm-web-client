@@ -30,9 +30,9 @@ const ProfileSettings = () => {
       <h1 className={styles.title}>Profile Settings</h1>
 
       <div className={styles.profileSettingsForm}>
-        <div className={styles.form1}>
+        {/* <div className={styles.form1}>
           <ImageButton label="Profile Avatar" />
-        </div>
+        </div> */}
         <div className={styles.form2}>
           <Input
             label="Name"

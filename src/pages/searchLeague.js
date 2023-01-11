@@ -167,7 +167,7 @@ const SearchLeague = () => {
                 />
               </div>
 
-              <DropDown
+              {/* <DropDown
                 label="Format"
                 options={[
                   '',
@@ -183,7 +183,7 @@ const SearchLeague = () => {
                 options={['', 'Opening', 'Closed']}
                 onChange={handleStatusChange}
                 value={statusFilter}
-              />
+              /> */}
               <DropDown
                 label="Sort by"
                 options={['', 'League Name', 'Latest Date', 'Oldest Date']}

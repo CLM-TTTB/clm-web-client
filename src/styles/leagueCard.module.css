@@ -38,6 +38,10 @@
   font-weight: bold;
   overflow: hidden;
   font-size: 23px;
+  white-space: nowrap;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .frameParent {

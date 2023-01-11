@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from '../../src/styles/matchResultModal.module.css';
 import cardStyle from '../../src/styles/leagueCard.module.css';
@@ -8,7 +8,10 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { updateKnockoutGameResult } from '~/apiServices/leagueService';
+import {
+  updateKnockoutGameResult,
+  updateGameDetails,
+} from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const MatchResultModal = ({
@@ -20,9 +23,10 @@ const MatchResultModal = ({
   teamName2,
   score1,
   score2,
-  property1,
-  property2,
-  onScoreChange,
+  fullStartTime,
+  // property1,
+  // property2,
+  handleSavePress,
   gameLocation, //the name 'location' is already use for routing
 }) => {
   const location = useLocation();
@@ -36,15 +40,16 @@ const MatchResultModal = ({
 
   const [selectedTeam, setSelectedTeam] = useState('');
   const [toggleDetailModal, setToggleDetailModal] = useState(false);
+  const [enableEditResult, setEnableEditResult] = useState(false);
 
-  const [goalCountsTeam1, setGoalCountsTeam1] = useState({});
-  const [goalCountsTeam2, setGoalCountsTeam2] = useState({});
+  // const [goalCountsTeam1, setGoalCountsTeam1] = useState({});
+  // const [goalCountsTeam2, setGoalCountsTeam2] = useState({});
 
-  const [yellowCardsTeam1, setYellowCardsTeam1] = useState({});
-  const [yellowCardsTeam2, setYellowCardsTeam2] = useState({});
+  // const [yellowCardsTeam1, setYellowCardsTeam1] = useState({});
+  // const [yellowCardsTeam2, setYellowCardsTeam2] = useState({});
 
-  const [redCardsTeam1, setRedCardsTeam1] = useState({});
-  const [redCardsTeam2, setRedCardsTeam2] = useState({});
+  // const [redCardsTeam1, setRedCardsTeam1] = useState({});
+  // const [redCardsTeam2, setRedCardsTeam2] = useState({});
 
   const [inputYear, setInputYear] = useState('');
   const [inputMonth, setInputMonth] = useState(''); // Assuming the default month is January (01)
@@ -52,7 +57,86 @@ const MatchResultModal = ({
   const [inputHour, setInputHour] = useState(''); // Assuming the default hour is midnight (00)
   const [inputMinute, setInputMinute] = useState(''); // Assuming the default minute is 00
 
-  const formattedDate = `${inputYear}-${inputMonth}-${inputDay}T${inputHour}:${inputMinute}:00.000z`;
+  useEffect(() => {
+    fullStartTime === null
+      ? setEnableEditResult(false)
+      : setEnableEditResult(true);
+
+    const tempStartTime = fullStartTime === null ? new Date() : fullStartTime;
+
+    setInputYear(tempStartTime.getFullYear());
+    const month =
+      tempStartTime.getUTCMonth() + 1 < 10
+        ? `0${tempStartTime.getUTCMonth() + 1}`
+        : tempStartTime.getUTCMonth() + 1; // Month is zero-based, so add 1
+    const day =
+      tempStartTime.getUTCDate() < 10
+        ? `0${tempStartTime.getUTCDate()}` //handle if the output of date, month, hour, minute is < 10
+        : tempStartTime.getUTCDate();
+    const hour =
+      tempStartTime.getUTCHours() < 10
+        ? `0${tempStartTime.getUTCHours()}`
+        : tempStartTime.getUTCHours();
+    const minute =
+      tempStartTime.getUTCMinutes() < 10
+        ? `0${tempStartTime.getUTCMinutes()}`
+        : tempStartTime.getUTCMinutes();
+
+    setInputMonth(month);
+    setInputDay(day);
+    setInputHour(hour);
+    setInputMinute(minute);
+  }, []);
+
+  const updateGameResult = async (
+    winner,
+    winnerGoalsFor,
+    winnerGoalsAgainst,
+  ) => {
+    try {
+      const response = await updateKnockoutGameResult(
+        leagueID,
+        gameID,
+        winner,
+        winnerGoalsFor,
+        winnerGoalsAgainst,
+      );
+      if (response.status === HttpStatus.OK) {
+        toast.success('Score updated successfully');
+        setIsEditMode(false);
+        handleSavePress();
+      } else {
+        toast.error('Unexpected server error, please try again later');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateGameInfos = async () => {
+    try {
+      let formattedDate = `${inputYear}-${inputMonth}-${inputDay}T${inputHour}:${inputMinute}:00.000z`;
+      console.log(formattedDate);
+      // console.log(editedLocation);
+
+      const response = await updateGameDetails(leagueID, gameID, {
+        stadium: editedLocation,
+        startTime: formattedDate,
+      });
+
+      if (response.status === HttpStatus.OK) {
+        toast.success('Game details updated successfully!!');
+        setEnableEditResult(true);
+        handleSavePress();
+      } else if (response.status === HttpStatus.BAD_REQUEST) {
+        toast.error('Invalid date or time format, please re-check!!');
+      } else {
+        toast.error('Unexpected server error!!');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // const handleAddGoal = (team, playerId) => {
   //   if (team === 'Team1') {
@@ -101,36 +185,49 @@ const MatchResultModal = ({
   };
 
   const handleSaveClick = async () => {
-    if (editedScore1 === editedScore2) {
-      toast.error('Knock out match result cannot be draw, please re-check!!');
-    } else {
-      let winnerGoalsFor, winnerGoalsAgainst, winner;
-      if (editedScore1 > editedScore2) {
-        winner = team1ID;
-        winnerGoalsFor = editedScore1;
-        winnerGoalsAgainst = editedScore2;
-      } else {
-        winner = team2ID;
-        winnerGoalsFor = editedScore2;
-        winnerGoalsAgainst = editedScore1;
-      }
-      try {
-        const response = await updateKnockoutGameResult(
-          leagueID,
-          gameID,
-          winner,
-          winnerGoalsFor,
-          winnerGoalsAgainst,
-        );
-        if (response.status === HttpStatus.OK) {
-          toast.success('Score updated successfully');
-          setIsEditMode(false);
-          onScoreChange();
+    if (enableEditResult) {
+      if (editedScore1 === editedScore2)
+        toast.error('Knock out match result cannot be draw, please re-check!!');
+      else {
+        let winnerGoalsFor, winnerGoalsAgainst, winner;
+        if (editedScore1 > editedScore2) {
+          winner = team1ID;
+          winnerGoalsFor = editedScore1;
+          winnerGoalsAgainst = editedScore2;
         } else {
-          toast.error('Unexpected server error, please try again later');
+          winner = team2ID;
+          winnerGoalsFor = editedScore2;
+          winnerGoalsAgainst = editedScore1;
         }
-      } catch (err) {
-        console.log(err);
+        await updateGameResult(winner, winnerGoalsFor, winnerGoalsAgainst);
+
+        if (
+          inputYear === '' ||
+          inputMonth === '' ||
+          inputDay === '' ||
+          inputHour === '' ||
+          inputMinute === ''
+        ) {
+          toast.error(
+            'Please fill in all the time information fields before saving!!',
+          );
+        } else {
+          await updateGameInfos();
+        }
+      }
+    } else {
+      if (
+        inputYear === '' ||
+        inputMonth === '' ||
+        inputDay === '' ||
+        inputHour === '' ||
+        inputMinute === ''
+      ) {
+        toast.error(
+          'Please fill in all the time information fields before saving!!',
+        );
+      } else {
+        updateGameInfos();
       }
     }
   };
@@ -150,11 +247,11 @@ const MatchResultModal = ({
               {isEditMode ? (
                 <div className={styles.dateInput}>
                   <input
-                    className={styles.yearEdit}
+                    className={styles.dateEdit}
                     type="text"
-                    placeholder="YYYY"
-                    value={inputYear}
-                    onChange={(e) => setInputYear(e.target.value)}
+                    placeholder="DD"
+                    value={inputDay}
+                    onChange={(e) => setInputDay(e.target.value)}
                   />
                   -
                   <input
@@ -166,11 +263,11 @@ const MatchResultModal = ({
                   />
                   -
                   <input
-                    className={styles.dateEdit}
+                    className={styles.yearEdit}
                     type="text"
-                    placeholder="DD"
-                    value={inputDay}
-                    onChange={(e) => setInputDay(e.target.value)}
+                    placeholder="YYYY"
+                    value={inputYear}
+                    onChange={(e) => setInputYear(e.target.value)}
                   />
                   <div className={styles.space} />
                   <input
@@ -193,7 +290,9 @@ const MatchResultModal = ({
                 //RETURN STRING: formattedDate (2023-01-11T08:23:00.000z)
 
                 <p>
-                  {inputYear}-{inputMonth}-{inputDay} {inputHour}:{inputMinute}
+                  {inputDay}/{inputMonth}/{inputYear}
+                  {' - '}
+                  {inputHour}:{inputMinute}
                 </p>
               )}
             </div>
@@ -250,7 +349,7 @@ const MatchResultModal = ({
 
             <div className={styles.scoreParent}>
               <div className={styles.score}>
-                {isEditMode ? (
+                {isEditMode && enableEditResult ? (
                   <>
                     <input
                       className={styles.scoreEdit}

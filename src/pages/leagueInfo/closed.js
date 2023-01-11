@@ -43,10 +43,10 @@ const Closed = ({ leagueID, leagueFormat }) => {
           label="Teams"
           className={`${styles.tab} ${tabValue === 3 && styles.activeTab}`}
         />
-        <Tab
+        {/* <Tab
           label="Stats"
           className={`${styles.tab} ${tabValue === 4 && styles.activeTab}`}
-        />
+        /> */}
       </Tabs>
       <div className={styles.colorLine}></div>
       {tabValue === 0 ? (

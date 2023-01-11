@@ -7,7 +7,7 @@ const KnockoutTree = ({ leagueRounds }) => {
   const [tournamentData, setTournamentData] = useState(null);
   let gap = 50;
 
-  console.log(leagueRounds);
+  // console.log(leagueRounds);
 
   // useEffect(() => {
   //   //USE TEST DATA
@@ -79,7 +79,11 @@ const KnockoutTree = ({ leagueRounds }) => {
 
       <div className={styles.winnerColumn}>
         <img className={styles.cup} alt="cup" src={cup}></img>
-        <div className={styles.winner}>CHAMPIONS</div>
+        <div className={styles.winner}>
+          {leagueRounds[leagueRounds.length - 1]?.games[0]?.winner === null
+            ? 'CHAMPION'
+            : leagueRounds[leagueRounds.length - 1]?.games[0]?.winner?.name}
+        </div>
       </div>
     </div>
   );
