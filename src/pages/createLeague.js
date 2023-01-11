@@ -147,6 +147,22 @@ const CreateLeague = () => {
     }
   };
 
+  const handleStartEstimateDateChange = (newDate) => {
+    if (enrollmentDeadline && newDate < enrollmentDeadline) {
+      toast.error('Estimate Start Date cannot be before Enrollment Deadline');
+    } else {
+      setStartEstimateDate(newDate);
+    }
+  };
+
+  const handleEndEstimateDateChange = (newDate) => {
+    if (startEstimateDate && newDate < startEstimateDate) {
+      toast.error('Estimate End Date cannot be before Estimate Start Date');
+    } else {
+      setEndEstimateDate(newDate);
+    }
+  };
+
   return (
     <Layout>
       <hr class="horizontal-line" />
@@ -221,7 +237,7 @@ const CreateLeague = () => {
           <label className={styles.label}>Estimate Start Date</label>
           <DatePickerComponent
             value={startEstimateDate}
-            onChange={(newDate) => setStartEstimateDate(newDate)}
+            onChange={handleStartEstimateDateChange}
           />
         </div>
 
@@ -229,7 +245,7 @@ const CreateLeague = () => {
           <label className={styles.label}>Estimate End Date</label>
           <DatePickerComponent
             value={endEstimateDate}
-            onChange={(newDate) => setEndEstimateDate(newDate)}
+            onChange={handleEndEstimateDateChange}
           />
         </div>
       </div>

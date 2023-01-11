@@ -39,7 +39,7 @@ const RegistrationList = ({ leagueID }) => {
     <div>
       <table className={styles.table}>
         <thead>
-          <tr>
+          <tr className={styles.head}>
             <th>ID</th>
             <th>Team Name</th>
             <th>Number of Players</th>
@@ -50,9 +50,9 @@ const RegistrationList = ({ leagueID }) => {
           </tr>
         </thead>
         <tbody className={styles.tbody}>
-          {registrationTeamData.map((team) => (
+          {registrationTeamData.map((team, index) => (
             <tr key={team.id}>
-              <td>{team.id}</td>
+              <td>{index + 1}</td>
               <td>{team.name}</td>
               <td>{team.member === undefined ? '0' : team.member.length}</td>
               <td>{team.phoneNo}</td>
