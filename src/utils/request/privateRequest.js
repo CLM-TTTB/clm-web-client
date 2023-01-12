@@ -47,8 +47,8 @@ axios.interceptors.response.use(
         return axios(config);
       }
       //logout without sending the refresh token back to server
-      toast.warn('Session expired. Please login again.');
-      history.navigate('/login');
+      // toast.warn('Session expired. Please login again.');
+      // history.navigate('/login');
       return Promise.reject(error);
     }
     return Promise.reject(error);

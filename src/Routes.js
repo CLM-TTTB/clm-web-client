@@ -28,12 +28,12 @@ const AppRoutes = () => {
       <Route path="/test" element={<TestPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/searchLeague" element={<SearchLeague />} />
-      <Route path="/guide" element={<Guide />} />
-      <Route path="/aboutUs" element={<AboutUs />} />
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route element={<PersistLogin />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/searchLeague" element={<SearchLeague />} />
+        <Route path="/guide" element={<Guide />} />
+        <Route path="/aboutUs" element={<AboutUs />} />
         <Route element={<RequireAuth />}>
           <Route path="/createLeague" element={<CreateLeague />} />
           <Route path="/createTeam" element={<CreateTeam />} />

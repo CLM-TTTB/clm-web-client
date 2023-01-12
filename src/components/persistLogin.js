@@ -21,7 +21,6 @@ const PersistLogin = () => {
     const fetchAuthInfos = async () => {
       try {
         const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
-        console.log(rememberMe);
 
         if (rememberMe) {
           const tempAccessToken = await localStorage.getItem(
@@ -33,12 +32,14 @@ const PersistLogin = () => {
           const tempUserInfos = await localStorage.getItem(
             StorageKey.USER_INFOS,
           );
-
-          console.log(tempAccessToken, tempRefreshToken, tempUserInfos);
+          // const tempUserPhoneNum = await localStorage.getItem(
+          //   StorageKey.USER_PHONE_NUM,
+          // );
 
           setAccessToken(tempAccessToken);
           setRefreshToken(tempRefreshToken);
           setUserInfos(tempUserInfos);
+          // setUserPhoneNum(tempUserPhoneNum);
         } else {
           const tempAccessToken = await sessionStorage.getItem(
             StorageKey.ACCESS_TOKEN,
@@ -49,12 +50,14 @@ const PersistLogin = () => {
           const tempUserInfos = await sessionStorage.getItem(
             StorageKey.USER_INFOS,
           );
-
-          console.log(tempAccessToken, tempRefreshToken, tempUserInfos);
+          // const tempUserPhoneNum = await sessionStorage.getItem(
+          //   StorageKey.USER_PHONE_NUM,
+          // );
 
           setAccessToken(tempAccessToken);
           setRefreshToken(tempRefreshToken);
           setUserInfos(tempUserInfos);
+          // setUserPhoneNum(tempUserPhoneNum);
         }
       } catch (err) {
         console.log(err);
@@ -65,7 +68,6 @@ const PersistLogin = () => {
     userInfos === null || accessToken === '' || refreshToken === ''
       ? fetchAuthInfos()
       : setIsLoading(false);
-    console.log('Hello from persist login');
   }, [
     setAccessToken,
     setRefreshToken,

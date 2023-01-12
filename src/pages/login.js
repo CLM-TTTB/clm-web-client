@@ -18,7 +18,8 @@ const Login = () => {
     localStorage.setItem(StorageKey.REMEMBER_ME, false);
   }, []);
 
-  const { setUserInfos, setAccessToken, setRefreshToken } = useAuth();
+  const { setUserInfos, setAccessToken, setRefreshToken, setUserPhoneNum } =
+    useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();

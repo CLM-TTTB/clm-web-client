@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '~/hooks/useAuth';
 
 import styles from '../styles/profileSettings.module.css';
 import Button from '~/components/button';
@@ -14,14 +15,66 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePickerComponent from '~/components/datePicker';
 
+import sessionStorage from '~/utils/sessionStorage';
+import localStorage from '~/utils/localStorage';
+import StorageKey from '~/constants/storageKeys';
+import { updateUserProfile } from '~/apiServices/authService';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const ProfileSettings = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const { userInfos, setUserInfos } = useAuth();
 
-  const handleSaveProfile = () => {
-    toast.success('Profile saved successfully');
+  const [name, setName] = useState(userInfos.name);
+  const [phoneNumber, setPhoneNumber] = useState(userInfos.phoneNo);
+
+  const handleSaveProfile = async () => {
+    const phoneRegex =
+      '^(\\+84|0)(3[2-9]|5[2689]|7[06-9]|8[1-9]|9[0-46-9])\\d{7}$';
+
+    if (phoneNumber && !phoneNumber.match(phoneRegex)) {
+      toast.error('Invalid phone number, please re-check!!');
+    } else {
+      try {
+        const response = await updateUserProfile(name, phoneNumber);
+
+        if (response.status === HttpStatus.OK) {
+          const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
+
+          if (rememberMe) {
+            const tempUserInfos = {
+              ...userInfos,
+              name: response.data.name,
+              phoneNo: response.data.phoneNo,
+            };
+            console.log(response.data.name);
+            console.log(response.data.phoneNo);
+            console.log(tempUserInfos);
+
+            localStorage.setItem(StorageKey.USER_INFOS, tempUserInfos);
+            setUserInfos(tempUserInfos);
+          } else {
+            const tempUserInfos = {
+              ...userInfos,
+              name: response.data.name,
+              phoneNo: response.data.phoneNo,
+            };
+            console.log(response.data.name);
+            console.log(response.data.phoneNo);
+            console.log(tempUserInfos);
+
+            sessionStorage.setItem(StorageKey.USER_INFOS, tempUserInfos);
+            setUserInfos(tempUserInfos);
+          }
+          toast.success('Profile saved successfully');
+        } else {
+          toast.error('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (

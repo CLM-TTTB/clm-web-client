@@ -1,6 +1,6 @@
 // Header.js
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/header.module.css';
 import logo from '../images/logo.png';
@@ -10,7 +10,7 @@ import localStorage from '~/utils/localStorage';
 import sessionStorage from '~/utils/sessionStorage';
 import StorageKey from '../constants/storageKeys';
 import useAuth from '~/hooks/useAuth';
-import { logout } from '~/apiServices/authService';
+import { logout, updateUserProfile } from '~/apiServices/authService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const Header = () => {
@@ -21,6 +21,8 @@ const Header = () => {
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsProfileOpen, setSubItemsProfileOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
 
   const navigate = useNavigate();
 
@@ -86,10 +88,12 @@ const Header = () => {
       localStorage.removeItem(StorageKey.USER_INFOS);
       localStorage.removeItem(StorageKey.ACCESS_TOKEN);
       localStorage.removeItem(StorageKey.REFRESH_TOKEN);
+      // localStorage.removeItem(StorageKey.USER_PHONE_NUM);
     } else {
       sessionStorage.removeItem(StorageKey.USER_INFOS);
       sessionStorage.removeItem(StorageKey.ACCESS_TOKEN);
       sessionStorage.removeItem(StorageKey.REFRESH_TOKEN);
+      // sessionStorage.removeItem(StorageKey.USER_PHONE_NUM);
     }
     localStorage.removeItem(StorageKey.RESEND_VERI_LINK_TOKEN);
     localStorage.removeItem(StorageKey.REMEMBER_ME);
@@ -161,7 +165,7 @@ const Header = () => {
                   onClick={openSubItemsProfile}
                 >
                   <div className={styles.profilePic} />
-                  <div>Username</div>
+                  <div>{userInfos.name}</div>
                   {isSubItemsProfileOpen && (
                     <div className={styles.subList1}>
                       <div className={styles.line}></div>

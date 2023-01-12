@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
-  getRegisteredTeamByID,
+  getTeamsInLeagueByID,
   acceptRejectTeamEnrollment,
 } from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
@@ -19,7 +19,7 @@ const RegistrationList = ({ leagueID }) => {
 
   const fetchRegistrationTeamData = async () => {
     try {
-      const response = await getRegisteredTeamByID(leagueID);
+      const response = await getTeamsInLeagueByID(leagueID);
       if (response.status === HttpStatus.OK) {
         const tempData = response.data.content;
         console.log(tempData);

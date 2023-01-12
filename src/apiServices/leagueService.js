@@ -182,10 +182,10 @@ export const searchLeagueByName = async (searchTerm) => {
   }
 };
 
-export const getRegisteredTeamByID = async (leagueID) => {
+export const getAcceptedTeamByID = async (leagueID) => {
   try {
     const response = await request.public.get(
-      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams`,
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams?status=ACCEPTED`,
     );
 
     return response;

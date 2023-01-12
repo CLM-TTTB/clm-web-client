@@ -10,6 +10,7 @@ import { useLocation, Location } from 'react-router-dom';
 import {
   updateKnockoutScheduleTree,
   generateKnockoutScheduleTree,
+  getAcceptedTeamByID,
 } from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
 
@@ -57,9 +58,34 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
     }
   };
 
-  const onGenerateSchedulePress = () => {
+  const onGenerateSchedulePress = async () => {
     setLeaguesRounds([]);
-    regenerateSchedule();
+    try {
+      const response = await getAcceptedTeamByID(leagueID);
+
+      if (response.status === HttpStatus.OK) {
+        console.log(response.data.totalItems);
+        if (response.data.totalItems % 2 !== 0) {
+          toast.error(
+            `Knock-out format number of team must be an even number but your number of team accepted into this League is an odd number (${response.data.totalItems} teams)`,
+          );
+        } else {
+          regenerateSchedule();
+        }
+      } else {
+        console.log('Unexpected server error!!');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
+    // if(numberOfEnrolledTeam % 2 !== 0){
+    //   toast.error(
+    //     `Knock-out format number of team must be an even number but your number of team accepted into this League is an odd number (${numberOfEnrolledTeam} teams)`,
+    //   );
+    // } else{
+    //   regenerateSchedule();
+    // }
   };
 
   useEffect(() => {

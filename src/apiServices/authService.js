@@ -71,3 +71,16 @@ export const resendVerificationLink = async () => {
     return err.response;
   }
 };
+
+export const updateUserProfile = async (userName, userPhoneNum) => {
+  try {
+    const response = await request.private.patch('/v1/user/change-profile', {
+      name: userName,
+      phoneNo: userPhoneNum,
+    });
+    return response;
+  } catch (err) {
+    console.log('Error from authSer.js: ' + err.response.status);
+    return err.response;
+  }
+};

@@ -113,8 +113,6 @@ const TemplateDetail = () => {
       toast.error('Phone number should start with 0');
     } else {
       try {
-        console.log(data);
-
         const response = await editTemplatePlayersInfos(templateId, {
           image: teamAvatar,
           name: templateName,
@@ -135,6 +133,33 @@ const TemplateDetail = () => {
           setData([]);
 
           fetchTemplateInfos();
+        } else if (response.status === HttpStatus.FORBIDDEN) {
+          try {
+            const response = await editTemplatePlayersInfos(templateId, {
+              image: teamAvatar,
+              teamName: teamName,
+              phoneNo: contactPhoneNumber,
+              description: description,
+              members: data,
+            });
+
+            if (response.status === HttpStatus.OK) {
+              toast.success('Template updated successfully!');
+
+              setTeamAvatar('');
+              setTemplateName('');
+              setTeamName('');
+              setContactPhoneNumber('');
+              setDescription('');
+              setData([]);
+
+              fetchTemplateInfos();
+            } else {
+              toast.error('Unexpected server error!!');
+            }
+          } catch (e) {
+            console.log(e);
+          }
         } else if (response.status === HttpStatus.NOT_FOUND) {
           console.log('User are not the creator of this template');
         } else {
