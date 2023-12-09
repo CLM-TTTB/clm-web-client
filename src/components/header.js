@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/header.module.css';
 import logo from '../images/logo.png';
 import logo1 from '../images/header/headerLogo-1.png';
+import CreateLeague from '~/pages/createLeague';
 
 const Header = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
@@ -57,7 +58,9 @@ const Header = () => {
             <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
             {isSubItemsLeaguesOpen && (
               <div className={styles.subList}>
-                <div onClick={() => navigate('/test')}>Create League</div>
+                <div onClick={() => navigate('/createLeague')}>
+                  Create League
+                </div>
                 <div onClick={() => navigate('/test')}>Search Leagues</div>
               </div>
             )}

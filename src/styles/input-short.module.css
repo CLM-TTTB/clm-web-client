@@ -1,0 +1,66 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  margin-bottom: 16px;
+  background-color: transparent;
+  margin-right: 40px;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  width: 196px;
+  line-height: 24px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #d4d4d4;
+  box-sizing: border-box;
+  line-height: 24px;
+  width: 196px;
+  outline: none;
+}
+
+.errorInput {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid red;
+  border-radius: 4px;
+  font-size: 16px;
+  color: red;
+  background-color: transparent;
+  box-sizing: border-box;
+  line-height: 24px;
+  width: 350px;
+  outline: none;
+}
+
+.errorInfo {
+  margin-top: 4px;
+  color: red;
+  font-size: 14px;
+}
+
+.visibilityButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  color: #7e7e7e;
+  align-self: flex-end; /* Align the button to the end of the container */
+  margin-top: 4px; /* Add margin to separate the button from the input */
+}
