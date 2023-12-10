@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/homePage.module.css';
 import logo from '../images/logo.png';
 import logo1 from '../images/headerLogo-1.png';
+import { login } from '~/apiServices/authService';
 
 const Header = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
@@ -21,7 +22,11 @@ const Header = () => {
     setSubItemsLeaguesOpen(false);
   }, [isSubItemsTeamsOpen]);
 
-  const onLOGINTextClick = useCallback(() => {
+  const onLOGINTextClick = useCallback(async () => {
+    const data = await login({
+      email: 'admin@gmail.com',
+      password: 'Admin123',
+    });
     // Please sync "LOGIN" to the project
   }, []);
 

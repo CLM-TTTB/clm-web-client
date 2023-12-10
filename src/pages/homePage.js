@@ -16,7 +16,7 @@ const HOME = () => {
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
 
-  const onLOGINTextClick = useCallback(() => {
+  const onLOGINTextClick = useCallback(async () => {
     // Please sync "LOGIN" to the project
   }, []);
 
