@@ -1,0 +1,39 @@
+@import './font.css';
+
+body {
+  margin: 0;
+  font-family: 'Manrope';
+}
+
+:root {
+  /* fonts */
+  --font-manrope: Manrope;
+
+  /* font sizes */
+  --font-size-base: 16px;
+  --font-size-7xl: 26px;
+  --font-size-5xl: 1.5rem;
+  --font-size-9xl: 1.75rem;
+  --font-size-21xl: 2.5rem;
+  --font-size-16xl: 2.19rem;
+  --font-size-71xl: 5.63rem;
+  --font-size-48xl-5: 4.22rem;
+  --font-size-31xl: 3.13rem;
+  --font-size-116xl: 8.44rem;
+
+  /* Colors */
+  --error: #ff3b3b;
+  --white-100: #fff;
+  --yellow-100: #ffdc11;
+  --black-100: #27282a;
+  --color-gray-100: rgba(255, 255, 255, 0.5);
+
+  /* Paddings */
+  --padding-smi: 0.81rem;
+  --padding-base: 1rem;
+  --padding-10xs: 0.19rem;
+  --padding-33xl: 3.25rem;
+
+  /* Border radiuses */
+  --br-8xs: 5px;
+}

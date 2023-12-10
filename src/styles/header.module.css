@@ -1,0 +1,171 @@
+.navigationRow {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navItem {
+  position: relative;
+  color: #d4d4d4;
+  margin-top: 40px;
+  margin-right: 40px; /* Adjust as needed for spacing between items */
+  text-wrap: nowrap;
+  cursor: pointer;
+}
+
+.headerBgParent {
+  display: flex;
+  justify-content: flex-start;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  color: #ffdc11;
+  background-color: #27282a;
+  z-index: 1000;
+}
+
+.headerBg {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: flex-start;
+  position: static;
+  top: 0;
+  background-color: #27282a;
+  height: 140px;
+}
+
+.clmLogo2041Parent {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.clmLogo2041 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.championLeagueManagementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #ffdc11;
+  margin-right: 270px;
+  margin-left: 10px;
+}
+
+.manageLeagues {
+  margin: 0;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.homeParent {
+  top: 2px;
+  left: 0;
+  width: 646px;
+  height: 30px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.frameWrapper {
+  top: 0;
+  left: 115px;
+  width: 117px;
+  height: 30px;
+}
+
+.subList2,
+.subList {
+  position: absolute; /* Position relative to the header */
+  top: 60%;
+  transform: translateX(-20%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 10px;
+  box-shadow: 0;
+  z-index: 1;
+  text-align: center;
+}
+
+.subList2 {
+  top: 70%;
+  transform: translateX(20%);
+}
+
+.frameContainer {
+  top: 0;
+  left: 282px;
+  width: 195px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.leaguesParent,
+.teamsParent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.aboutUs,
+.guide {
+  top: 0;
+  left: 427px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.teams {
+  position: static;
+  opacity: 0.8;
+  width: 100%;
+}
+
+.navigationChild {
+  position: absolute;
+  top: 1.5px;
+  left: 720.5px;
+  box-sizing: border-box;
+  width: 1px;
+  height: 30px;
+}
+.loginParent {
+  margin-left: 190px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.earthIcon,
+.signup,
+.login {
+  opacity: 0.8;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.signup {
+  color: #d4d4d4;
+  font-weight: normal;
+}
+.earthIcon {
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: cover;
+}

@@ -1,0 +1,7 @@
+/* fonts.css */
+
+@font-face {
+  font-family: 'Manrope'; /* Give your font a name */
+  src: url('./fonts/Manrope-Regular.ttf') format('truetype'); /* Add paths to your font files */
+  /* Add additional font formats if needed (e.g., truetype or opentype) */
+}

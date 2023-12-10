@@ -1,0 +1,229 @@
+/* homePage.module.css */
+
+.section {
+  position: relative;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlayColor {
+  background-color: rgba(
+    39,
+    40,
+    42,
+    0.7
+  ); /* Adjust the color and opacity as needed */
+  /* You can also adjust other styles like opacity to control the dimming effect */
+}
+
+/*SECTION 1*/
+
+.titleParent {
+  position: absolute;
+  top: 50px;
+  left: 150px;
+  width: 723px;
+  height: 190.5px;
+  color: #ababab;
+  font-size: 60px;
+}
+
+.titleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.title {
+  margin: 0;
+}
+
+.goalieIcon {
+  position: absolute;
+  top: 100px;
+  left: 984px;
+  width: 420px;
+  height: 420px;
+  object-fit: cover;
+}
+
+.gridContainer {
+  margin-top: 275px;
+  margin-left: 150px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px; /* Reduce the gap between buttons to 2 pixels */
+  height: 20vh;
+  width: 45vh;
+  justify-content: start;
+  align-items: start;
+}
+
+/* Specific styles for the buttons within the gridContainer */
+.gridContainer .button1,
+.gridContainer .button2,
+.gridContainer .button3,
+.gridContainer .button4 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.button2 {
+  margin-left: 15px;
+}
+
+.countingContainer {
+  margin-left: 150px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.countingBox {
+  text-align: center;
+  padding-right: 20px;
+  border: 1px solid rgba(204, 204, 204, 0);
+  margin-top: 50px;
+}
+
+.countingLabel {
+  font-size: xx-large;
+}
+
+.countingText {
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: black;
+  opacity: 70%;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/*SECTION 2*/
+
+.screen2Layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.titleParent2 {
+  margin-left: 150px;
+  color: #ababab;
+  font-size: 50px;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.operateContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 150px;
+}
+
+.operateItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 100px;
+}
+
+.operateNumber {
+  font-size: 100px;
+  color: #ffdc11;
+  font-weight: bold;
+}
+
+.operateTextContainer {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.operateLabel {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 38px;
+}
+
+.operateText {
+  margin-top: 5px;
+}
+
+.bigButton1 {
+  margin-top: 80px;
+
+  margin-bottom: 80px;
+  align-self: center;
+}
+
+/*SECTION 3*/
+
+.operateContainer2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 200px;
+  margin-left: 150px;
+}
+
+.operateLabel2 {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.bigButton2 {
+  margin-top: 80px;
+  margin-right: 150px;
+  margin-bottom: 50px;
+  align-self: flex-end;
+}
+
+/*SECTION 4*/
+
+.operateContainer3 {
+  position: relative;
+  bottom: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 150px;
+  gap: 150px;
+}
+
+.operateLabel3 {
+  color: #ffdc11;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.textRight {
+  text-align: end;
+}
+
+.operateItem2 {
+  margin-bottom: 50px;
+}
+
+.bigButton3 {
+  position: relative;
+  bottom: 200px;
+  align-self: center;
+}

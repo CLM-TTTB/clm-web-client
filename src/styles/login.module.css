@@ -1,0 +1,47 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.title {
+  color: #ffdc11;
+}
+
+.checkboxRow {
+  margin-bottom: 30px;
+}
+
+.forgotPassword,
+.rememberMe {
+  padding: 29px;
+  color: #d4d4d4;
+}
+
+.line {
+  height: 1px;
+  width: 350px;
+  background-color: #d4d4d4;
+  opacity: 20%;
+  margin-top: 60px;
+}
+
+.createAccount {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 33px;
+}
+
+.createAccount a {
+  color: #ffdc11; /* or any other color you prefer */
+  cursor: pointer;
+  text-decoration: none;
+}

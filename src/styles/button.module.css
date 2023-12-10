@@ -1,0 +1,33 @@
+/* Button.module.css */
+.button {
+  /* Default style */
+  border-radius: 8px;
+  border: 1px solid #ffdc11;
+  box-sizing: border-box;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffdc11;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: large;
+  white-space: nowrap;
+}
+
+.button:hover {
+  /* Hovered style */
+  background-color: #ffdc11;
+  color: black;
+}
+
+.button:active {
+  /* Active/Clicked style */
+  background-color: #ffdc11;
+  color: black;
+  box-shadow: grey;
+}
