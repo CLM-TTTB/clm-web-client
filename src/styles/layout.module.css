@@ -1,0 +1,10 @@
+.pageContainer {
+  background-color: rgb(
+    39,
+    40,
+    42
+  ); /* Change this to your desired background color */
+  min-height: 100vh;
+  padding: 20px;
+  color: #d4d4d4;
+}
