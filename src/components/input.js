@@ -1,5 +1,5 @@
 // InputComponent.js
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '~/styles/input.module.css';
 
 const Input = ({
@@ -8,13 +8,12 @@ const Input = ({
   errorInfo,
   onChange,
   value,
-  toggleVisibility,
-  showPassword,
+  type, // Added 'type' prop to differentiate between 'text' and 'password'
 }) => {
-  const inputClassName = error ? styles.errorInput : styles.input;
-  const inputType = showPassword ? 'password' : 'text';
+  const [showPassword, setShowPassword] = useState(false);
 
-  const isPasswordEmpty = value.trim().length === 0;
+  const inputClassName = error ? styles.errorInput : styles.input;
+  const inputType = type === 'password' ? (showPassword ? 'text' : 'password') : 'text';
 
   return (
     <div className={styles.inputContainer}>
@@ -26,13 +25,13 @@ const Input = ({
           value={value}
           onChange={onChange}
         />
-        {toggleVisibility && !isPasswordEmpty && (
+        {type === 'password' && (
           <button
             className={styles.visibilityButton}
-            onClick={toggleVisibility}
+            onClick={() => setShowPassword(!showPassword)}
             type="button"
           >
-            {showPassword ? 'Show' : 'Hide'}
+            {showPassword ? 'Hide' : 'Show'}
           </button>
         )}
       </div>

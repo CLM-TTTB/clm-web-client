@@ -6,7 +6,7 @@ import Layout from '~/components/layout';
 import Input from '~/components/input';
 import Button from '~/components/button';
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -18,9 +18,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [rememberMe, setRememberMe] = useState(false);
 
+  const [rePassword, setRePassword] = useState('');
+  const [rePasswordError, setRePasswordError] = useState(false);
+  const [rePasswordErrorInfo, setRePasswordErrorInfo] = useState('');
+
+
   // HANDLE SUCCESSFUL LOGIN
-  const loginSucceeded = () => {
-    navigate('/');
+  const signupSucceeded = () => {
+    navigate('/login');
   };
 
   const handleEmail = (e) => {
@@ -50,22 +55,32 @@ const Login = () => {
     }
   };
 
+  const handleRePassword = (e) => {
+    const value = e.target.value;
+    setRePassword(value);
+
+    if (value !== password) {
+      setRePasswordError(true);
+      setRePasswordErrorInfo('Password and Re-entered Password do not match');
+    } else {
+      setRePasswordError(false);
+      setRePasswordErrorInfo('');
+    }
+  };
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     if (password.length < 7) {
       setPasswordError(true);
       setPasswordErrorInfo('The password must contain at least 8 characters');
-    } else if (password != '12345678') {
-      setPasswordError(true);
-      setPasswordErrorInfo('Invalid Email or Password. Please try again');
-    } else if (passwordError == false && emailError == false) loginSucceeded();
+    } else if (passwordError == false && emailError == false && rePasswordError === false) signupSucceeded();
   };
 
-  const handleCreateAccount = () => {
-    navigate('/signup');
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -73,7 +88,7 @@ const Login = () => {
       <Layout>
         <hr class="horizontal-line" />
         <div className={styles.loginForm}>
-          <h1 className={styles.title}>Login</h1>
+          <h1 className={styles.title}>Sign Up</h1>
           <Input
             label="Email Address"
             error={emailError}
@@ -94,29 +109,31 @@ const Login = () => {
             type="password"
           />
 
-          <div className={styles.checkboxRow}>
-            <label className={styles.rememberMe}>
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-              />
-              Remember Me
-            </label>
+          <Input
+            label="Re-enter Password"
+            error={rePasswordError}
+            errorInfo={rePasswordErrorInfo}
+            onChange={handleRePassword}
+            value={rePassword}
+            toggleVisibility={togglePasswordVisibility}
+            showPassword={showPassword}
+            type="password"
+          />
 
-            <a href="/forgot-password" className={styles.forgotPassword}>
-              Forgot Password?
-            </a>
+          <div className={styles.checkboxRow}>
+            <label className={styles.terms}>
+              By clicking Sign Up, you indicate that you have read, understood and agreed to our <span style={{ color: '#ffdc11' }}>Terms of Use</span> and <span style={{ color: '#ffdc11' }}>Privacy Policy</span>.
+            </label>
           </div>
 
-          <Button text="Log in" onClick={handleLogin}></Button>
+          <Button text="Sign Up" onClick={handleSignup}></Button>
 
-          <div className={styles.line}></div>
+          <div className={styles.line2}></div>
 
-          <div className={styles.createAccount}>
-            Don't have an account?{' '}
-            <a href="#" onClick={handleCreateAccount}>
-              Create one!
+          <div className={styles.login}>
+            Already have an account?{' '}
+            <a onClick={handleLogin}>
+              Login
             </a>
           </div>
         </div>
@@ -127,4 +144,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

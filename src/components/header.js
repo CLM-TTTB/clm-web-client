@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
   const onSIGNUPTextClick = useCallback(() => {
-    // Please sync "SIGN UP" to the project
+    navigate('/signup')
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
