@@ -8,11 +8,12 @@ import Input from '~/components/input';
 import InputShort from '~/components/input-short';
 import ImageButton from '~/components/imageButton';
 import { FormControlLabel, FormGroup, Switch } from '@mui/material';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from '~/components/dropdown';
+import DropdownShort from '~/components/dropdown-short';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DatePicker } from '@mui/x-date-pickers';
 
 const CreateLeague = () => {
   const navigate = useNavigate();
@@ -60,10 +61,9 @@ const CreateLeague = () => {
       ageRange.length < 1 ||
       numOfPlayers.length < 1 ||
       competitionFormat.length < 1 ||
-      numOfTeams.length < 1 ||
-      privacy.length < 1
+      numOfTeams.length < 1
     ) {
-      alert('Please fill out all fields');
+      toast.error('Please fill out all fields');
     } else {
       toast.success('League created successfully!');
       setLeagueName('');
@@ -111,27 +111,33 @@ const CreateLeague = () => {
       </div>
 
       <div className={styles.createLeagueForm}>
-        <InputShort
+        <DropdownShort
           label="Age Range"
           placeholder="Age Range"
           value={ageRange}
           onChange={(e) => setAgeRange(e.target.value)}
+          options={['Under 18', '18-25', '26-35', '36-45', '46-55', '56+']}
+          defaultValue="Under 18"
         />
 
-        <Input
+        <Dropdown
           label="Number of players per team*"
           placeholder="Number of players per team"
           value={numOfPlayers}
           onChange={(e) => setNumOfPlayers(e.target.value)}
+          options={['3', '5', '6', '7', '9', '11']}
+          defaultValue="3"
         />
       </div>
 
       <div className={styles.createLeagueForm}>
-        <InputShort
+        <DropdownShort
           label="Competition Format"
           placeholder="Competition Format"
           value={competitionFormat}
           onChange={(e) => setCompetitionFormat(e.target.value)}
+          options={['Knock-out', 'Round-robin', 'Mixed']}
+          defaultValue="Knock-out"
         />
 
         <Input
@@ -144,19 +150,19 @@ const CreateLeague = () => {
 
       <div className={styles.createLeagueForm}>
         <h3>
-          {' '}
           For this configuration, the number of matches in the league is: 3
         </h3>
       </div>
 
       <div className={styles.createLeagueForm}>
         <div className={styles.form3}>
-          <InputShort
+          <DropdownShort
             label="Privacy"
             placeholder="Privacy"
             value={privacy}
-            styles={styles.alignLeft}
             onChange={(e) => setPrivacy(e.target.value)}
+            options={['Private', 'Public']}
+            defaultValue="Private"
           />
         </div>
 
