@@ -1,40 +1,46 @@
-// Create a square button element
-const button = document.createElement('button');
-button.style.width = '100px';
-button.style.height = '100px';
-button.style.backgroundColor = 'gray';
+import { useRef, useState } from 'react';
+import styles from '../styles/imageButton.module.css';
+import ImageFrame from '../../src/images/ImageFrame.png';
 
-// Create an input element for file upload
-const input = document.createElement('input');
-input.type = 'file';
-input.accept = 'image/*';
-input.style.display = 'none';
+const ImageButton = () => {
+  const inputRef = useRef(null);
+  const [image, setImage] = useState(null);
 
-// Add event listener to the button
-button.addEventListener('click', () => {
-  input.click();
-});
-
-// Add event listener to the input element
-input.addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-
-  reader.onload = (e) => {
-    const imageUrl = e.target.result;
-
-    // Create an image element to display the uploaded image
-    const image = document.createElement('img');
-    image.src = imageUrl;
-    image.style.width = '100%';
-    image.style.height = '100%';
-
-    // Replace the button with the uploaded image
-    button.parentNode.replaceChild(image, button);
+  const handleImageClick = () => {
+    inputRef.current.click();
   };
 
-  reader.readAsDataURL(file);
-});
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    console.log(file);
+    setImage(file);
+  };
 
-// Append the button to the document body
-document.body.appendChild(button);
+  return (
+    <div className={styles.imageButtonContainer}>
+      <label className={styles.label}>League Image</label>
+      <div className={styles.imageButtonWrapper}>
+        <div onClick={handleImageClick} style={{ cursor: 'pointer' }}>
+          {image ? (
+            <img
+              src={URL.createObjectURL(image)}
+              alt=""
+              className="img-display-after"
+            />
+          ) : (
+            <img src={ImageFrame} className="img-display-before" />
+          )}
+
+          <input
+            type="file"
+            ref={inputRef}
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ImageButton;

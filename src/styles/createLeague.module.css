@@ -12,6 +12,17 @@ html {
   box-sizing: border-box;
 }
 
+.form1 {
+  width: 196px;
+  margin-right: 40px;
+  align-items: left;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   color: #ffdc11;
   align-items: center;
