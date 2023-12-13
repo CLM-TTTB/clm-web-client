@@ -1,13 +1,14 @@
 import React from 'react';
-
-import Header from '~/components/header';
+import Layout from '~/components/layout';
 
 const Test = () => {
   return (
-    <div>
-      <h1>This is the Test Page</h1>
-      <Header></Header>
-    </div>
+    <Layout>
+      <div className="test-page">
+        <h1>This is a test page!</h1>
+        <p>Feel free to experiment with different elements here.</p>
+      </div>
+    </Layout>
   );
 };
 

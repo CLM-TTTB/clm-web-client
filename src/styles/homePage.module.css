@@ -1,902 +1,229 @@
-.subList {
-  max-height: 200px; /* Adjust as needed */
-  overflow-y: auto; /* Add scrollbar if content overflows */
-  position: absolute; /* Position relative to the header */
-  top: 100%; /* Position below the button */
-  left: 0; /* Align with the left edge of the button */
-  background-color: rgb(39, 40, 42); /* Set background color */
-  box-shadow: 0;
-}
-.travisJonesBjpWwrmf1iUnsplIcon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2333px;
-  height: 800px;
-  object-fit: cover;
-}
-.groupChild {
-  position: absolute;
-  top: 0;
-  left: 204px;
-  background-color: rgb(39, 40, 42);
-  width: 1920px;
-  height: 800px;
-  opacity: 0.8;
-}
-.goalie011Icon {
-  position: absolute;
-  top: 100px;
-  left: 1584px;
-  width: 500px;
-  height: 500px;
-  object-fit: cover;
-}
-.groupItem,
-.travisJonesBjpWwrmf1iUnsplParent {
-  position: absolute;
-  top: 150px;
-  left: -204px;
-  width: 2333px;
-  height: 800px;
-}
-.groupItem {
-  top: 0;
-  left: 0;
-  background-color: rgb(39, 40, 42);
-  width: 1920px;
-  height: 400px;
-}
-.clmLogo2041 {
-  position: absolute;
-  top: 57px;
-  left: 150px;
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-.clmChampion {
-  position: absolute;
-  top: 57px;
-  left: 378px;
-  font-size: 30px;
-  color: #ffdc11;
-}
-.groupInner {
-  position: absolute;
-  top: 299px;
-  left: 0;
-  width: 377px;
-  height: 100px;
-  object-fit: cover;
+/* homePage.module.css */
+
+.section {
+  position: relative;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
-.groupInnerFlipped {
-  position: absolute;
-  top: 299px;
-  left: 0;
-  width: 377px;
-  height: 100px;
-  object-fit: cover;
-  transform: scaleX(-1);
-}
-.rectangleIconFlip {
-  position: absolute;
-  top: 299px;
-  left: 0;
-  width: 377px;
-  height: 100px;
-  object-fit: cover;
-  transform: scaleX(-1);
-}
-.groupInnerFlipped {
-  left: 1543px;
-  object-fit: contain;
-}
-.allRightReserved {
-  position: absolute;
-  top: 338px;
-  left: 418px;
-}
-.privacyPolicy,
-.termsConditions {
-  position: absolute;
-  top: 338px;
-  left: 1138px;
-  font-weight: 500;
-}
-.privacyPolicy {
-  left: 1356px;
-}
-.loremIpsumIs {
-  position: absolute;
-  top: 113px;
-  left: 378px;
-  font-size: large;
-  display: inline-block;
-  width: 547px;
-  opacity: 0.9;
-}
-.div {
-  position: absolute;
-  top: 335px;
-  left: 1335px;
-  font-size: 5 * x-large;
-  font-weight: 500;
-}
-.rectangleParent {
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1920px;
-  height: 400px;
-  text-align: left;
-  font-size: x-large;
-  color: white;
-}
-.iconFacebook,
-.iconTwitter {
-  position: absolute;
+  width: 100%;
   height: 100%;
-  width: 46.85%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 53.15%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-  object-fit: cover;
 }
-.iconFacebook {
-  right: 53.15%;
-  left: 0;
+
+.overlayColor {
+  background-color: rgba(
+    39,
+    40,
+    42,
+    0.7
+  ); /* Adjust the color and opacity as needed */
+  /* You can also adjust other styles like opacity to control the dimming effect */
 }
-.iconTwitterParent {
+
+/*SECTION 1*/
+
+.titleParent {
   position: absolute;
-  height: 9.03%;
-  width: 4.02%;
-  top: 16.5%;
-  right: 7.81%;
-  bottom: 74.47%;
-  left: 88.18%;
-}
-.youremailgmailcom {
-  position: absolute;
-  top: 1px;
-  left: 0;
-}
-.iconEmailOutline {
-  position: absolute;
-  height: 100%;
-  width: 12.26%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 87.74%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-  object-fit: cover;
-}
-.iconPinOutline,
-.youremailgmailcomParent {
-  position: absolute;
-  top: 171px;
-  left: 1537px;
-  width: 232.51px;
-  height: 28.51px;
-}
-.iconPinOutline {
-  height: 100%;
-  width: 7.95%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 92.05%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-  object-fit: cover;
-}
-.linhTrungThuDucHoChiMiParent {
-  position: absolute;
-  top: 215px;
-  left: 1411px;
-  width: 358.51px;
-  height: 28.51px;
-}
-.div1,
-.iconPhone {
-  position: absolute;
-  top: 4px;
-  left: 0;
-}
-.iconPhone {
-  height: 98.31%;
-  width: 14.44%;
-  top: 0;
-  right: 0;
-  bottom: 1.69%;
-  left: 85.56%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
-  object-fit: cover;
-}
-.groupParent,
-.parent {
-  position: absolute;
-  top: 127px;
-  left: 1572px;
-  width: 197.51px;
-  height: 29px;
-}
-.groupParent {
-  top: 3470px;
-  left: 0;
-  width: 1920px;
-  height: 400px;
-  text-align: right;
-  font-size: large;
-}
-.manageLeagues {
-  margin: 0;
-}
-.manageLeaguesMoreContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.clm {
-  position: absolute;
-  top: 67.5px;
-  left: 531px;
-  font-size: 71 * x-large;
-  color: #ffdc11;
-}
-.manageLeaguesMoreEasierWitParent {
-  position: absolute;
-  top: 254.75px;
+  top: 50px;
   left: 150px;
   width: 723px;
   height: 190.5px;
   color: #ababab;
-  font-size: 80px;
+  font-size: 60px;
 }
 
-.buttonleague,
-.buttonleague1,
-.buttonteam,
-.buttonteam1 {
+.titleContainer {
   position: absolute;
-  top: 520px;
-  left: 150px;
-}
-.buttonleague1,
-.buttonteam,
-.buttonteam1 {
-  left: 315px;
-}
-.buttonteam,
-.buttonteam1 {
-  top: 610px;
-  left: 150px;
-}
-.buttonteam1 {
-  left: 300px;
-}
-.div2 {
-  color: #ababab;
-  opacity: 0.8;
+  top: 0;
+  left: 0;
 }
 
-.leagues {
-  position: relative;
-  font-weight: 500;
-  cursor: pointer;
-  width: fit-content;
+.title {
+  margin: 0;
 }
-.group,
-.leaguesWrapper {
+
+.goalieIcon {
+  position: absolute;
+  top: 100px;
+  left: 984px;
+  width: 420px;
+  height: 420px;
+  object-fit: cover;
+}
+
+.gridContainer {
+  margin-top: 275px;
+  margin-left: 150px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px; /* Reduce the gap between buttons to 2 pixels */
+  height: 20vh;
+  width: 45vh;
+  justify-content: start;
+  align-items: start;
+}
+
+/* Specific styles for the buttons within the gridContainer */
+.gridContainer .button1,
+.gridContainer .button2,
+.gridContainer .button3,
+.gridContainer .button4 {
   display: flex;
+  justify-content: start;
   align-items: center;
 }
-.leaguesWrapper {
-  background-color: gray;
-  width: 200px;
-  height: 40px;
-  flex-direction: row;
-  justify-content: center;
-  padding: 10px 33px;
-  box-sizing: border-box;
-  font-size: var(--font-size-5xl);
-  color: rgb(39, 40, 42);
+
+.button2 {
+  margin-left: 15px;
 }
-.group {
-  position: absolute;
-  height: 100%;
+
+.countingContainer {
+  margin-left: 150px;
+  display: flex;
+  align-items: flex-start;
   width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+}
+
+.countingBox {
+  text-align: center;
+  padding-right: 20px;
+  border: 1px solid rgba(204, 204, 204, 0);
+  margin-top: 50px;
+}
+
+.countingLabel {
+  font-size: xx-large;
+}
+
+.countingText {
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: black;
+  opacity: 70%;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/*SECTION 2*/
+
+.screen2Layout {
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-}
-.countings,
-.countings1,
-.homeChild,
-.homeInner {
-  position: absolute;
-  top: 750px;
-  left: 150px;
-  width: 200px;
-  height: 95px;
-  font-size: 210;
-}
-.countings1,
-.homeChild,
-.homeInner {
-  left: 380px;
-}
-.countings1,
-.homeChild {
-  left: 610px;
-}
-.homeChild {
-  left: 840px;
-}
-.footballInBloomingtonIndiaIcon,
-.homeItem {
-  position: absolute;
-  width: 1920px;
-  height: 801px;
-}
-.footballInBloomingtonIndiaIcon {
-  top: 949px;
-  left: calc(50% - 960px);
-  object-fit: cover;
-}
-.homeItem {
-  top: 948px;
-  left: 0;
-  background-color: rgb(39, 40, 42);
-  opacity: 0.8;
-}
-.beMasterWith,
-.createYourOwn,
-.customizeYourLeagues {
-  position: absolute;
-  top: 1339px;
-  font-weight: 300;
-  display: inline-block;
-}
-.createYourOwn {
-  left: 220px;
-  font-size: var(--navigation-normal-size);
-  width: 348px;
-}
-.beMasterWith,
-.customizeYourLeagues {
-  left: 758px;
-  width: 441px;
-}
-.beMasterWith {
-  left: 1390px;
-  width: 380px;
-}
-.operateLeaguesWith {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  opacity: 0.6;
-}
-.clm1 {
-  position: absolute;
-  top: 0;
-  left: 675px;
-  font-size: 71 * x-large;
-  color: #ffdc11;
-}
-.operateLeaguesWithParent {
-  position: absolute;
-  top: 1086px;
-  left: 150px;
-  width: 867px;
-  height: 123px;
-  font-size: var(--font-size-48xl-5);
-}
-.b,
-.createLeague2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.createLeague2 {
-  top: 31px;
-  left: 70px;
-  font-size: var(--font-size-31xl);
-  font-weight: 600;
-  color: white;
-}
-.groupDiv {
-  position: absolute;
-  top: 1230px;
-  left: 150px;
-  width: 418px;
-  height: 184px;
-  font-size: var(--font-size-116xl);
-  color: #ffdc11;
-}
-.customizeLeague {
-  position: absolute;
-  top: 31px;
-  left: 100px;
-  font-size: var(--font-size-31xl);
-  font-weight: 600;
-  color: white;
-}
-.homeInner1,
-.parent2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 542px;
-  height: 184px;
-}
-.homeInner1 {
-  top: 1230px;
-  left: 658px;
-  font-size: var(--font-size-116xl);
-  color: #ffdc11;
-}
-.operateLeague {
-  position: absolute;
-  top: 31px;
-  left: 99px;
-  font-size: var(--font-size-31xl);
-  font-weight: 600;
-  color: white;
-}
-.homeInner2,
-.parent3 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 479px;
-  height: 184px;
-}
-.homeInner2 {
-  top: 1230px;
-  left: 1291px;
-  font-size: var(--font-size-116xl);
-  color: #ffdc11;
-}
-.registerNow {
-  position: relative;
-}
-.buttonbig {
-  position: absolute;
-  top: calc(50% - 375px);
-  left: calc(50% - 180px);
-  border-radius: var(--br-3xs);
-  border: 1px solid #ffdc11;
-  box-sizing: border-box;
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding-xs) var(--padding-14xl);
-  font-size: var(--font-size-21xl);
-  color: #ffdc11;
-}
-.dominikHofbauer1ylt0422fyqUIcon {
-  position: absolute;
-  top: 1749px;
-  left: calc(50% - 960px);
-  width: 1921px;
-  height: 801px;
-  object-fit: cover;
-}
-.rectangleDiv {
-  position: absolute;
-  top: 1748px;
-  left: calc(50% - 960px);
-  background-color: rgb(39, 40, 42);
-  width: 1920px;
-  height: 802px;
-  opacity: 0.8;
-}
-.supportsVariousCompetitionContainer {
-  position: absolute;
-  top: 24px;
-  left: 0;
-  white-space: pre-wrap;
-  opacity: 0.6;
-}
-.clm2 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: var(--font-size-71xl);
-  color: #ffdc11;
-}
-.supportsVariousCompetitionFParent {
-  position: absolute;
-  top: 1846px;
-  left: 150px;
-  width: 724px;
-  height: 208px;
-  font-size: var(--font-size-48xl-5);
-}
-.arrowUpCircle {
-  position: absolute;
-  top: 2656px;
-  left: 1780px;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-  object-fit: cover;
-}
-.fauzanSaariCjyqbskdsiiUnsplIcon {
-  position: absolute;
-  top: 2550px;
-  left: 0;
-  width: 1920px;
-  height: 920px;
-  object-fit: cover;
-}
-.homeChild1 {
-  position: absolute;
-  top: 2549px;
-  left: calc(50% - 960px);
-  background-color: rgb(39, 40, 42);
-  width: 1920px;
-  height: 921px;
-  opacity: 0.8;
-}
-.sValuesParent {
-  position: absolute;
-  top: 2679px;
-  left: 150px;
-  width: 462px;
-  height: 123px;
-  font-size: var(--font-size-48xl-5);
-}
-.knockOut {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 600;
-}
-.knockOutWrapper {
-  position: absolute;
-  top: 122px;
-  left: 0;
-  width: 173px;
-  height: 48px;
-}
-.imageRemovebgPreview1Icon {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 542px);
-  width: 130px;
-  height: 100px;
-  object-fit: cover;
-}
-.roundRobin {
-  position: absolute;
-  top: 122px;
-  left: 0;
-  font-weight: 600;
-}
-.imageRemovebgPreview11 {
-  position: absolute;
-  top: 0;
-  left: 41px;
-  width: 130px;
-  height: 100px;
-  object-fit: cover;
-}
-.roundRobinParent {
-  position: absolute;
-  top: 0;
-  left: 423px;
-  width: 212px;
-  height: 170px;
-}
-.roundRobinContainer {
-  position: absolute;
-  top: 137px;
-  left: 0;
-  font-weight: 600;
-}
-.imageRemovebgPreview31 {
-  position: absolute;
-  top: 0;
-  left: 55px;
-  width: 130px;
-  height: 131.2px;
-  object-fit: cover;
-}
-.groupContainer,
-.roundRobinKnockOutParent {
-  position: absolute;
-  top: 0;
-  left: 885px;
-  width: 241px;
-  height: 233px;
-}
-.groupContainer {
-  top: 2149px;
-  left: 150px;
-  width: 1126px;
-  text-align: center;
-  font-size: var(--font-size-16xl);
-}
-.saveTheTime,
-.timeSavingParent {
-  position: absolute;
-  left: 0;
-  width: 700px;
-}
-.saveTheTime {
-  top: 65px;
-  font-size: var(--font-size-9xl);
-  color: var(--white-100);
-  display: inline-block;
-}
-.timeSavingParent {
-  top: 0;
-  height: 179px;
-}
-.paperResourceSaving {
-  position: absolute;
-  top: 0;
-  left: 262px;
-  font-weight: 600;
-}
-.paperResourceSavingParent {
-  position: absolute;
-  top: 0;
-  left: 920px;
-  width: 700px;
-  height: 179px;
-  text-align: right;
-}
-.storageCapacityParent {
-  position: absolute;
-  top: 229px;
-  left: 0;
-  width: 700px;
-  height: 179px;
-}
-.convenience {
-  position: absolute;
-  top: 0;
-  left: 448px;
-  font-weight: 600;
-}
-.informationIsAlways {
-  position: absolute;
-  top: 65px;
-  left: 0;
-  font-size: var(--font-size-9xl);
-  color: var(--white-100);
-  text-align: right;
-  display: inline-block;
-  width: 700px;
-}
-.convenienceParent,
-.groupParent1 {
-  position: absolute;
-  top: 229px;
-  left: 920px;
-  width: 700px;
-  height: 179px;
-}
-.groupParent1 {
-  top: 2832px;
-  left: 150px;
-  width: 1620px;
-  height: 408px;
-  font-size: var(--font-size-21xl);
-  color: #ffdc11;
-}
-.buttonleague2,
-.component2 {
-  position: absolute;
-}
-.buttonleague2 {
-  top: 2420px;
-  left: 1592px;
-  border-radius: var(--br-8xs);
-  height: 60px;
-  overflow: hidden;
-  padding: var(--padding-smi) var(--padding-base);
-}
-.component2 {
-  top: calc(50% + 1380px);
-  left: calc(50% - 161.5px);
-  border-radius: var(--br-3xs);
-  height: 80px;
-  padding: var(--padding-xs) var(--padding-14xl);
-  font-size: var(--font-size-21xl);
-}
-.headerBg {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 960px);
-  background-color: rgb(39, 40, 42);
-  width: 1920px;
-  height: 150px;
-}
-.clmLogo20411 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-}
-.championLeagueManagementContainer {
-  position: absolute;
-  top: 5px;
-  left: 110px;
-  margin-top: 13px;
-  opacity: 0.5;
-  color: #ffdc11;
-}
-.home1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-weight: 800;
-  color: #ffdc11;
-}
-.arrowDown2 {
-  position: relative;
-  width: 20px;
-  height: 20px;
-  overflow: hidden;
-  flex-shrink: 0;
-  object-fit: cover;
-  opacity: 0.8;
-}
-.leaguesParent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--gap-10xs);
-  cursor: pointer;
-}
-.frameWrapper {
-  position: absolute;
-  top: 0;
-  left: 115px;
-  width: 117px;
-  height: 30px;
-}
-.teams {
-  position: static;
-  opacity: 0.8;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.titleParent2 {
+  margin-left: 150px;
+  color: #ababab;
+  font-size: 50px;
   width: 100%;
+  margin-top: 100px;
 }
-.teamsParent {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.operateContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
-  gap: var(--gap-10xs);
+  margin-left: 150px;
 }
-.frameContainer {
-  position: absolute;
-  top: 0;
-  left: 282px;
-  width: 195px;
-  height: 30px;
-  cursor: pointer;
+
+.operateItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-right: 100px;
 }
-.aboutUs,
-.guide {
-  position: absolute;
-  top: 0;
-  left: 427px;
-  opacity: 0.8;
-  cursor: pointer;
+
+.operateNumber {
+  font-size: 100px;
+  color: #ffdc11;
+  font-weight: bold;
 }
-.aboutUs {
-  cursor: pointer;
-  left: 541px;
-}
-.homeParent {
-  position: absolute;
-  top: 2px;
-  left: 0;
-  width: 646px;
-  height: 30px;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-.navigationChild {
-  position: absolute;
-  top: 1.5px;
-  left: 720.5px;
-  background-color: var(--white-100);
-  border-right: 1px solid var(--white-100);
-  box-sizing: border-box;
-  width: 1px;
-  height: 31px;
-}
-.earthIcon,
-.login {
-  position: relative;
-  opacity: 0.8;
-  cursor: pointer;
+
+.operateTextContainer {
   margin-left: 20px;
-  margin-right: 20px;
+  margin-top: 20px;
 }
-.earthIcon {
-  width: 34px;
-  height: 34px;
-  overflow: hidden;
-  flex-shrink: 0;
-  object-fit: cover;
+
+.operateLabel {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 38px;
 }
-.loginParent {
-  position: absolute;
-  top: 0;
-  left: 796px;
-  width: 280px;
-  flex-shrink: 0;
+
+.operateText {
+  margin-top: 5px;
+}
+
+.bigButton1 {
+  margin-top: 80px;
+
+  margin-bottom: 80px;
+  align-self: center;
+}
+
+/*SECTION 3*/
+
+.operateContainer2 {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
-  gap: var(--gap-31xl);
+  gap: 200px;
+  margin-left: 150px;
 }
-.navigation {
-  position: absolute;
-  top: 33px;
-  left: 764px;
-  width: 1076px;
-  height: 34px;
+
+.operateLabel2 {
+  margin-top: 20px;
+  font-weight: bold;
   text-align: center;
-  color: var(--white-100);
 }
-.clmLogo2041Parent {
-  position: absolute;
-  top: 25px;
-  left: 40px;
-  width: 1840px;
-  height: 100px;
+
+.bigButton2 {
+  margin-top: 80px;
+  margin-right: 150px;
+  margin-bottom: 50px;
+  align-self: flex-end;
 }
-.headerBgParent {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 960px);
-  width: 1920px;
-  height: 150px;
-  font-size: var(--navigation-normal-size);
-  color: #ffdc11;
-}
-.home {
+
+/*SECTION 4*/
+
+.operateContainer3 {
   position: relative;
-  background-color: var(--white-100);
-  width: 100%;
-  height: 3870px;
-  overflow: hidden;
-  text-align: left;
-  font-size: var(--font-size-5xl);
-  color: var(--white-100);
-  font-family: 'Manrope';
+  bottom: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 150px;
+  gap: 150px;
+}
+
+.operateLabel3 {
+  color: #ffdc11;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.textRight {
+  text-align: end;
+}
+
+.operateItem2 {
+  margin-bottom: 50px;
+}
+
+.bigButton3 {
+  position: relative;
+  bottom: 200px;
+  align-self: center;
 }

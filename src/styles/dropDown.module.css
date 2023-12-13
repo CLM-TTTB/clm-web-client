@@ -1,0 +1,64 @@
+/* CustomDropdown.module.css */
+.dropdownWrapper {
+  position: relative;
+  width: 160px;
+}
+
+.dropdownLabel {
+  font-size: 12px;
+  margin-bottom: 5px;
+  height: 15px; /* Fixed height */
+}
+
+.dropdownHeader {
+  padding: 10px;
+  background-color: #27282a; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 20px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.dropdownHeader.open {
+  border-bottom: 1px solid #ccc;
+}
+
+.arrow{
+  margin-left: 65px;
+  height: 10px;
+  width: 18px;
+}
+
+.dropdownList {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background-color: #27282a;
+  overflow-y: auto;
+  z-index: 1;
+  border-radius: 4px;
+}
+.roundedCorners1,
+.roundedCorners2 {
+  border-radius: 5px;
+}
+
+.topLeftTopRight1 {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0px;
+}
+
+.dropdownItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #ffdc11;
+  color:#27282a
+}

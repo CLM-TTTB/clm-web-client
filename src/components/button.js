@@ -1,8 +1,9 @@
+// Button.js
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from '~/styles/button.module.css';
 
-const Button = ({ text }) => {
+const Button = ({ text, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
@@ -23,6 +24,12 @@ const Button = ({ text }) => {
     setIsActive(false);
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
       className={`${styles.button} ${isHovered ? styles.hovered : ''} ${
@@ -32,6 +39,7 @@ const Button = ({ text }) => {
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onClick={handleClick}
     >
       {text}
     </button>
@@ -40,6 +48,7 @@ const Button = ({ text }) => {
 
 Button.propTypes = {
   text: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default Button;
