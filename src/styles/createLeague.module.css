@@ -72,3 +72,9 @@ html {
   cursor: pointer;
   text-decoration: none;
 }
+.label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  width: 196px;
+  line-height: 24px;
+}
