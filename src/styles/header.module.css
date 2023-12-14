@@ -21,15 +21,12 @@
   width: 100%;
   color: #d4d4d4;
   background-color: #27282a;
-  z-index: 1000;
 }
 
 .headerBg {
   display: flex;
   flex-direction: row;
-
   justify-content: flex-start;
-  position: static;
   top: 0;
   background-color: #27282a;
   height: 140px;
@@ -128,7 +125,6 @@
 }
 
 .teams {
-  position: static;
   opacity: 0.8;
   width: 100%;
 }

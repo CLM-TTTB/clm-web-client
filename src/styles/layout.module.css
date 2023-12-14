@@ -1,6 +1,13 @@
+body {
+  overflow-x: hidden;
+}
 .pageContainer {
+  overflow-x: hidden;
   background-color: rgb(39, 40, 42);
   min-height: 100vh;
+  width: 100%;
   padding-bottom: 10px;
   color: #d4d4d4;
+  margin: 0;
+  max-width: 100vw;
 }
