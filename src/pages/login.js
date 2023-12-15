@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
@@ -16,18 +15,45 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorInfo, setPasswordErrorInfo] = useState('');
   const [showPassword, setShowPassword] = useState(true);
-  const [rememberMe, setRememberMe] = useState(false);
 
   // HANDLE SUCCESSFUL LOGIN
   const loginSucceeded = () => {
     navigate('/');
   };
 
+  // CALL AUTH CHECK
+  const formatCheckPassed = () => {
+    if (email !== 'abc@gm.com' || password !== '12345678') {
+      setPasswordError(true);
+      setPasswordErrorInfo('Invalid Email or Password. Please try again');
+    } else {
+      loginSucceeded();
+    }
+  };
+
   const handleEmail = (e) => {
     const value = e.target.value;
     setEmail(value);
+
+    setEmailError(false);
+    setEmailErrorInfo('');
+  };
+
+  const handlePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    setPasswordError(false);
+    setPasswordErrorInfo('');
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleLogin = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValidEmail = emailRegex.test(value);
+    const isValidEmail = emailRegex.test(email);
 
     if (isValidEmail) {
       setEmailError(false);
@@ -36,32 +62,19 @@ const Login = () => {
       setEmailError(true);
       setEmailErrorInfo('The email format should be "yourname@gmail.com"');
     }
-  };
 
-  const handlePassword = (e) => {
-    const value = e.target.value;
-    setPassword(value);
-
-    if (password.length < 7) {
+    if (password.length < 8) {
       setPasswordError(true);
       setPasswordErrorInfo('The password must contain at least 8 characters');
     } else {
       setPasswordError(false);
     }
-  };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+    if (!isValidEmail || password.length < 8) {
+      return;
+    }
 
-  const handleLogin = () => {
-    if (password.length < 7) {
-      setPasswordError(true);
-      setPasswordErrorInfo('The password must contain at least 8 characters');
-    } else if (password != '12345678') {
-      setPasswordError(true);
-      setPasswordErrorInfo('Invalid Email or Password. Please try again');
-    } else if (passwordError == false && emailError == false) loginSucceeded();
+    formatCheckPassed();
   };
 
   const handleCreateAccount = () => {
@@ -71,7 +84,7 @@ const Login = () => {
   return (
     <>
       <Layout>
-        <hr class="horizontal-line" />
+        <hr className="horizontal-line" />
         <div className={styles.loginForm}>
           <h1 className={styles.title}>Login</h1>
           <Input
@@ -96,11 +109,7 @@ const Login = () => {
 
           <div className={styles.checkboxRow}>
             <label className={styles.rememberMe}>
-              <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={() => setRememberMe(!rememberMe)}
-              />
+              <input type="checkbox" checked={false} onChange={() => {}} />
               Remember Me
             </label>
 
@@ -121,7 +130,7 @@ const Login = () => {
           </div>
         </div>
 
-        <hr class="horizontal-line" />
+        <hr className="horizontal-line" />
       </Layout>
     </>
   );
