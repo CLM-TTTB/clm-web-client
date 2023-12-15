@@ -21,7 +21,7 @@ const SearchLeague = () => {
         competitionFormat: `Format ${i}`,
         location: `Location ${i}`,
         profileSrc: `~/images/leagueCard/avatar${i}.png`,
-        status: 'closed'
+        status: 'closed',
       });
     }
 
@@ -72,11 +72,13 @@ const SearchLeague = () => {
   // Filtering logic based on search term, Format, and Status
   const filteredLeagues = leagues.filter((league) => {
     const formatFilterMatch =
-      formatFilter === '' || league.competitionFormat.toLowerCase() === formatFilter.toLowerCase();
-  
+      formatFilter === '' ||
+      league.competitionFormat.toLowerCase() === formatFilter.toLowerCase();
+
     const statusFilterMatch =
-      statusFilter === '' || league.status.toLowerCase() === statusFilter.toLowerCase();
-  
+      statusFilter === '' ||
+      league.status.toLowerCase() === statusFilter.toLowerCase();
+
     return (
       (league.leagueName.toLowerCase().includes(searchTerm) ||
         league.location.toLowerCase().includes(searchTerm)) &&
@@ -108,7 +110,7 @@ const SearchLeague = () => {
   // Get the leagues for the current page
   const paginatedLeagues = sortedLeagues.slice(
     (currentPage - 1) * pageSize,
-    currentPage * pageSize
+    currentPage * pageSize,
   );
 
   // JSX for rendering the component
@@ -117,42 +119,44 @@ const SearchLeague = () => {
       <Layout>
         <hr className={styles.horizontalLine} />
         <div className={styles.createLeagueForm}>
-          <h1 className={styles.title}>Create League</h1>
+          <h1 className={styles.title}>Search League</h1>
           <div className={styles.container}>
             <div className={styles.filterContainer}>
-            <div className={styles.searchBar}>
-              {/* Search Input */}
-              <Input
-                type="text"
-                placeholder="Search by League Name or Location"
-                value={searchTerm}
-                onChange={handleSearch}
+              <div className={styles.searchBar}>
+                {/* Search Input */}
+                <Input
+                  type="text"
+                  placeholder="Search by League Name or Location"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+                <img
+                  className={styles.searchIcon}
+                  src={search}
+                  alt="Search Icon"
+                />
+              </div>
+
+              {/* Dropdowns for Format, Status, and Sort by */}
+              <DropDown
+                label="Format"
+                options={['', 'Knock-out', 'Round Robin', 'Mixed']}
+                onChange={handleFormatChange}
+                value={formatFilter}
               />
-              <img className={styles.searchIcon} src={search} alt="Search Icon" />
-
+              <DropDown
+                label="Status"
+                options={['', 'Opening', 'Closed']}
+                onChange={handleStatusChange}
+                value={statusFilter}
+              />
+              <DropDown
+                label="Sort by"
+                options={['', 'League Name', 'Latest Date', 'Oldest Date']}
+                onChange={handleSortByChange}
+                value={sortBy}
+              />
             </div>
-
-            {/* Dropdowns for Format, Status, and Sort by */}
-                <DropDown
-                  label="Format"
-                  options={['', 'Knock-out', 'Round Robin', 'Mixed']}
-                  onChange={handleFormatChange}
-                  value={formatFilter}
-                />
-                <DropDown
-                  label="Status"
-                  options={['', 'Opening', 'Closed']}
-                  onChange={handleStatusChange}
-                  value={statusFilter}
-                />
-                <DropDown
-                  label="Sort by"
-                  options={['', 'League Name', 'Latest Date', 'Oldest Date']}
-                  onChange={handleSortByChange}
-                  value={sortBy}
-                />
-            </div>
-
 
             {/* Displaying leagues on the grid */}
             <div className={styles.leagueGrid}>
@@ -170,23 +174,25 @@ const SearchLeague = () => {
             {/* Pagination */}
             <div className={styles.pagination}>
               <div>
-              <button
-                className={styles.pageButton}
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-              >
-                Previous
-              </button>
+                <button
+                  className={styles.pageButton}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
               </div>
-              <div><span>{`Page ${currentPage} of ${totalPages}`}</span></div>
               <div>
-              <button
-                className={styles.pageButton}
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
+                <span>{`Page ${currentPage} of ${totalPages}`}</span>
+              </div>
+              <div>
+                <button
+                  className={styles.pageButton}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
