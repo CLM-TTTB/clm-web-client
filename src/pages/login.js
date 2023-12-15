@@ -15,6 +15,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorInfo, setPasswordErrorInfo] = useState('');
   const [showPassword, setShowPassword] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
 
   // HANDLE SUCCESSFUL LOGIN
   const loginSucceeded = () => {
@@ -24,6 +25,7 @@ const Login = () => {
   // CALL AUTH CHECK
   const formatCheckPassed = () => {
     if (email !== 'abc@gm.com' || password !== '12345678') {
+      setEmailError(true);
       setPasswordError(true);
       setPasswordErrorInfo('Invalid Email or Password. Please try again');
     } else {
@@ -77,6 +79,10 @@ const Login = () => {
     formatCheckPassed();
   };
 
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
   const handleCreateAccount = () => {
     navigate('/signup');
   };
@@ -109,7 +115,11 @@ const Login = () => {
 
           <div className={styles.checkboxRow}>
             <label className={styles.rememberMe}>
-              <input type="checkbox" checked={false} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={handleRememberMeChange}
+              />
               Remember Me
             </label>
 
@@ -124,9 +134,7 @@ const Login = () => {
 
           <div className={styles.createAccount}>
             Don't have an account?{' '}
-            <a href="#" onClick={handleCreateAccount}>
-              Create one!
-            </a>
+            <a onClick={handleCreateAccount}>Create one!</a>
           </div>
         </div>
 

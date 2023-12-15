@@ -143,7 +143,7 @@ const Signup = () => {
           <div className={styles.line2}></div>
 
           <div className={styles.login}>
-            Already have an account? <a onClick={handleLogin}>Login</a>
+            Already have an account? <a onClick={handleLogin}>Log in</a>
           </div>
         </div>
 

@@ -14,7 +14,8 @@ const Input = ({
   const [showPassword, setShowPassword] = useState(false);
 
   const inputClassName = error ? styles.errorInput : styles.input;
-  const inputType = type === 'password' ? (showPassword ? 'text' : 'password') : 'text';
+  const inputType =
+    type === 'password' ? (showPassword ? 'text' : 'password') : 'text';
 
   return (
     <div className={styles.inputContainer}>
@@ -25,7 +26,7 @@ const Input = ({
           type={inputType}
           value={value}
           onChange={onChange}
-          placeholder={placeholder} 
+          placeholder={placeholder}
         />
         {type === 'password' && (
           <button
@@ -37,7 +38,10 @@ const Input = ({
           </button>
         )}
       </div>
-      {error && <div className={styles.errorInfo}>{errorInfo}</div>}
+      <div className={styles.errorInfoWrapper}>
+        {error && <div className={styles.errorInfo}>{errorInfo}</div>}
+        {!error && <div className={styles.errorInfoPlaceholder}></div>}
+      </div>
     </div>
   );
 };

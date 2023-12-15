@@ -1,7 +1,8 @@
 .inputContainer {
+  height: 90px;
   display: flex;
   flex-direction: column; /* Center horizontally */
-  margin-bottom: 16px;
+  margin-bottom: 15px;
   background-color: transparent;
 }
 
@@ -59,6 +60,8 @@
   font-size: 14px;
   outline: none;
   color: #7e7e7e;
-  align-self: flex-end; /* Align the button to the end of the container */
-  margin-top: 4px; /* Add margin to separate the button from the input */
+  align-self: flex-end;
+  margin-top: -30px;
+  margin-bottom: 12px;
+  margin-right: 3px;
 }
