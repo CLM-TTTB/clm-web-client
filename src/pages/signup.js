@@ -1,4 +1,4 @@
-// Login.js
+// Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
@@ -16,14 +16,12 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorInfo, setPasswordErrorInfo] = useState('');
   const [showPassword, setShowPassword] = useState(true);
-  const [rememberMe, setRememberMe] = useState(false);
 
   const [rePassword, setRePassword] = useState('');
   const [rePasswordError, setRePasswordError] = useState(false);
   const [rePasswordErrorInfo, setRePasswordErrorInfo] = useState('');
 
-
-  // HANDLE SUCCESSFUL LOGIN
+  // HANDLE SUCCESSFUL REGISTERATION
   const signupSucceeded = () => {
     navigate('/login');
   };
@@ -31,8 +29,34 @@ const Signup = () => {
   const handleEmail = (e) => {
     const value = e.target.value;
     setEmail(value);
+
+    setEmailError(false);
+    setEmailErrorInfo('');
+  };
+
+  const handlePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+
+    setPasswordError(false);
+    setPasswordErrorInfo('');
+  };
+
+  const handleRePassword = (e) => {
+    const value = e.target.value;
+    setRePassword(value);
+
+    setRePasswordError(false);
+    setRePasswordErrorInfo('');
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSignup = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isValidEmail = emailRegex.test(value);
+    const isValidEmail = emailRegex.test(email);
 
     if (isValidEmail) {
       setEmailError(false);
@@ -41,11 +65,6 @@ const Signup = () => {
       setEmailError(true);
       setEmailErrorInfo('The email format should be "yourname@gmail.com"');
     }
-  };
-
-  const handlePassword = (e) => {
-    const value = e.target.value;
-    setPassword(value);
 
     if (password.length < 7) {
       setPasswordError(true);
@@ -53,30 +72,20 @@ const Signup = () => {
     } else {
       setPasswordError(false);
     }
-  };
 
-  const handleRePassword = (e) => {
-    const value = e.target.value;
-    setRePassword(value);
-
-    if (value !== password) {
+    if (rePassword !== password) {
       setRePasswordError(true);
       setRePasswordErrorInfo('Password and Re-entered Password do not match');
     } else {
       setRePasswordError(false);
       setRePasswordErrorInfo('');
     }
-  };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+    if (!isValidEmail || password.length < 7 || rePassword !== password) {
+      return;
+    }
 
-  const handleSignup = () => {
-    if (password.length < 7) {
-      setPasswordError(true);
-      setPasswordErrorInfo('The password must contain at least 8 characters');
-    } else if (passwordError == false && emailError == false && rePasswordError === false) signupSucceeded();
+    signupSucceeded();
   };
 
   const handleLogin = () => {
@@ -86,7 +95,7 @@ const Signup = () => {
   return (
     <>
       <Layout>
-        <hr class="horizontal-line" />
+        <hr className="horizontal-line" />
         <div className={styles.loginForm}>
           <h1 className={styles.title}>Sign Up</h1>
           <Input
@@ -122,7 +131,10 @@ const Signup = () => {
 
           <div className={styles.checkboxRow}>
             <label className={styles.terms}>
-              By clicking Sign Up, you indicate that you have read, understood and agreed to our <span style={{ color: '#ffdc11' }}>Terms of Use</span> and <span style={{ color: '#ffdc11' }}>Privacy Policy</span>.
+              By clicking Sign Up, you indicate that you have read, understood,
+              and agreed to our{' '}
+              <span style={{ color: '#ffdc11' }}>Terms of Use</span> and{' '}
+              <span style={{ color: '#ffdc11' }}>Privacy Policy</span>.
             </label>
           </div>
 
@@ -131,14 +143,11 @@ const Signup = () => {
           <div className={styles.line2}></div>
 
           <div className={styles.login}>
-            Already have an account?{' '}
-            <a onClick={handleLogin}>
-              Login
-            </a>
+            Already have an account? <a onClick={handleLogin}>Login</a>
           </div>
         </div>
 
-        <hr class="horizontal-line" />
+        <hr className="horizontal-line" />
       </Layout>
     </>
   );
