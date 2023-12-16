@@ -4,7 +4,7 @@ import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/header.module.css';
 import logo from '../images/logo.png';
-import logo1 from '../images/header/earth.png';
+import logo1 from '../images/headerLogo-1.png';
 
 const Header = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
   const onSIGNUPTextClick = useCallback(() => {
-    navigate('/signup')
+    // Please sync "SIGN UP" to the project
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
@@ -57,8 +57,12 @@ const Header = () => {
             <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
             {isSubItemsLeaguesOpen && (
               <div className={styles.subList}>
-                <div onClick={() => navigate('/createLeague')}>Create League</div>
-                <div onClick={() => navigate('/searchLeague')}>Search Leagues</div>
+                <div onClick={() => navigate('/createLeague')}>
+                  Create League
+                </div>
+                <div onClick={() => navigate('/searchLeague')}>
+                  Search Leagues
+                </div>
               </div>
             )}
           </div>
@@ -66,7 +70,7 @@ const Header = () => {
             <div onClick={openSubItemsTeams}>TEAMS ⮟</div>
             {isSubItemsTeamsOpen && (
               <div className={styles.subList}>
-                <div onClick={() => navigate('/test')}>Create Team</div>
+                <div onClick={() => navigate('/createTeam')}>Create Team</div>
                 <div onClick={() => navigate('/test')}>Search Teams</div>
               </div>
             )}
