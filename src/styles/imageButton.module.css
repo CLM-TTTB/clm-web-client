@@ -21,10 +21,12 @@
 
 .imgdisplaybefore {
   width: 196px;
+  height: 196px;
   border-radius: 10px;
 }
 
 .imgdisplayafter {
   width: 196px;
+  height: 196px;
   border-radius: 10px;
 }
