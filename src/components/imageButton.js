@@ -100,10 +100,10 @@ const ImageButton = ({ label }) => {
             <img
               src={URL.createObjectURL(image)}
               alt=""
-              className="img-display-after"
+              className={styles.imgdisplayafter}
             />
           ) : (
-            <img src={ImageFrame} className="img-display-before" />
+            <img src={ImageFrame} className={styles.imgdisplaybefore} />
           )}
 
           <input
