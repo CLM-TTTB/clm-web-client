@@ -10,6 +10,7 @@ const Header = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,12 +29,14 @@ const Header = () => {
   }, []);
 
   const onSIGNUPTextClick = useCallback(() => {
-    // Please sync "SIGN UP" to the project
+    navigate('/signUp');
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
     setSubItemsLanguagesOpen(!isSubItemsLanguagesOpen);
   }, [isSubItemsLanguagesOpen]);
+
+  const openSubItemsProfile = () => {};
 
   return (
     <div className={styles.headerBgParent}>
@@ -50,60 +53,69 @@ const Header = () => {
             </b>
           </div>
 
-          <div onClick={() => navigate('/')} className={styles.navItem}>
-            HOME
-          </div>
-          <div className={styles.navItem}>
-            <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
-            {isSubItemsLeaguesOpen && (
-              <div className={styles.subList}>
-                <div onClick={() => navigate('/createLeague')}>
-                  Create League
+          <div className={styles.navContainer}>
+            <div onClick={() => navigate('/')} className={styles.navItem}>
+              HOME
+            </div>
+            <div className={styles.navItem}>
+              <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
+              {isSubItemsLeaguesOpen && (
+                <div className={styles.subList}>
+                  <div onClick={() => navigate('/createLeague')}>
+                    Create League
+                  </div>
+                  <div onClick={() => navigate('/searchLeague')}>
+                    Search Leagues
+                  </div>
                 </div>
-                <div onClick={() => navigate('/searchLeague')}>
-                  Search Leagues
-                </div>
-              </div>
-            )}
-          </div>
-          <div className={styles.navItem}>
-            <div onClick={openSubItemsTeams}>TEAMS ⮟</div>
-            {isSubItemsTeamsOpen && (
-              <div className={styles.subList}>
-                <div onClick={() => navigate('/createTeam')}>Create Team</div>
-                <div onClick={() => navigate('/test')}>Search Teams</div>
-              </div>
-            )}
-          </div>
-          <div onClick={() => navigate('/test')} className={styles.navItem}>
-            GUIDE
-          </div>
-          <div onClick={() => navigate('/test')} className={styles.navItem}>
-            ABOUT US
-          </div>
+              )}
+            </div>
 
-          <div className={styles.loginParent}>
-            <div className={styles.login} onClick={onLOGINTextClick}>
-              LOGIN
+            <div onClick={() => navigate('/test')} className={styles.navItem}>
+              GUIDE
             </div>
-            <div className={styles.signup} onClick={onSIGNUPTextClick}>
-              SIGN UP
+            <div onClick={() => navigate('/test')} className={styles.navItem}>
+              ABOUT US
             </div>
-            <img
-              className={styles.earthIcon}
-              alt=""
-              src={logo1}
-              onClick={openSubItemsLanguages}
-            />
-            {isSubItemsLanguagesOpen && (
-              <div className={styles.subList2}>
-                <div>Language 1</div>
-                <div>Language 2</div>
-              </div>
-            )}
+
+            <div className={styles.devider}>
+              <div>|</div>
+            </div>
+
+            <div className={styles.loginParent}>
+              {isLoggedIn ? (
+                <div
+                  className={styles.userProfile}
+                  onClick={openSubItemsProfile}
+                >
+                  <div className={styles.profilePic} />
+                  <div>Username</div>
+                </div>
+              ) : (
+                <div class={styles.auth}>
+                  <div className={styles.login} onClick={onLOGINTextClick}>
+                    LOGIN
+                  </div>
+                  <div className={styles.signup} onClick={onSIGNUPTextClick}>
+                    SIGN UP
+                  </div>
+                </div>
+              )}
+              <img
+                className={styles.earthIcon}
+                alt=""
+                src={logo1}
+                onClick={openSubItemsLanguages}
+              />
+              {isSubItemsLanguagesOpen && (
+                <div className={styles.subList2}>
+                  <div>Language 1</div>
+                  <div>Language 2</div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-
         <div className={styles.line}></div>
       </div>
     </div>

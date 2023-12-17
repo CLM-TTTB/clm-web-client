@@ -4,6 +4,12 @@
   justify-content: space-between;
 }
 
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  margin-left: 275px;
+}
+
 .navItem {
   position: relative;
   color: #d4d4d4;
@@ -11,6 +17,18 @@
   margin-right: 40px; /* Adjust as needed for spacing between items */
   text-wrap: nowrap;
   cursor: pointer;
+}
+
+.devider {
+  margin-top: 35px;
+  margin-left: 10px;
+  font-size: 26px;
+  font-family: 'Courier New';
+}
+
+.auth {
+  display: flex;
+  flex-direction: row;
 }
 
 .headerBgParent {
@@ -138,7 +156,7 @@
   height: 30px;
 }
 .loginParent {
-  margin-left: 190px;
+  margin-left: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -153,6 +171,23 @@
   margin-right: 20px;
   font-weight: bold;
 }
+
+.userProfile {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-right: 60px;
+  cursor: pointer;
+}
+
+.profilePic {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffdc11;
+}
+
 .earthIcon {
   width: 34px;
   height: 34px;

@@ -1,0 +1,16 @@
+.parrentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  background-color: #ffdb1118;
+  color: #d4d4d4;
+  gap: 20px;
+  border-radius: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.duedate {
+}

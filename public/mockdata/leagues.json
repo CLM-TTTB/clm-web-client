@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "leagueName": "Premier League",
+        "competitionFormat": "Round Robin",
+        "location": "England",
+        "status": "Closed",
+        "teamNumber": 10
+    },
+    {
+        "id": 2,
+        "leagueName": "La Liga",
+        "competitionFormat": "Round Robin",
+        "location": "Spain",
+        "status": "Opening",
+        "teamNumber": 10
+    },
+    {
+        "id": 3,
+        "leagueName": "Serie A",
+        "competitionFormat": "Round Robin",
+        "location": "Italy",
+        "status": "Opening"
+    },
+    {
+        "id": 4,
+        "leagueName": "Bundesliga",
+        "competitionFormat": "Round Robin",
+        "location": "Germany",
+        "status": "Closed"
+    },
+    {
+        "id": 5,
+        "leagueName": "Ligue 1",
+        "competitionFormat": "Round Robin",
+        "location": "France",
+        "status": "Opening"
+    },
+    {
+        "id": 6,
+        "leagueName": "Eredivisie",
+        "competitionFormat": "Round Robin",
+        "location": "Netherlands",
+        "status": "Closed"
+    },
+    {
+        "id": 7,
+        "leagueName": "Primeira Liga",
+        "competitionFormat": "Round Robin",
+        "location": "Portugal",
+        "status": "Opening"
+    },
+    {
+        "id": 8,
+        "leagueName": "Russian Premier",
+        "competitionFormat": "Round Robin",
+        "location": "Russia",
+        "status": "Closed"
+    },
+    {
+        "id": 9,
+        "leagueName": "Major League",
+        "competitionFormat": "Round Robin",
+        "location": "United States",
+        "status": "Opening"
+    },
+    {
+        "id": 10,
+        "leagueName": "Super Lig",
+        "competitionFormat": "Round Robin",
+        "location": "Turkey",
+        "status": "Opening"
+    },
+    {
+        "id": 11,
+        "leagueName": "J1 League",
+        "competitionFormat": "Round Robin",
+        "location": "Japan",
+        "status": "Closed"
+    },
+    {
+        "id": 12,
+        "leagueName": "Brasileirao Serie A",
+        "competitionFormat": "Round Robin",
+        "location": "Brazil",
+        "status": "Opening"
+    },
+    {
+        "id": 13,
+        "leagueName": "Argentine Primera",
+        "competitionFormat": "Round Robin",
+        "location": "Argentina",
+        "status": "Closed"
+    },
+    {
+        "id": 14,
+        "leagueName": "Scottish Premiership",
+        "competitionFormat": "Round Robin",
+        "location": "Scotland",
+        "status": "Closed"
+    }
+]
