@@ -1,0 +1,32 @@
+.imageButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  margin-bottom: 48px;
+  background-color: transparent;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  width: 168px;
+  line-height: 24px;
+}
+
+.imageButtonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.imgdisplaybefore {
+  width: 168px;
+  height: 168px;
+  border-radius: 10px;
+}
+
+.imgdisplayafter {
+  width: 168px;
+  height: 168px;
+  border-radius: 10px;
+}
