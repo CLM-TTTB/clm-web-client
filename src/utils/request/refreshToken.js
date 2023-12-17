@@ -5,6 +5,7 @@ import LocalStorageKey from '~/constants/localStorageKeys';
 
 const refreshTokenFn = async () => {
   const refreshToken = localStorage.getItem(LocalStorageKey.REFRESH_TOKEN);
+
   if (!refreshToken) {
     return null;
   }
