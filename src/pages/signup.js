@@ -21,7 +21,7 @@ const Signup = () => {
   const [rePasswordError, setRePasswordError] = useState(false);
   const [rePasswordErrorInfo, setRePasswordErrorInfo] = useState('');
 
-  // HANDLE SUCCESSFUL REGISTERATION
+  // HANDLE SUCCESSFUL REGISTRATION
   const signupSucceeded = () => {
     navigate('/login');
   };

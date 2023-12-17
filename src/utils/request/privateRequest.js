@@ -3,13 +3,19 @@ import refreshTokenFn from './refreshToken';
 import AppProperty from '~/constants/appProperties';
 import HttpStatus from '~/constants/httpStatusCode';
 import localStorage from '~/utils/localStorage';
-import LocalStorageKey from '~/constants/localStorageKeys';
+import sessionStorage from '~/utils/sessionStorage';
+import StorageKey from '~/constants/storageKeys';
 
 axios.defaults.baseURL = AppProperty.CLM_API_URL;
 
 axios.interceptors.request.use(
   async (config) => {
-    const accessToken = localStorage.getItem(LocalStorageKey.ACCESS_TOKEN);
+    const rememberMe = localStorage.getItem(StorageKey.REMEMBER_ME);
+
+    const accessToken = rememberMe
+      ? localStorage.getItem(StorageKey.ACCESS_TOKEN)
+      : sessionStorage.getItem(StorageKey.ACCESS_TOKEN);
+
     if (accessToken) {
       config.headers = {
         ...config.headers,

@@ -1,10 +1,15 @@
 import publicRequest from './publicRequest';
 import localStorage from '~/utils/localStorage';
+import sessionStorage from '~/utils/sessionStorage';
 import AuthEndpoint from '~/endpoints/authEndpoints';
-import LocalStorageKey from '~/constants/localStorageKeys';
+import StorageKey from '~/constants/storageKeys';
 
 const refreshTokenFn = async () => {
-  const refreshToken = localStorage.getItem(LocalStorageKey.REFRESH_TOKEN);
+  const rememberMe = localStorage.getItem(StorageKey.REMEMBER_ME);
+
+  const refreshToken = rememberMe
+    ? localStorage.getItem(StorageKey.REFRESH_TOKEN)
+    : sessionStorage.getItem(StorageKey.REFRESH_TOKEN);
   if (!refreshToken) {
     return null;
   }
@@ -23,12 +28,22 @@ const refreshTokenFn = async () => {
     );
 
     const { newAccessToken, newRefreshToken } = response.data;
-    localStorage.setItem(LocalStorageKey.REFRESH_TOKEN, newRefreshToken);
-    localStorage.setItem(LocalStorageKey.ACCESS_TOKEN, newAccessToken);
+    if (rememberMe) {
+      localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+      localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+    } else {
+      sessionStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+      sessionStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+    }
     return newAccessToken;
   } catch (error) {
-    localStorage.removeItem(LocalStorageKey.REFRESH_TOKEN);
-    localStorage.removeItem(LocalStorageKey.ACCESS_TOKEN);
+    if (rememberMe) {
+      localStorage.removeItem(StorageKey.REFRESH_TOKEN);
+      localStorage.removeItem(StorageKey.ACCESS_TOKEN);
+    } else {
+      sessionStorage.removeItem(StorageKey.REFRESH_TOKEN);
+      sessionStorage.removeItem(StorageKey.ACCESS_TOKEN);
+    }
     return null;
   }
 };

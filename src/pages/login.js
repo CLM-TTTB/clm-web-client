@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import Layout from '~/components/layout';
 import Input from '~/components/input';
 import Button from '~/components/button';
 
+import localStorage from '~/utils/localStorage';
+import StorageKey from '~/constants/storageKeys';
+import { login } from '~/apiServices/authService';
+import useAuth from '~/hooks/useAuth';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const Login = () => {
+  useEffect(() => {
+    localStorage.setItem(StorageKey.REMEMBER_ME, false);
+  }, []);
+
+  const { setUserInfos, setAccessToken, setRefreshToken } = useAuth();
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -17,19 +29,60 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [rememberMe, setRememberMe] = useState(false);
 
-  // HANDLE SUCCESSFUL LOGIN
-  const loginSucceeded = () => {
-    navigate('/');
-  };
+  // CALL AUTH APIs
+  const formatCheckPassed = async () => {
+    try {
+      const response = await login({ email, password });
 
-  // CALL AUTH CHECK
-  const formatCheckPassed = () => {
-    if (email !== 'abc@gm.com' || password !== '12345678') {
-      setEmailError(true);
-      setPasswordError(true);
-      setPasswordErrorInfo('Invalid Email or Password. Please try again');
-    } else {
-      loginSucceeded();
+      console.log('Response something: ' + response.status);
+      if (response.status === HttpStatus.OK) {
+        console.log(response?.data);
+        const { accessToken, refreshToken, ...userInfos } = response?.data;
+
+        setRefreshToken(refreshToken);
+        setAccessToken(accessToken);
+        setUserInfos(userInfos);
+
+        //Storing auth infos
+        if (rememberMe) {
+          localStorage.setItem(StorageKey.USER_INFOS, userInfos);
+          localStorage.setItem(StorageKey.REFRESH_TOKEN, refreshToken);
+          localStorage.setItem(StorageKey.ACCESS_TOKEN, accessToken);
+        } else {
+          sessionStorage.setItem(StorageKey.USER_INFOS, userInfos);
+          sessionStorage.setItem(StorageKey.REFRESH_TOKEN, refreshToken);
+          sessionStorage.setItem(StorageKey.ACCESS_TOKEN, accessToken);
+        }
+
+        //Clear state after login success
+        setEmail('');
+        setPassword('');
+        setEmailError(false);
+        setPasswordError(false);
+        setRememberMe(false);
+
+        console.log('Login success');
+        navigate('/');
+      } else if (response.status === HttpStatus.NOT_FOUND) {
+        setEmailErrorInfo('');
+        setPasswordErrorInfo('Username or password is incorrect');
+        setEmailError(true);
+        setPasswordError(true);
+      } else if (response.status === HttpStatus.UNAUTHORIZED) {
+        setEmailErrorInfo('');
+        setPasswordErrorInfo(
+          'Account is unverified, please check your email for verify link',
+        );
+        setEmailError(true);
+        setPasswordError(true);
+      } else {
+        setEmailErrorInfo('');
+        setPasswordErrorInfo('Unexpected error, please try again later');
+        setEmailError(true);
+        setPasswordError(true);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -57,6 +110,8 @@ const Login = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail = emailRegex.test(email);
 
+    const isValidPassword = password.length >= 8 && /[A-Z]/.test(password);
+
     if (isValidEmail) {
       setEmailError(false);
       setEmailErrorInfo('');
@@ -65,22 +120,28 @@ const Login = () => {
       setEmailErrorInfo('The email format should be "yourname@gmail.com"');
     }
 
-    if (password.length < 8) {
-      setPasswordError(true);
-      setPasswordErrorInfo('The password must contain at least 8 characters');
-    } else {
+    if (isValidPassword) {
       setPasswordError(false);
+      setPasswordErrorInfo('');
+    } else {
+      setPasswordError(true);
+      setPasswordErrorInfo(
+        'The password must be at least 8 characters long and at least 1 uppercase character',
+      );
     }
 
-    if (!isValidEmail || password.length < 8) {
+    if (!isValidEmail || !isValidPassword) {
       return;
     }
 
+    //Inputs format check passed:
     formatCheckPassed();
   };
 
   const handleRememberMeChange = (e) => {
     setRememberMe(e.target.checked);
+    if (e.target.checked) localStorage.setItem(StorageKey.REMEMBER_ME, true);
+    else localStorage.setItem(StorageKey.REMEMBER_ME, false);
   };
 
   const handleCreateAccount = () => {
