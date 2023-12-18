@@ -1,0 +1,11 @@
+.dataTable {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border: 1px solid #ddd;
+}

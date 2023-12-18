@@ -1,0 +1,25 @@
+/* Opening.module.css */
+
+/* Define styles for tabs */
+.tabsContainer {
+  margin-bottom: 20px;
+}
+
+/* Define styles for individual tabs */
+.tab {
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.tab:hover {
+  background-color: #ffdc11;
+}
+
+/* Define styles for the active tab */
+.activeTab {
+  background-color: #4caf50;
+  color: white;
+}

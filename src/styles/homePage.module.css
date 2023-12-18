@@ -58,13 +58,13 @@
 }
 
 .gridContainer {
-  margin-top: 275px;
+  margin-top: 300px;
   margin-left: 150px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 0px; /* Reduce the gap between buttons to 2 pixels */
-  height: 20vh;
+  height: 17vh;
   width: 45vh;
   justify-content: start;
   align-items: start;
@@ -72,9 +72,7 @@
 
 /* Specific styles for the buttons within the gridContainer */
 .gridContainer .button1,
-.gridContainer .button2,
-.gridContainer .button3,
-.gridContainer .button4 {
+.gridContainer .button2 {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -118,7 +116,6 @@
 .screen2Layout {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
 }
 
