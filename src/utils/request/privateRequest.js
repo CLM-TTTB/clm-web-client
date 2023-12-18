@@ -5,6 +5,8 @@ import HttpStatus from '~/constants/httpStatusCode';
 import localStorage from '~/utils/localStorage';
 import sessionStorage from '~/utils/sessionStorage';
 import StorageKey from '~/constants/storageKeys';
+import history from '~/utils/navigateSite';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = AppProperty.CLM_API_URL;
 
@@ -36,6 +38,7 @@ axios.interceptors.response.use(
     if (error?.response?.status === HttpStatus.UNAUTHORIZED && !config?.sent) {
       config.sent = true;
       const newAccessToken = await refreshTokenFn();
+
       if (newAccessToken) {
         config.headers = {
           ...config.headers,
@@ -43,6 +46,8 @@ axios.interceptors.response.use(
         };
         return axios(config);
       }
+      toast.warning('Session expired. Please login again.');
+      history.navigate('/login');
       return Promise.reject(error);
     }
     return Promise.reject(error);
