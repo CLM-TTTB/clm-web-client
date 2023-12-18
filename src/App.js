@@ -9,6 +9,7 @@ import SearchLeague from './pages/searchLeague';
 import CreateLeague from './pages/createLeague';
 import CreateTeam from './pages/createTeam';
 import GlobalNavigate from './components/globalNavigate';
+import ProfileSettings from './pages/profileSettings';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/createLeague" element={<CreateLeague />} />
             <Route path="/createTeam" element={<CreateTeam />} />
             <Route path="/searchLeague" element={<SearchLeague />} />
+            <Route path="/profileSettings" element={<ProfileSettings />} />
           </Routes>
         </GlobalNavigate>
       </Router>
