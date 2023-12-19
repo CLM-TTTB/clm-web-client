@@ -35,7 +35,7 @@ const Opening = ({ leagueData }) => {
           className={`${styles.tab} ${tabValue === 2 && styles.activeTab}`}
         />
       </Tabs>
-
+      <div className={styles.colorLine}></div>
       {tabValue === 0 && <Enroll />}
       {tabValue === 1 && <RegistrationList />}
       {tabValue === 2 && <Schedule />}

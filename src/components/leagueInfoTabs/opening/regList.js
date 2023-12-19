@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import DataTable from '~/components/table';
+import DataTable from '~/components/leagueInfoTabs/table';
 
 import styles from './regList.module.css';
 

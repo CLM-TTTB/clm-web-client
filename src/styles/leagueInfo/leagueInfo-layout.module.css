@@ -5,19 +5,45 @@
 .headerContainer {
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   height: 100px;
 }
 
 .title {
   color: #ffdc11;
+  font-size: 20px;
+  font-weight: 200;
 }
 
 .leagueInfo {
-  gap: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .img {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.formatLocation {
+  font-size: 14px;
+}
+
+.teamNumber {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.colorLine,
+.colorLine2 {
+  height: 1px;
+  width: 100%;
+  background-color: #ffdc11;
+  margin-bottom: 40px;
+}
+
+.colorLine2 {
+  margin-top: 300px;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '~/styles/table.moudule.css'; // Import your CSS file or define styles inline
+import styles from './table.moudule.css'; // Import your CSS file or define styles inline
 
 const DataTable = ({ data }) => {
   const renderTableHeader = () => {
