@@ -11,19 +11,25 @@ import CreateLeague from './pages/createLeague';
 import CreateTeam from './pages/createTeam';
 import LeagueDetailPage from './pages/leagueInfo/leagueInfo-layout';
 import VerificationConfirm from './pages/verificationConfirm';
+import RequireAuth from './components/requireAuth';
+import PersistLogin from './components/persistLogin';
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
       <Route path="/test" element={<TestPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
-      <Route path="/createLeague" element={<CreateLeague />} />
-      <Route path="/createTeam" element={<CreateTeam />} />
-      <Route path="/searchLeague" element={<SearchLeague />} />
-      <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
+      <Route element={<PersistLogin />}>
+        <Route path="/" element={<HomePage />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/createLeague" element={<CreateLeague />} />
+          <Route path="/createTeam" element={<CreateTeam />} />
+          <Route path="/searchLeague" element={<SearchLeague />} />
+          <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
+        </Route>
+      </Route>
     </Routes>
   );
 };

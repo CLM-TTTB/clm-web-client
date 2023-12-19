@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '../styles/homePage.module.css';
@@ -14,12 +14,20 @@ import background4 from '../images/homePage/homeBackground-4.png';
 import logoGK from '../images/homePage/homeLogoGK.png';
 import Layout from '~/components/layout';
 
+// import localStorage from '~/utils/localStorage';
+// import sessionStorage from '~/utils/sessionStorage';
+// import StorageKey from '../constants/storageKeys';
+import useAuth from '~/hooks/useAuth';
+
 const HOME = () => {
+  const { userInfos } = useAuth();
+
+  console.log(userInfos);
+
   const navigate = useNavigate();
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
     <Layout>
@@ -134,7 +142,7 @@ const HOME = () => {
               </div>
             </div>
 
-            {isLoggedIn ? null : (
+            {!userInfos && (
               <div className={styles.bigButton1}>
                 <Button
                   text="REGISTER NOW"
@@ -254,7 +262,7 @@ const HOME = () => {
               </div>
             </div>
 
-            {isLoggedIn ? null : (
+            {!userInfos && (
               <div className={styles.bigButton3}>
                 <Button text="JOIN US NOW" onClick={() => navigate('/login')} />
               </div>

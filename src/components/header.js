@@ -6,11 +6,17 @@ import styles from '../styles/header.module.css';
 import logo from '../images/logo.png';
 import logo1 from '../images/headerLogo-1.png';
 
+import localStorage from '~/utils/localStorage';
+import sessionStorage from '~/utils/sessionStorage';
+import StorageKey from '../constants/storageKeys';
+import useAuth from '~/hooks/useAuth';
+
 const Header = () => {
+  const { userInfos } = useAuth();
+
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -83,13 +89,13 @@ const Header = () => {
             </div>
 
             <div className={styles.loginParent}>
-              {isLoggedIn ? (
+              {userInfos ? (
                 <div
                   className={styles.userProfile}
                   onClick={openSubItemsProfile}
                 >
                   <div className={styles.profilePic} />
-                  <div>Username</div>
+                  <div>{userInfos?.name}</div>
                 </div>
               ) : (
                 <div class={styles.auth}>

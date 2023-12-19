@@ -5,6 +5,7 @@ import Layout from '~/components/layout';
 import Input from '~/components/input';
 import Button from '~/components/button';
 
+import sessionStorage from '~/utils/sessionStorage';
 import localStorage from '~/utils/localStorage';
 import StorageKey from '~/constants/storageKeys';
 import { login } from '~/apiServices/authService';
