@@ -10,6 +10,7 @@ import SearchLeague from './pages/searchLeague';
 import CreateLeague from './pages/createLeague';
 import CreateTeam from './pages/createTeam';
 import LeagueDetailPage from './pages/leagueInfo/leagueInfo-layout';
+import VerificationConfirm from './pages/verificationConfirm';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
       <Route path="/test" element={<TestPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route path="/createLeague" element={<CreateLeague />} />
       <Route path="/createTeam" element={<CreateTeam />} />
       <Route path="/searchLeague" element={<SearchLeague />} />

@@ -4,6 +4,7 @@
   flex-direction: column; /* Center horizontally */
   margin-bottom: 15px;
   background-color: transparent;
+  margin-top: 18px;
 }
 
 .label {

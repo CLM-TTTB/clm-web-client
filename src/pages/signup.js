@@ -6,6 +6,9 @@ import Layout from '~/components/layout';
 import Input from '~/components/input';
 import Button from '~/components/button';
 
+import { signUp } from '~/apiServices/authService';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -22,8 +25,38 @@ const Signup = () => {
   const [rePasswordErrorInfo, setRePasswordErrorInfo] = useState('');
 
   // HANDLE SUCCESSFUL REGISTRATION
-  const signupSucceeded = () => {
-    navigate('/login');
+  const signupVerify = async () => {
+    try {
+      const response = await signUp({ email, password });
+      console.log('Response status: ' + response.status);
+
+      if (response.status === HttpStatus.CREATED) {
+        setEmail('');
+        setPassword('');
+        setRePassword('');
+
+        console.log('Register success, navigate to verify email notify page');
+        navigate('/verificationConfirm');
+      } else if (response.status === HttpStatus.FORBIDDEN) {
+        setEmailError(true);
+
+        setEmailErrorInfo('This email is already used to create account');
+      } else if (response.status === HttpStatus.NOT_FOUND) {
+        setEmailError(true);
+        setPasswordError(true);
+        setRePasswordError(true);
+
+        setRePasswordErrorInfo('Role not found');
+      } else {
+        setEmailError(true);
+        setPasswordError(true);
+        setRePasswordError(true);
+
+        setRePasswordErrorInfo('Unexpected error, please try again later');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleEmail = (e) => {
@@ -57,6 +90,7 @@ const Signup = () => {
   const handleSignup = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail = emailRegex.test(email);
+    const isValidPassword = password.length >= 8 && /[A-Z]/.test(password);
 
     if (isValidEmail) {
       setEmailError(false);
@@ -66,26 +100,32 @@ const Signup = () => {
       setEmailErrorInfo('The email format should be "yourname@gmail.com"');
     }
 
-    if (password.length < 7) {
-      setPasswordError(true);
-      setPasswordErrorInfo('The password must contain at least 8 characters');
-    } else {
+    if (isValidPassword) {
       setPasswordError(false);
+      setPasswordErrorInfo('');
+    } else {
+      setPasswordError(true);
+      setPasswordErrorInfo(
+        'The password must be at least 8 characters long and at least 1 uppercase character',
+      );
     }
 
     if (rePassword !== password) {
       setRePasswordError(true);
-      setRePasswordErrorInfo('Password and Re-entered Password do not match');
+      setRePasswordErrorInfo('Password and Re-entered Password does not match');
+    } else if (rePassword === '') {
+      setRePasswordError(true);
     } else {
       setRePasswordError(false);
       setRePasswordErrorInfo('');
     }
 
-    if (!isValidEmail || password.length < 7 || rePassword !== password) {
+    if (!isValidEmail || !isValidPassword || rePassword !== password) {
       return;
     }
 
-    signupSucceeded();
+    //Signup inputs satisfied
+    signupVerify();
   };
 
   const handleLogin = () => {

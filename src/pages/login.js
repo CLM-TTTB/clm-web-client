@@ -30,11 +30,10 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
 
   // CALL AUTH APIs
-  const formatCheckPassed = async () => {
+  const loginVerify = async () => {
     try {
       const response = await login({ email, password });
 
-      console.log('Response something: ' + response.status);
       if (response.status === HttpStatus.OK) {
         console.log(response?.data);
         const { accessToken, refreshToken, ...userInfos } = response?.data;
@@ -57,8 +56,8 @@ const Login = () => {
         //Clear state after login success
         setEmail('');
         setPassword('');
-        setEmailError(false);
-        setPasswordError(false);
+        // setEmailError(false);
+        // setPasswordError(false);
         setRememberMe(false);
 
         console.log('Login success');
@@ -69,17 +68,17 @@ const Login = () => {
         setEmailError(true);
         setPasswordError(true);
       } else if (response.status === HttpStatus.UNAUTHORIZED) {
+        setEmailError(true);
+        setPasswordError(true);
         setEmailErrorInfo('');
         setPasswordErrorInfo(
-          'Account is unverified, please check your email for verify link',
+          'Account is unverified, please check your email for verification link',
         );
+      } else {
         setEmailError(true);
         setPasswordError(true);
-      } else {
         setEmailErrorInfo('');
         setPasswordErrorInfo('Unexpected error, please try again later');
-        setEmailError(true);
-        setPasswordError(true);
       }
     } catch (err) {
       console.log(err);
@@ -109,7 +108,6 @@ const Login = () => {
   const handleLogin = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail = emailRegex.test(email);
-
     const isValidPassword = password.length >= 8 && /[A-Z]/.test(password);
 
     if (isValidEmail) {
@@ -135,7 +133,7 @@ const Login = () => {
     }
 
     //Inputs format check passed:
-    formatCheckPassed();
+    loginVerify();
   };
 
   const handleRememberMeChange = (e) => {
