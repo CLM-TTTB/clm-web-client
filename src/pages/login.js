@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import styles from '../styles/login.module.css';
 import Layout from '~/components/layout';
 import Input from '~/components/input';
@@ -20,6 +20,8 @@ const Login = () => {
   const { setUserInfos, setAccessToken, setRefreshToken } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/'; //navigate user to the private page that they want to go after Login
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -62,7 +64,7 @@ const Login = () => {
         setRememberMe(false);
 
         console.log('Login success');
-        navigate('/');
+        navigate(from, { replace: true });
       } else if (response.status === HttpStatus.NOT_FOUND) {
         setEmailErrorInfo('');
         setPasswordErrorInfo('Username or password is incorrect');

@@ -8,6 +8,8 @@ import Button from '~/components/button';
 
 import { signUp } from '~/apiServices/authService';
 import HttpStatus from '~/constants/httpStatusCode';
+import localStorage from '~/utils/localStorage';
+import StorageKey from '~/constants/storageKeys';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -35,7 +37,15 @@ const Signup = () => {
         setPassword('');
         setRePassword('');
 
-        console.log('Register success, navigate to verify email notify page');
+        console.log(
+          'Resend verify token: ' + response.data.resendVerificationLinkToken,
+        );
+        const resendVeriLinkToken = response.data.resendVerificationLinkToken;
+        localStorage.setItem(
+          StorageKey.RESEND_VERI_LINK_TOKEN,
+          resendVeriLinkToken,
+        );
+
         navigate('/verificationConfirm');
       } else if (response.status === HttpStatus.FORBIDDEN) {
         setEmailError(true);

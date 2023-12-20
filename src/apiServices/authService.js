@@ -1,8 +1,9 @@
 import * as request from '~/utils/request';
 import AuthEndpoint from '~/endpoints/authEndpoints';
-import HttpStatus from '~/constants/httpStatusCode';
 import localStorage from '~/utils/localStorage';
-import LocalStorageKey from '~/constants/storageKeys';
+import StorageKey from '~/constants/storageKeys';
+import axios from 'axios';
+import AppProperty from '~/constants/appProperties';
 
 export const login = async (data) => {
   try {
@@ -25,3 +26,28 @@ export const signUp = async (data) => {
 };
 
 export const logout = async () => {};
+
+export const resendVerificationLink = async () => {
+  const resendVeriLinkToken = await localStorage.getItem(
+    StorageKey.RESEND_VERI_LINK_TOKEN,
+  );
+  console.log(resendVeriLinkToken);
+
+  if (!resendVeriLinkToken) {
+    console.log('Resend verification link token does not exist!!');
+    return;
+  }
+
+  try {
+    const response = axios.post(
+      AppProperty.CLM_API_URL + AuthEndpoint.RESEND_VERIFY_LINK,
+      null,
+      {
+        headers: { Authorization: 'Bearer ' + resendVeriLinkToken },
+      },
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
