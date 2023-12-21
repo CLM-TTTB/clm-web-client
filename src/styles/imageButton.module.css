@@ -19,10 +19,12 @@
   align-items: stretch;
 }
 
-.img-display-before {
+.imgdisplaybefore {
   width: 196px;
+  border-radius: 10px;
 }
 
-.img-display-after {
+.imgdisplayafter {
   width: 196px;
+  border-radius: 10px;
 }

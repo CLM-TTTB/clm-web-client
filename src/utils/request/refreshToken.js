@@ -10,6 +10,7 @@ const refreshTokenFn = async () => {
   const refreshToken = rememberMe
     ? localStorage.getItem(StorageKey.REFRESH_TOKEN)
     : sessionStorage.getItem(StorageKey.REFRESH_TOKEN);
+
   if (!refreshToken) {
     return null;
   }
