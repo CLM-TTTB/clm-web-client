@@ -1,0 +1,37 @@
+.fixtureContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(220, 220, 220);
+}
+
+.team {
+  color: black;
+}
+
+.dateTime {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffdc11;
+  color: black;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  margin-right: 25px;
+  margin-left: 25px;
+  text-align: center;
+  height: 50px;
+  align-self: stretch; /* Stretch vertically to match the height of fixtureContainer */
+}
+
+.date {
+  margin-top: -15px;
+  font-weight: bold;
+}
+
+.time {
+  margin-top: 2px;
+}

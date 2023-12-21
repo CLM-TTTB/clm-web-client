@@ -10,6 +10,8 @@ import CreateLeague from './pages/createLeague';
 import CreateTeam from './pages/createTeam';
 import GlobalNavigate from './components/globalNavigate';
 import ProfileSettings from './pages/profileSettings';
+// App.js
+import AppRoutes from '~/Routes';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
             <Route path="/profileSettings" element={<ProfileSettings />} />
           </Routes>
         </GlobalNavigate>
+        <AppRoutes />
       </Router>
     </div>
   );

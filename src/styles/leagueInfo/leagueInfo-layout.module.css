@@ -1,0 +1,49 @@
+.parrentContainer {
+  margin: 50px;
+  margin-top: 0px;
+}
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: 100px;
+}
+
+.title {
+  color: #ffdc11;
+  font-size: 20px;
+  font-weight: 200;
+}
+
+.leagueInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.formatLocation {
+  font-size: 14px;
+}
+
+.teamNumber {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.colorLine,
+.colorLine2 {
+  height: 1px;
+  width: 100%;
+  background-color: #ffdc11;
+  margin-bottom: 40px;
+}
+
+.colorLine2 {
+  margin-top: 300px;
+}

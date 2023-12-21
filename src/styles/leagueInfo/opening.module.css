@@ -1,0 +1,36 @@
+/* Opening.module.css */
+
+/* Define styles for tabs */
+.tabsContainer {
+  height: 30px !important;
+  margin-bottom: 20px;
+}
+
+/* Define styles for individual tabs */
+.tab {
+  cursor: pointer;
+  color: #ccc !important;
+  margin-right: 10px;
+}
+
+.tab:hover {
+  background-color: #ffdb1139;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+/* Define styles for the active tab */
+.activeTab {
+  background-color: #ffdc11 !important;
+  border-top-right-radius: 5px !important;
+  border-top-left-radius: 5px !important;
+  color: black !important;
+}
+
+.colorLine {
+  height: 1px;
+  width: 100%;
+  background-color: #ffdc11;
+  margin-top: -22px;
+  margin-bottom: 40px;
+}

@@ -19,6 +19,7 @@ const HOME = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
     <Layout>
@@ -45,16 +46,20 @@ const HOME = () => {
 
           <div className={styles.gridContainer}>
             <div className={styles.button1}>
-              <Button text="Create League" />
+              <Button
+                text="Create League"
+                onClick={() => {
+                  navigate('/createLeague');
+                }}
+              />
             </div>
             <div className={styles.button2}>
-              <Button text="Search League" />
-            </div>
-            <div className={styles.button3}>
-              <Button text="Create Team" />
-            </div>
-            <div className={styles.button4}>
-              <Button text="Search League" />
+              <Button
+                text="Search League"
+                onClick={() => {
+                  navigate('/searchLeague');
+                }}
+              />
             </div>
           </div>
 
@@ -129,9 +134,14 @@ const HOME = () => {
               </div>
             </div>
 
-            <div className={styles.bigButton1}>
-              <Button text="REGISTER NOW" />
-            </div>
+            {isLoggedIn ? null : (
+              <div className={styles.bigButton1}>
+                <Button
+                  text="REGISTER NOW"
+                  onClick={() => navigate('/signUp')}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -173,7 +183,12 @@ const HOME = () => {
             </div>
 
             <div className={styles.bigButton2}>
-              <Button text="View more ➔" />
+              <Button
+                text="View more ➔"
+                onClick={() => {
+                  navigate('/test');
+                }}
+              />
             </div>
           </div>
         </div>
@@ -239,9 +254,11 @@ const HOME = () => {
               </div>
             </div>
 
-            <div className={styles.bigButton3}>
-              <Button text="JOIN US NOW" />
-            </div>
+            {isLoggedIn ? null : (
+              <div className={styles.bigButton3}>
+                <Button text="JOIN US NOW" onClick={() => navigate('/login')} />
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,75 +1,65 @@
-// SearchLeague.jsx
-import React, { useState } from 'react';
-import styles from '../styles/searchLeague.module.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '~/components/layout';
 import LeagueCard from '~/components/leagueCard';
 import Input from '~/components/input';
-import DropDown from '~/components/dropDown'; // Import the Dropdown component
+import DropDown from '~/components/dropDown';
 import search from '~/images/leagueCard/search.png';
+import styles from '~/styles/searchLeague.module.css';
 
 const SearchLeague = () => {
-  // Number of leagues per page
+  const navigate = useNavigate();
   const pageSize = 12;
 
-  // For testing
-  const generateLeagues = (count) => {
-    const leagues = [];
+  const [leagues, setLeagues] = useState([]);
 
-    for (let i = 1; i <= count; i++) {
-      leagues.push({
-        leagueName: `League ${i}`,
-        competitionFormat: `Format ${i}`,
-        location: `Location ${i}`,
-        profileSrc: `~/images/leagueCard/avatar${i}.png`,
-        status: 'closed',
-      });
-    }
+  useEffect(() => {
+    const fetchLeagues = async () => {
+      try {
+        // Replace the following with your actual API call
+        const response = await fetch(`/mockData/leagues.json`);
+        const data = await response.json();
+        console.log('Fetched Data:', data); // Log the fetched data
+        setLeagues(data);
+      } catch (error) {
+        console.error('Error fetching leagues:', error);
+      }
+    };
 
-    return leagues;
-  };
+    fetchLeagues();
+  }, []);
 
-  // Set initial league array
-  const initialLeagues = generateLeagues(14);
-
-  // State for managing leagues, search term, current page, and filters
-  const [leagues, setLeagues] = useState(initialLeagues);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [formatFilter, setFormatFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
 
-  // Function to handle search input changes
   const handleSearch = (event) => {
     const searchValue = event.target.value.toLowerCase();
     setSearchTerm(searchValue);
-    setCurrentPage(1); // Reset to the first page when searching
+    setCurrentPage(1);
   };
 
-  // Function to handle page changes
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  // Function to handle Format filter changes
   const handleFormatChange = (selectedFormat) => {
     setFormatFilter(selectedFormat);
-    setCurrentPage(1); // Reset to the first page when changing filters
+    setCurrentPage(1);
   };
 
-  // Function to handle Status filter changes
   const handleStatusChange = (selectedStatus) => {
     setStatusFilter(selectedStatus);
-    setCurrentPage(1); // Reset to the first page when changing filters
+    setCurrentPage(1);
   };
 
-  // Function to handle Sort by changes
   const handleSortByChange = (selectedSortBy) => {
     setSortBy(selectedSortBy);
-    setCurrentPage(1); // Reset to the first page when changing filters
+    setCurrentPage(1);
   };
 
-  // Filtering logic based on search term, Format, and Status
   const filteredLeagues = leagues.filter((league) => {
     const formatFilterMatch =
       formatFilter === '' ||
@@ -77,43 +67,39 @@ const SearchLeague = () => {
 
     const statusFilterMatch =
       statusFilter === '' ||
-      league.status.toLowerCase() === statusFilter.toLowerCase();
+      (league.status &&
+        league.status.toLowerCase().includes(statusFilter.toLowerCase()));
 
-    return (
-      (league.leagueName.toLowerCase().includes(searchTerm) ||
-        league.location.toLowerCase().includes(searchTerm)) &&
-      formatFilterMatch &&
-      statusFilterMatch
-    );
+    const searchTermMatch =
+      league.leagueName.toLowerCase().includes(searchTerm) ||
+      league.location.toLowerCase().includes(searchTerm);
+
+    console.log('Format Filter Match:', formatFilterMatch);
+    console.log('Status Filter Match:', statusFilterMatch);
+    console.log('Search Term Match:', searchTermMatch);
+
+    return searchTermMatch && formatFilterMatch && statusFilterMatch;
   });
 
-  // Sorting logic based on Sort by option
   const sortedLeagues = [...filteredLeagues].sort((a, b) => {
     if (sortBy === 'League Name') {
       return a.leagueName.localeCompare(b.leagueName);
-    } else if (sortBy === 'Latest Date') {
-      // Implement sorting by date logic if your league objects have a 'date' property
-      // return new Date(b.date) - new Date(a.date);
-    } else if (sortBy === 'Oldest Date') {
-      // Implement sorting by date logic if your league objects have a 'date' property
-      // return new Date(a.date) - new Date(b.date);
     }
+    // Add other sorting options if needed
     return 0;
   });
 
-  // Total number of leagues after filtering
   const totalLeagues = sortedLeagues.length;
-
-  // Total number of pages based on page size
   const totalPages = Math.ceil(totalLeagues / pageSize);
-
-  // Get the leagues for the current page
   const paginatedLeagues = sortedLeagues.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize,
   );
 
-  // JSX for rendering the component
+  const handleDetail = (leagueId) => {
+    navigate(`/league/${encodeURIComponent(leagueId)}`);
+  };
+
   return (
     <>
       <Layout>
@@ -123,7 +109,6 @@ const SearchLeague = () => {
           <div className={styles.container}>
             <div className={styles.filterContainer}>
               <div className={styles.searchBar}>
-                {/* Search Input */}
                 <Input
                   type="text"
                   placeholder="Search by League Name or Location"
@@ -137,7 +122,6 @@ const SearchLeague = () => {
                 />
               </div>
 
-              {/* Dropdowns for Format, Status, and Sort by */}
               <DropDown
                 label="Format"
                 options={['', 'Knock-out', 'Round Robin', 'Mixed']}
@@ -158,7 +142,6 @@ const SearchLeague = () => {
               />
             </div>
 
-            {/* Displaying leagues on the grid */}
             <div className={styles.leagueGrid}>
               {paginatedLeagues.map((league, index) => (
                 <LeagueCard
@@ -167,11 +150,14 @@ const SearchLeague = () => {
                   competitionFormat={league.competitionFormat}
                   location={league.location}
                   profileSrc={league.profileSrc}
+                  status={league.status}
+                  onDetailClick={() =>
+                    handleDetail(league.id ? league.id.toString() : '')
+                  }
                 />
               ))}
             </div>
 
-            {/* Pagination */}
             <div className={styles.pagination}>
               <div>
                 <button
