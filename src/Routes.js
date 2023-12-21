@@ -8,7 +8,7 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import SearchLeague from './pages/searchLeague';
 import CreateLeague from './pages/createLeague';
-import CreateTeam from './pages/createTeam';
+import CreateTeam from './components/leagueInfoTabs/opening/enroll/createTeam';
 import LeagueDetailPage from './pages/leagueInfo/leagueInfo-layout';
 
 const AppRoutes = () => {

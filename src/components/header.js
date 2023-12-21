@@ -9,8 +9,9 @@ import logo1 from '../images/headerLogo-1.png';
 const Header = () => {
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
+  const [isSubItemsProfileOpen, setSubItemsProfileOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
 
   const navigate = useNavigate();
 
@@ -29,14 +30,16 @@ const Header = () => {
   }, []);
 
   const onSIGNUPTextClick = useCallback(() => {
-    navigate('/signUp');
+    // Please sync "SIGN UP" to the project
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
     setSubItemsLanguagesOpen(!isSubItemsLanguagesOpen);
   }, [isSubItemsLanguagesOpen]);
 
-  const openSubItemsProfile = () => {};
+  const openSubItemsProfile = useCallback(() => {
+    setSubItemsProfileOpen(!isSubItemsProfileOpen);
+  }, [isSubItemsProfileOpen]);
 
   return (
     <div className={styles.headerBgParent}>
@@ -61,10 +64,17 @@ const Header = () => {
               <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
               {isSubItemsLeaguesOpen && (
                 <div className={styles.subList}>
-                  <div onClick={() => navigate('/createLeague')}>
+                  <div className={styles.line}></div>
+                  <div
+                    className={styles.subItem}
+                    onClick={() => navigate('/createLeague')}
+                  >
                     Create League
                   </div>
-                  <div onClick={() => navigate('/searchLeague')}>
+                  <div
+                    className={styles.subItem}
+                    onClick={() => navigate('/searchLeague')}
+                  >
                     Search Leagues
                   </div>
                 </div>
@@ -90,6 +100,35 @@ const Header = () => {
                 >
                   <div className={styles.profilePic} />
                   <div>Username</div>
+                  {isSubItemsProfileOpen && (
+                    <div className={styles.subList1}>
+                      <div className={styles.line}></div>
+                      <div
+                        className={styles.subItem}
+                        onClick={() => navigate('/myLeagues')}
+                      >
+                        My Leagues
+                      </div>
+                      <div
+                        className={styles.subItem}
+                        onClick={() => navigate('/myTemplates')}
+                      >
+                        My Templates
+                      </div>
+                      <div
+                        className={styles.subItem}
+                        onClick={() => navigate('/settings')}
+                      >
+                        Settings
+                      </div>
+                      <div
+                        className={styles.subItem}
+                        onClick={() => navigate('/logout')}
+                      >
+                        Logout
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div class={styles.auth}>
@@ -109,8 +148,9 @@ const Header = () => {
               />
               {isSubItemsLanguagesOpen && (
                 <div className={styles.subList2}>
-                  <div>Language 1</div>
-                  <div>Language 2</div>
+                  <div className={styles.line}></div>
+                  <div className={styles.subItem}>Language 1</div>
+                  <div className={styles.subItem}>Language 2</div>
                 </div>
               )}
             </div>
