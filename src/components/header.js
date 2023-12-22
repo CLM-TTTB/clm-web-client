@@ -88,7 +88,7 @@ const Header = () => {
               ABOUT US
             </div>
 
-            <div className={styles.devider}>
+            <div className={styles.divider}>
               <div>|</div>
             </div>
 
