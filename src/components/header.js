@@ -11,7 +11,7 @@ const Header = () => {
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
   const [isSubItemsProfileOpen, setSubItemsProfileOpen] = useState(false);
   const [isSubItemsLanguagesOpen, setSubItemsLanguagesOpen] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Header = () => {
   }, []);
 
   const onSIGNUPTextClick = useCallback(() => {
-    // Please sync "SIGN UP" to the project
+    navigate('/signUp');
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
@@ -156,7 +156,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className={styles.line}></div>
       </div>
     </div>
   );

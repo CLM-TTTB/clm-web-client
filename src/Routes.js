@@ -10,6 +10,7 @@ import SearchLeague from './pages/searchLeague';
 import CreateLeague from './pages/createLeague';
 import CreateTeam from './components/leagueInfoTabs/opening/enroll/createTeam';
 import LeagueDetailPage from './pages/leagueInfo/leagueInfo-layout';
+import TeamInfo from './pages/teamInfo/teamInfo';
 
 const AppRoutes = () => {
   return (
@@ -22,6 +23,7 @@ const AppRoutes = () => {
       <Route path="/createTeam" element={<CreateTeam />} />
       <Route path="/searchLeague" element={<SearchLeague />} />
       <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
+      <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
     </Routes>
   );
 };

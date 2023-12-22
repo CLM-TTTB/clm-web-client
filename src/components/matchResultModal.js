@@ -32,7 +32,7 @@ const MatchResultModal = ({
 
             <div className={styles.score}>
               <h1>{score1}</h1>
-              <h1> - </h1>
+              <h1 className={styles.devider}> - </h1>
               <h1>{score2}</h1>
             </div>
 
