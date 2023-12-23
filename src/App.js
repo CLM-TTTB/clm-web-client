@@ -1,14 +1,16 @@
-// App.js
-
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import GlobalNavigate from './components/globalNavigate';
 import AppRoutes from '~/Routes';
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <AppRoutes />
+        <GlobalNavigate>
+          <AppRoutes />
+        </GlobalNavigate>
       </Router>
     </div>
   );

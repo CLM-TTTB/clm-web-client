@@ -1,0 +1,17 @@
+.dataTable {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  padding-left: 58.5px;
+  padding-right: 58.5px;
+  border: 1px solid #454545;
+  text-align: center;
+}
+
+th {
+  background-color: #bababa;
+  color: black;
+}

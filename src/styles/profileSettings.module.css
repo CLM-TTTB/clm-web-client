@@ -1,0 +1,33 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.profileSettingsForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.form1 {
+  width: 196px;
+  margin-right: 40px;
+  align-items: left;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+}
+
+.line {
+  height: 1px;
+  width: 350px;
+  background-color: #d4d4d4;
+  opacity: 20%;
+  margin-top: 60px;
+}

@@ -1,10 +1,9 @@
-// Opening.jsx
-
 import React, { useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
 import Enroll from '~/components/leagueInfoTabs/opening/enroll';
 import RegistrationList from '~/components/leagueInfoTabs/opening/regList';
-import Schedule from '~/components/leagueInfoTabs/opening/schedule';
+import Schedule from '~/components/leagueInfoTabs/opening/schedule/schedule';
+import ChooseTeam from '~/components/leagueInfoTabs/opening/enroll/chooseTeam';
 import styles from '~/styles/leagueInfo/opening.module.css'; // Import the CSS module
 
 const Opening = ({ leagueData }) => {
@@ -12,6 +11,10 @@ const Opening = ({ leagueData }) => {
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
+  };
+
+  const handleEnrollClick = () => {
+    setTabValue(0);
   };
 
   return (
@@ -35,10 +38,16 @@ const Opening = ({ leagueData }) => {
           className={`${styles.tab} ${tabValue === 2 && styles.activeTab}`}
         />
       </Tabs>
-
-      {tabValue === 0 && <Enroll />}
-      {tabValue === 1 && <RegistrationList />}
-      {tabValue === 2 && <Schedule />}
+      <div className={styles.colorLine}></div>
+      {tabValue === 0 ? (
+        <Enroll onEnrollClick={handleEnrollClick} />
+      ) : tabValue === 1 ? (
+        <RegistrationList />
+      ) : tabValue === 2 ? (
+        <Schedule />
+      ) : (
+        <ChooseTeam />
+      )}
     </div>
   );
 };

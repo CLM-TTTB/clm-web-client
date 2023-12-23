@@ -98,21 +98,44 @@
   height: 30px;
 }
 
+.subList1,
 .subList2,
 .subList {
   position: absolute; /* Position relative to the header */
   top: 60%;
   transform: translateX(-20%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #1c1c1e;
   padding: 10px 10px;
   box-shadow: 0;
   z-index: 1;
   text-align: center;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
+.subList1 {
+  margin-top: 10px;
+  margin-left: 10px;
+  text-align: start;
+}
+
+.subItem {
+  padding-top: 12px;
+}
+
+.line {
+  margin-left: -10px;
+  align-self: center;
+  width: 117%;
+  height: 1px;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  background-color: #ffdc11;
+}
 .subList2 {
   top: 70%;
   transform: translateX(20%);
+  right: 20px;
 }
 
 .frameContainer {
@@ -160,7 +183,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 .earthIcon {
   position: absolute;
@@ -198,9 +221,11 @@
 }
 
 .earthIcon {
+  position: absolute;
   width: 34px;
   height: 34px;
   overflow: hidden;
   flex-shrink: 0;
   object-fit: cover;
+  right: 0;
 }

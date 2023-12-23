@@ -38,6 +38,20 @@ const CreateLeague = () => {
 
   const [numOfPeople, setNumOfPeople] = useState('');
 
+  const ageRangeOptions = [
+    'U12',
+    'U14',
+    'U16',
+    'U18',
+    'U21',
+    'U23',
+    'U25',
+    'U30',
+    'U35',
+    'U40',
+    'U45',
+  ];
+
   const ShowPublicEnrollment = () => {
     if (privacy === 'Public') {
       return (
@@ -129,8 +143,8 @@ const CreateLeague = () => {
           placeholder="Age Range"
           value={ageRange}
           onChange={(e) => setAgeRange(e.target.value)}
-          options={['Under 18', '18-25', '26-35', '36-45', '46-55', '56+']}
-          defaultValue="Under 18"
+          options={ageRangeOptions}
+          defaultValue={ageRangeOptions[0]}
         />
 
         <Dropdown

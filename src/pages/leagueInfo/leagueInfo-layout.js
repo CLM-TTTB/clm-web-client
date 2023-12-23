@@ -45,16 +45,21 @@ const LeagueDetailPage = () => {
 
   return (
     <Layout>
+      <div className={styles.colorLine} />
       <div className={styles.parrentContainer}>
         <div className={styles.headerContainer}>
           <img className={styles.img} alt="" src={avt} />
           <div className={styles.leagueInfo}>
             <div className={styles.title}>{leagueData.leagueName}</div>
-            <p>
+            <div className={styles.formatLocation}>
               {' '}
-              {leagueData.location} | {leagueData.competitionFormat}
-            </p>
-            <p> {leagueData.teamNumber} teams </p>
+              {leagueData.competitionFormat}
+              {' | '} {leagueData.location}
+            </div>
+            <div className={styles.teamNumber}>
+              {' '}
+              {leagueData.teamNumber} teams{' '}
+            </div>
           </div>
         </div>
 
@@ -63,9 +68,9 @@ const LeagueDetailPage = () => {
         ) : (
           <Closed leagueData={leagueData} />
         )}
-
-        <button onClick={() => navigate('/searchLeague')}>Go Back</button>
       </div>
+
+      <div className={styles.colorLine2} />
     </Layout>
   );
 };
