@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '../styles/createLeague.module.css';
@@ -14,8 +14,13 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePickerComponent from '~/components/datePicker';
+import dayjs, { Dayjs } from 'dayjs';
 
 const CreateLeague = () => {
+  useEffect(() => {
+    console.log('CreateLeague page loaded!!!');
+  }, []);
+
   const navigate = useNavigate();
 
   const [leagueName, setLeagueName] = useState('');
@@ -25,25 +30,33 @@ const CreateLeague = () => {
   const [numOfPlayers, setNumOfPlayers] = useState('');
   const [competitionFormat, setCompetitionFormat] = useState('');
   const [numOfTeams, setNumOfTeams] = useState('');
-  const [privacy, setPrivacy] = useState('');
+  const [privacy, setPrivacy] = useState('Public');
 
-  const [enrollmentDeadline, setEnrollmentDeadline] = useState('');
+  const [enrollmentDeadline, setEnrollmentDeadline] = useState();
+  const [startEstimateDate, setStartEstimateDate] = useState();
+  const [endEstimateDate, setEndEstimateDate] = useState();
+
   const [numOfPeople, setNumOfPeople] = useState('');
 
   const ShowPublicEnrollment = () => {
     if (privacy === 'Public') {
       return (
         <div className={styles.createLeagueForm}>
-          <div className={styles.form1}>
+          <div className={styles.form5}>
             <label className={styles.label}>Enrollment Deadline</label>
-            <DatePickerComponent />
+            <div className={styles.datePickerContainer}>
+              <DatePickerComponent
+                value={enrollmentDeadline}
+                onChange={(newDate) => setEnrollmentDeadline(newDate)}
+              />
+            </div>
           </div>
-          <Input
+          {/* <Input
             label="Number of People"
             placeholder="Number of People"
             value={numOfPeople}
             onChange={(e) => setNumOfPeople(e.target.value)}
-          />
+          /> */}
         </div>
       );
     }
@@ -52,16 +65,19 @@ const CreateLeague = () => {
 
   const handleCreateLeague = () => {
     if (
-      leagueName.length < 1 ||
-      phoneNumber.length < 1 ||
-      location.length < 1 ||
-      ageRange.length < 1 ||
-      numOfPlayers.length < 1 ||
-      competitionFormat.length < 1 ||
-      numOfTeams.length < 1
+      leagueName.length < 1
+      // ||
+      // phoneNumber.length < 1 ||
+      // location.length < 1 ||
+      // ageRange.length < 1 ||
+      // numOfPlayers.length < 1 ||
+      // competitionFormat.length < 1 ||
+      // numOfTeams.length < 1
     ) {
       toast.error('Please fill out all fields');
     } else {
+      console.log(enrollmentDeadline);
+
       toast.success('League created successfully!');
       setLeagueName('');
       setPhoneNumber('');
@@ -146,9 +162,21 @@ const CreateLeague = () => {
       </div>
 
       <div className={styles.createLeagueForm}>
-        <h3>
-          For this configuration, the number of matches in the league is: 3
-        </h3>
+        <div className={styles.form6}>
+          <label className={styles.label}>Estimate Start Date</label>
+          <DatePickerComponent
+            value={startEstimateDate}
+            onChange={(newDate) => setStartEstimateDate(newDate)}
+          />
+        </div>
+
+        <div className={styles.form7}>
+          <label className={styles.label}>Estimate End Date</label>
+          <DatePickerComponent
+            value={endEstimateDate}
+            onChange={(newDate) => setEndEstimateDate(newDate)}
+          />
+        </div>
       </div>
 
       <div className={styles.createLeagueForm}>
@@ -158,8 +186,8 @@ const CreateLeague = () => {
             placeholder="Privacy"
             value={privacy}
             onChange={(e) => setPrivacy(e.target.value)}
-            options={['Private', 'Public']}
-            defaultValue="Private"
+            options={['Public', 'Private']}
+            defaultValue="Public"
           />
         </div>
 

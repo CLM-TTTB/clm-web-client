@@ -78,3 +78,26 @@ html {
   width: 196px;
   line-height: 24px;
 }
+
+.datePickerContainer {
+  margin-bottom: 25px;
+  justify-items: left;
+  justify-content: left;
+  align-items: left;
+  align-content: left;
+}
+
+.form5 {
+  width: 550px;
+  margin-right: 40px;
+  align-items: left;
+}
+
+.form6 {
+  width: 196px;
+  margin-right: 40px;
+}
+
+.form7 {
+  width: 350px;
+}
