@@ -7,7 +7,10 @@ import AppProperty from '~/constants/appProperties';
 
 export const createLeague = async (data) => {
   try {
-    const response = await request.private.post(AuthEndpoint.LOGIN, data);
+    const response = await request.private.post(
+      AuthEndpoint.CREATE_LEAGUE,
+      data,
+    );
     return response;
   } catch (err) {
     return err.response;

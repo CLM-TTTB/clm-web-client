@@ -29,14 +29,18 @@ const refreshTokenFn = async () => {
     );
 
     const { newAccessToken, newRefreshToken } = response.data;
-    if (rememberMe) {
-      localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
-      localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
-    } else {
-      sessionStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
-      sessionStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+    const status = response.status;
+    if (response.status > 200 && response.status < 300) {
+      if (rememberMe) {
+        localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+        localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+      } else {
+        sessionStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+        sessionStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+      }
+      return newAccessToken;
     }
-    return newAccessToken;
+    return null;
   } catch (error) {
     if (rememberMe) {
       localStorage.removeItem(StorageKey.REFRESH_TOKEN);

@@ -14,7 +14,8 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePickerComponent from '~/components/datePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import { createLeague } from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
 
 const CreateLeague = () => {
   useEffect(() => {
@@ -26,17 +27,15 @@ const CreateLeague = () => {
   const [leagueName, setLeagueName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [location, setLocation] = useState('');
-  const [ageRange, setAgeRange] = useState('');
+  const [ageRange, setAgeRange] = useState('U21');
   const [numOfPlayers, setNumOfPlayers] = useState('');
-  const [competitionFormat, setCompetitionFormat] = useState('');
+  const [competitionFormat, setCompetitionFormat] = useState('KNOCKOUT');
   const [numOfTeams, setNumOfTeams] = useState('');
-  const [privacy, setPrivacy] = useState('Public');
+  const [privacy, setPrivacy] = useState('Publish');
 
   const [enrollmentDeadline, setEnrollmentDeadline] = useState();
   const [startEstimateDate, setStartEstimateDate] = useState();
   const [endEstimateDate, setEndEstimateDate] = useState();
-
-  const [numOfPeople, setNumOfPeople] = useState('');
 
   const ageRangeOptions = [
     'U12',
@@ -53,7 +52,7 @@ const CreateLeague = () => {
   ];
 
   const ShowPublicEnrollment = () => {
-    if (privacy === 'Public') {
+    if (privacy === 'Publish') {
       return (
         <div className={styles.createLeagueForm}>
           <div className={styles.form5}>
@@ -77,30 +76,74 @@ const CreateLeague = () => {
     return null;
   };
 
-  const handleCreateLeague = () => {
+  const handleCreateLeague = async () => {
+    // console.log(parseInt(numOfTeams));
+    // console.log(parseInt(numOfPlayers));
+    // console.log(leagueName);
+    // console.log(phoneNumber);
+    // console.log(location);
+    // console.log(ageRange);
+    // console.log(startEstimateDate.toISOString());
+    // console.log(endEstimateDate.toISOString());
+    // console.log(enrollmentDeadline.toISOString());
+    // console.log(competitionFormat.toUpperCase().replace(/-/g, '_'));
+    // console.log(privacy.toUpperCase().replace(/-/g, '_'));
+    //** FOR DEBUGGING PURPOSE **
+
     if (
-      leagueName.length < 1
-      // ||
-      // phoneNumber.length < 1 ||
-      // location.length < 1 ||
-      // ageRange.length < 1 ||
-      // numOfPlayers.length < 1 ||
-      // competitionFormat.length < 1 ||
-      // numOfTeams.length < 1
+      leagueName.length < 1 ||
+      phoneNumber.length < 1 ||
+      location.length < 1 ||
+      ageRange.length < 1 ||
+      numOfPlayers.length < 1 ||
+      numOfTeams.length < 1 ||
+      !startEstimateDate ||
+      !endEstimateDate ||
+      !enrollmentDeadline //The enrollmentDeadline state will caused a bug if the privacy is 'Private'
     ) {
       toast.error('Please fill out all fields');
     } else {
-      console.log(enrollmentDeadline);
+      try {
+        const response = await createLeague({
+          maxTeams: numOfTeams,
+          minTeams: numOfTeams,
+          maxPlayersPerTeam: numOfPlayers,
+          minPlayersPerTeam: numOfPlayers,
+          name: leagueName,
+          phoneNo: phoneNumber,
+          location: location,
+          ageGroup: ageRange,
+          startTime: startEstimateDate.toISOString(),
+          endTime: endEstimateDate.toISOString(),
+          registrationDeadline: enrollmentDeadline.toISOString(),
+          competitionType: competitionFormat.toUpperCase().replace(/-/g, '_'),
+          visibility: privacy.toUpperCase().replace(/-/g, '_'),
+        });
 
-      toast.success('League created successfully!');
-      setLeagueName('');
-      setPhoneNumber('');
-      setLocation('');
-      setAgeRange('');
-      setNumOfPlayers('');
-      setCompetitionFormat('');
-      setNumOfTeams('');
-      setPrivacy('');
+        if (response.status === HttpStatus.CREATED) {
+          toast.success('League created successfully!');
+
+          setLeagueName('');
+          setPhoneNumber('');
+          setLocation('');
+          setAgeRange('');
+          setNumOfPlayers('');
+          setCompetitionFormat('');
+          setNumOfTeams('');
+          setPrivacy('');
+          setStartEstimateDate();
+          setEndEstimateDate();
+          setEnrollmentDeadline();
+        } else if (response.status === HttpStatus.BAD_REQUEST) {
+          toast.error('The input field is not valid!!');
+        } else if (response.status === HttpStatus.UNAUTHORIZED) {
+          toast.error('Unauthorized, please login again to use this feature!!');
+        } else {
+          toast.error('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -147,13 +190,11 @@ const CreateLeague = () => {
           defaultValue={ageRangeOptions[0]}
         />
 
-        <Dropdown
-          label="Number of players per team*"
-          placeholder="Number of players per team"
+        <Input
+          label="Number of Players"
+          placeholder="Number of Players"
           value={numOfPlayers}
           onChange={(e) => setNumOfPlayers(e.target.value)}
-          options={['3', '5', '6', '7', '9', '11']}
-          defaultValue="3"
         />
       </div>
 
@@ -163,8 +204,8 @@ const CreateLeague = () => {
           placeholder="Competition Format"
           value={competitionFormat}
           onChange={(e) => setCompetitionFormat(e.target.value)}
-          options={['Knock-out', 'Round-robin', 'Mixed']}
-          defaultValue="Knock-out"
+          options={['Knockout', 'Round-robin', 'Round-robin-with-Knockout']}
+          defaultValue="Knockout"
         />
 
         <Input
@@ -200,8 +241,8 @@ const CreateLeague = () => {
             placeholder="Privacy"
             value={privacy}
             onChange={(e) => setPrivacy(e.target.value)}
-            options={['Public', 'Private']}
-            defaultValue="Public"
+            options={['Publish', 'Private']}
+            // defaultValue="Publish"
           />
         </div>
 
@@ -211,7 +252,7 @@ const CreateLeague = () => {
               control={
                 <Switch
                   disabled={privacy === 'Private'}
-                  checked={privacy === 'Public'}
+                  checked={privacy === 'Publish'}
                 />
               }
               label="Allow public enrollment"

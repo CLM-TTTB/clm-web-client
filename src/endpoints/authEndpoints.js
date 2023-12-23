@@ -4,6 +4,8 @@ const AuthEndpoint = {
   LOGOUT: '/v1/auth/logout',
   REGISTER: '/v1/auth/register',
   RESEND_VERIFY_LINK: '/v1/auth/two-step-verification/email',
+
+  CREATE_LEAGUE: '/v1/tournaments',
 };
 
 export default AuthEndpoint;

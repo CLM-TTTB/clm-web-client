@@ -37,6 +37,7 @@ const Header = () => {
 
   const onSIGNUPTextClick = useCallback(() => {
     // Please sync "SIGN UP" to the project
+    navigate('/signup');
   }, []);
 
   const openSubItemsLanguages = useCallback(() => {
@@ -162,7 +163,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className={styles.line}></div>
       </div>
     </div>
   );
