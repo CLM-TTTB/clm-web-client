@@ -7,9 +7,9 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import SearchLeague from './pages/searchLeague';
 import CreateLeague from './pages/createLeague';
-import CreateTeam from './pages/createTeam';
 import GlobalNavigate from './components/globalNavigate';
 import ProfileSettings from './pages/profileSettings';
+import Guide from './pages/guide';
 // App.js
 import AppRoutes from '~/Routes';
 
@@ -24,9 +24,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/createLeague" element={<CreateLeague />} />
-            <Route path="/createTeam" element={<CreateTeam />} />
             <Route path="/searchLeague" element={<SearchLeague />} />
             <Route path="/profileSettings" element={<ProfileSettings />} />
+            <Route path="/guide" element={<Guide />} />
           </Routes>
         </GlobalNavigate>
         <AppRoutes />
