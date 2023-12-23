@@ -69,6 +69,12 @@
   flex-direction: row;
   color: black;
   font-weight: bold;
+  margin-top: -50px;
+}
+
+.devider {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .propertyContainer {
@@ -97,7 +103,7 @@
   width: 100%;
   align-items: center;
   align-content: center;
-  margin-left: 45px;
+  margin-left: 35px;
 }
 
 .property .num2 {
@@ -118,5 +124,5 @@
   width: 100%;
   align-items: center;
   align-content: center;
-  margin-right: 45px;
+  margin-right: 35px;
 }

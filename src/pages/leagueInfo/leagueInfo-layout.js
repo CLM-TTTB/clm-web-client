@@ -12,16 +12,13 @@ import Layout from '~/components/layout';
 const LeagueDetailPage = () => {
   const { leagueId } = useParams();
   const [leagueData, setLeagueData] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Replace this with your actual path to the JSON file
         const response = await fetch(`/mockData/leagues.json`);
         const data = await response.json();
 
-        // Find the league with the matching ID
         const selectedLeague = data.find(
           (league) => league.id === parseInt(leagueId, 10),
         );

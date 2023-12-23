@@ -1,0 +1,55 @@
+const teams = [
+  {
+    id: 0,
+    teamName: 'Team A',
+    wdl: { win: 3, draw: 1, lost: 1 },
+    goalsScored: 7,
+    goalsConceded: 3,
+    red: 1,
+    yellow: 0,
+    location: 'Location 1',
+  },
+  {
+    id: 1,
+    teamName: 'Team B',
+    wdl: { win: 4, draw: 2, lost: 2 },
+    goalsScored: 3,
+    goalsConceded: 3,
+    red: 1,
+    yellow: 2,
+    location: 'Location 1',
+  },
+  {
+    id: 2,
+    teamName: 'Team C',
+    wdl: { win: 3, draw: 1, lost: 1 },
+    goalsScored: 2,
+    goalsConceded: 3,
+    red: 0,
+    yellow: 5,
+    location: 'Location 1',
+  },
+  {
+    id: 3,
+    teamName: 'Team D',
+    wdl: { win: 1, draw: 4, lost: 3 },
+    goalsScored: 1,
+    goalsConceded: 1,
+    red: 0,
+    yellow: 0,
+    location: 'Location 1',
+  },
+  {
+    id: 4,
+    teamName: 'Team E',
+    wdl: { win: 4, draw: 4, lost: 0 },
+    goalsScored: 7,
+    goalsConceded: 1,
+    red: 0,
+    yellow: 0,
+    location: 'Location 1',
+  },
+  // Add more teams as needed
+];
+
+export default teams;
