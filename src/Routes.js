@@ -14,6 +14,7 @@ import VerificationConfirm from './pages/verificationConfirm';
 import RequireAuth from './components/requireAuth';
 import PersistLogin from './components/persistLogin';
 import TeamInfo from './pages/teamInfo/teamInfo';
+import MyLeagues from './pages/myLeagues';
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <Route path="/searchLeague" element={<SearchLeague />} />
           <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
           <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
+          <Route path="/myLeagues" element={<MyLeagues />} />
         </Route>
       </Route>
       {/* =======

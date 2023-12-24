@@ -6,30 +6,41 @@ import MyLeaguesStyle from '~/styles/myLeagues.module.css';
 import CardStyle from '~/styles/leagueCard.module.css';
 import SearchLeagueStyle from '~/styles/searchLeague.module.css';
 import Layout from '~/components/layout';
+import { getAllMyLeagues } from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
 
 const MyLeagues = () => {
   const navigate = useNavigate();
 
   const [leagues, setLeagues] = useState([]);
 
-  useEffect(() => {
-    const fetchLeagues = async () => {
-      try {
-        // Replace the following with your actual API call
-        const response = await fetch(`/mockData/leagues.json`);
-        const data = await response.json();
-        console.log('Fetched Data:', data); // Log the fetched data
-        setLeagues(data);
-      } catch (error) {
-        console.error('Error fetching leagues:', error);
-      }
-    };
+  const fetchLeagues = async () => {
+    try {
+      const response = await getAllMyLeagues();
 
+      if (response.status === HttpStatus.OK) {
+        console.log('All user leagues: ' + response.data.content);
+        setLeagues(response.data.content);
+      } else if (response.status === HttpStatus.UNAUTHORIZED) {
+        console.log('User unauthorized, please login again!!');
+      } else {
+        console.log('Unexpected server error!!');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
     fetchLeagues();
   }, []);
 
   const handleDetail = (leagueId) => {
     navigate(`/league/${encodeURIComponent(leagueId)}`);
+  };
+
+  const onCreateNewLeaguePress = () => {
+    navigate('/createLeague');
   };
 
   return (
@@ -42,6 +53,7 @@ const MyLeagues = () => {
           <div className={MyLeaguesStyle.container}>
             <div className={MyLeaguesStyle.buttonContainer}>
               <Button
+                onClick={onCreateNewLeaguePress}
                 text="Create New League"
                 className={MyLeaguesStyle.button}
               />
@@ -51,11 +63,11 @@ const MyLeagues = () => {
               {leagues.map((league, index) => (
                 <LeagueCard
                   key={index}
-                  leagueName={league.leagueName}
-                  competitionFormat={league.competitionFormat}
+                  leagueName={league.name}
+                  competitionFormat={league.competitionType}
                   location={league.location}
-                  profileSrc={league.profileSrc}
-                  status={league.status}
+                  profileSrc={league.image}
+                  status={league.status} //
                   onDetailClick={() =>
                     handleDetail(league.id ? league.id.toString() : '')
                   }

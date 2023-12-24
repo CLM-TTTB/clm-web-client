@@ -6,6 +6,8 @@ const AuthEndpoint = {
   RESEND_VERIFY_LINK: '/v1/auth/two-step-verification/email',
 
   CREATE_LEAGUE: '/v1/tournaments',
+  GET_ALL_MY_LEAGUES: '/v1/user/created-tournaments',
+  GET_LEAGUE_BY_ID: '/v1/tournaments',
 };
 
 export default AuthEndpoint;

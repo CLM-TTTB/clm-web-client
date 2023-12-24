@@ -6,34 +6,36 @@ import avt from '~/images/leagueCard/avatar.png';
 
 import Opening from './opening';
 import Closed from './closed';
-
 import Layout from '~/components/layout';
+
+import HttpStatus from '~/constants/httpStatusCode';
+import { getLeagueByID } from '~/apiServices/leagueService';
 
 const LeagueDetailPage = () => {
   const { leagueId } = useParams();
   const [leagueData, setLeagueData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchLeagueByID = async () => {
       try {
-        const response = await fetch(`/mockData/leagues.json`);
-        const data = await response.json();
+        const response = await getLeagueByID(leagueId);
 
-        const selectedLeague = data.find(
-          (league) => league.id === parseInt(leagueId, 10),
-        );
-
-        if (selectedLeague) {
-          setLeagueData(selectedLeague);
+        if (response.status === HttpStatus.OK) {
+          console.log('League by ID data: ' + response.data);
+          setLeagueData(response.data);
+        } else if (response.status === HttpStatus.NOT_FOUND) {
+          console.log('League by id does not found!!');
+        } else if (response.status === HttpStatus.UNAUTHORIZED) {
+          console.log('User unauthorized, please login again!!');
         } else {
-          console.error('League not found');
+          console.log('Unexpected server error!!');
         }
       } catch (error) {
-        console.error('Error fetching league data:', error);
+        console.error(error);
       }
     };
 
-    fetchData();
+    fetchLeagueByID();
   }, [leagueId]);
 
   if (!leagueData) {
@@ -47,15 +49,15 @@ const LeagueDetailPage = () => {
         <div className={styles.headerContainer}>
           <img className={styles.img} alt="" src={avt} />
           <div className={styles.leagueInfo}>
-            <div className={styles.title}>{leagueData.leagueName}</div>
+            <div className={styles.title}>{leagueData.name}</div>
             <div className={styles.formatLocation}>
               {' '}
-              {leagueData.competitionFormat}
+              {leagueData.competitionType}
               {' | '} {leagueData.location}
             </div>
             <div className={styles.teamNumber}>
               {' '}
-              {leagueData.teamNumber} teams{' '}
+              {leagueData.maxTeams} teams{' '}
             </div>
           </div>
         </div>

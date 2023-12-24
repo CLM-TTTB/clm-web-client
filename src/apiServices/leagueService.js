@@ -16,3 +16,25 @@ export const createLeague = async (data) => {
     return err.response;
   }
 };
+
+export const getAllMyLeagues = async () => {
+  try {
+    const response = await request.private.get(AuthEndpoint.GET_ALL_MY_LEAGUES);
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const getLeagueByID = async (id) => {
+  try {
+    const response = await request.private.get(
+      `${AuthEndpoint.GET_LEAGUE_BY_ID}/${id}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
