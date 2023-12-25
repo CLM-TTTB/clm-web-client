@@ -6,7 +6,7 @@ import Schedule from '~/components/leagueInfoTabs/opening/schedule/schedule';
 import ChooseTeam from '~/components/leagueInfoTabs/opening/enroll/chooseTeam';
 import styles from '~/styles/leagueInfo/opening.module.css'; // Import the CSS module
 
-const Opening = ({ leagueData }) => {
+const Opening = ({ leagueID }) => {
   const [tabValue, setTabValue] = useState(0);
 
   const handleTabChange = (event, newValue) => {

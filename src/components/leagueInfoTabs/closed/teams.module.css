@@ -19,3 +19,7 @@ html {
   gap: 30px; /* Adjust the max-width as needed */
   margin-top: 0px;
 }
+
+.link {
+  text-decoration: none;
+}

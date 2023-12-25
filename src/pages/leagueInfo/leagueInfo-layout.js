@@ -21,7 +21,6 @@ const LeagueDetailPage = () => {
         const response = await getLeagueByID(leagueId);
 
         if (response.status === HttpStatus.OK) {
-          console.log('League by ID data: ' + response.data);
           setLeagueData(response.data);
         } else if (response.status === HttpStatus.NOT_FOUND) {
           console.log('League by id does not found!!');
@@ -36,7 +35,7 @@ const LeagueDetailPage = () => {
     };
 
     fetchLeagueByID();
-  }, [leagueId]);
+  }, []);
 
   if (!leagueData) {
     return <div>Loading...</div>;
@@ -63,9 +62,9 @@ const LeagueDetailPage = () => {
         </div>
 
         {leagueData.status.toLowerCase() === 'opening' ? (
-          <Opening leagueData={leagueData} />
+          <Opening leagueID={leagueId} />
         ) : (
-          <Closed leagueData={leagueData} />
+          <Closed leagueID={leagueId} />
         )}
       </div>
 

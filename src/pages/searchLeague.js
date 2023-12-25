@@ -6,43 +6,84 @@ import Input from '~/components/input';
 import DropDown from '~/components/dropDown';
 import search from '~/images/leagueCard/search.png';
 import styles from '~/styles/searchLeague.module.css';
+import {
+  getPublishLeagueByPage,
+  searchLeagueByName,
+  sortLeagueByName,
+  sortLeague,
+} from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
 
 const SearchLeague = () => {
   const navigate = useNavigate();
-  const pageSize = 12;
 
-  const [leagues, setLeagues] = useState([]);
-
-  useEffect(() => {
-    const fetchLeagues = async () => {
-      try {
-        // Replace the following with your actual API call
-        const response = await fetch(`/mockData/leagues.json`);
-        const data = await response.json();
-        console.log('Fetched Data:', data); // Log the fetched data
-        setLeagues(data);
-      } catch (error) {
-        console.error('Error fetching leagues:', error);
-      }
-    };
-
-    fetchLeagues();
-  }, []);
-
-  const [searchTerm, setSearchTerm] = useState('');
+  const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [leagues, setLeagues] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [formatFilter, setFormatFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
 
+  const fetchLeagues = async (page) => {
+    try {
+      const response = await getPublishLeagueByPage(page - 1);
+      if (response.status === HttpStatus.OK) {
+        console.log('Get all publish league successfully!!');
+        setLeagues(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } else {
+        console.log('Unexpected server error!!');
+      }
+    } catch (error) {
+      console.error('Error fetching leagues:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLeagues(currentPage);
+  }, []); //fetching first page of league when page loaded
+
+  const sort = async (sortBy, isDESC) => {
+    try {
+      const response = await sortLeague(sortBy, isDESC);
+
+      if (response.status === HttpStatus.OK) {
+        setLeagues(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } else {
+        console.log('Unexpected server error!!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const searchLeague = async (searchTerm) => {
+    try {
+      const response = await searchLeagueByName(searchTerm);
+
+      if (response.status === HttpStatus.OK) {
+        setLeagues(response.data.content);
+        setTotalPages(response.data.totalPages);
+      } else {
+        console.log('Unexpected server error!!');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSearch = (event) => {
     const searchValue = event.target.value.toLowerCase();
     setSearchTerm(searchValue);
+    searchLeague(searchValue);
     setCurrentPage(1);
   };
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    fetchLeagues(newPage); //because we have already -1 for the currentPage when calling it
   };
 
   const handleFormatChange = (selectedFormat) => {
@@ -57,44 +98,48 @@ const SearchLeague = () => {
 
   const handleSortByChange = (selectedSortBy) => {
     setSortBy(selectedSortBy);
-    setCurrentPage(1);
+    if (selectedSortBy === 'League Name') {
+      sort('name', false);
+      setCurrentPage(1);
+    } else if (selectedSortBy === 'Latest Date') {
+      sort('startTime', true);
+      setCurrentPage(1);
+    } else if (selectedSortBy === 'Oldest Date') {
+      sort('startTime', false);
+      setCurrentPage(1);
+    } else {
+      sort('');
+      setCurrentPage(1);
+    }
   };
 
-  const filteredLeagues = leagues.filter((league) => {
-    const formatFilterMatch =
-      formatFilter === '' ||
-      league.competitionFormat.toLowerCase() === formatFilter.toLowerCase();
+  // const sortedLeagues = [...filteredLeagues].sort((a, b) => {
+  //   if (sortBy === 'League Name') {
+  //     return a.name.localeCompare(b.name);
+  //   } else if(sortBy === 'Latest Date') {
+  //     const dateA = new Date(a.startTime);
+  //     const dateB = new Date(b.startTime);
 
-    const statusFilterMatch =
-      statusFilter === '' ||
-      (league.status &&
-        league.status.toLowerCase().includes(statusFilter.toLowerCase()));
+  //     if (dateA < dateB) return -1;
+  //     else if (dateA > dateB) return 1;
+  //     else return 0;
+  //   } else{
+  //     const dateA = new Date(a.startTime);
+  //     const dateB = new Date(b.startTime);
 
-    const searchTermMatch =
-      league.leagueName.toLowerCase().includes(searchTerm) ||
-      league.location.toLowerCase().includes(searchTerm);
+  //     if (dateA < dateB) return 1;
+  //     else if (dateA > dateB) return -1;
+  //     else return 0;
+  //   }
+  //   // // Add other sorting options if needed
+  // });
 
-    console.log('Format Filter Match:', formatFilterMatch);
-    console.log('Status Filter Match:', statusFilterMatch);
-    console.log('Search Term Match:', searchTermMatch);
-
-    return searchTermMatch && formatFilterMatch && statusFilterMatch;
-  });
-
-  const sortedLeagues = [...filteredLeagues].sort((a, b) => {
-    if (sortBy === 'League Name') {
-      return a.leagueName.localeCompare(b.leagueName);
-    }
-    // Add other sorting options if needed
-    return 0;
-  });
-
-  const totalLeagues = sortedLeagues.length;
-  const totalPages = Math.ceil(totalLeagues / pageSize);
-  const paginatedLeagues = sortedLeagues.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
-  );
+  // const totalLeagues = sortedLeagues.length;
+  // const totalPages = Math.ceil(totalLeagues / pageSize);
+  // const paginatedLeagues = sortedLeagues.slice(
+  //   (currentPage - 1) * pageSize,
+  //   currentPage * pageSize,
+  // );
 
   const handleDetail = (leagueId) => {
     navigate(`/league/${encodeURIComponent(leagueId)}`);
@@ -111,7 +156,7 @@ const SearchLeague = () => {
               <div className={styles.searchBar}>
                 <Input
                   type="text"
-                  placeholder="Search by League Name or Location"
+                  placeholder="Search by League Name"
                   value={searchTerm}
                   onChange={handleSearch}
                 />
@@ -124,7 +169,12 @@ const SearchLeague = () => {
 
               <DropDown
                 label="Format"
-                options={['', 'Knock-out', 'Round Robin', 'Mixed']}
+                options={[
+                  '',
+                  'KNOCKOUT',
+                  'ROUND_ROBIN',
+                  'ROUND_ROBIN_WITH_KNOCKOUT',
+                ]}
                 onChange={handleFormatChange}
                 value={formatFilter}
               />
@@ -143,14 +193,15 @@ const SearchLeague = () => {
             </div>
 
             <div className={styles.leagueGrid}>
-              {paginatedLeagues.map((league, index) => (
+              {leagues.map((league, index) => (
                 <LeagueCard
                   key={index}
-                  leagueName={league.leagueName}
-                  competitionFormat={league.competitionFormat}
+                  leagueName={league.name}
+                  competitionFormat={league.competitionType}
                   location={league.location}
-                  profileSrc={league.profileSrc}
+                  profileSrc={league.image}
                   status={league.status}
+                  numOfTeams={league.maxTeams}
                   onDetailClick={() =>
                     handleDetail(league.id ? league.id.toString() : '')
                   }

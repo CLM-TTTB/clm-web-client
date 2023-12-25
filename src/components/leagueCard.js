@@ -12,6 +12,7 @@ const LeagueCard = ({
   status,
   league,
   onDetailClick,
+  numOfTeams,
 }) => {
   const navigate = useNavigate();
 
@@ -60,7 +61,7 @@ const LeagueCard = ({
           className={`${styles.container1} ${styles.roundedCorners1} ${styles.topLeftBottomRight1}`}
         >
           <img className={styles.iconTeams} alt="" src={people} />
-          <div className={styles.teamNumber}>5 teams</div>
+          <div className={styles.teamNumber}>{numOfTeams} teams</div>
         </div>
         <div
           className={`${styles.container2} ${styles.roundedCorners2} ${styles.topLeftBottomRight2}`}

@@ -19,7 +19,6 @@ const MyLeagues = () => {
       const response = await getAllMyLeagues();
 
       if (response.status === HttpStatus.OK) {
-        console.log('All user leagues: ' + response.data.content);
         setLeagues(response.data.content);
       } else if (response.status === HttpStatus.UNAUTHORIZED) {
         console.log('User unauthorized, please login again!!');
@@ -67,6 +66,7 @@ const MyLeagues = () => {
                   competitionFormat={league.competitionType}
                   location={league.location}
                   profileSrc={league.image}
+                  numOfTeams={league.maxTeams}
                   status={league.status} //
                   onDetailClick={() =>
                     handleDetail(league.id ? league.id.toString() : '')

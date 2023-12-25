@@ -17,13 +17,13 @@ html {
 
 .searchBar {
   position: relative;
-  margin-top: -8px;
+  margin-top: -26px;
 }
 
 .searchIcon {
   width: 25px;
   position: absolute;
-  top: 28%;
+  top: 37%;
   right: 5%;
   transform: translateY(-50%);
 }
