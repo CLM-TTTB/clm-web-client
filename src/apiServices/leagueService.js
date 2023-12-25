@@ -99,3 +99,15 @@ export const searchLeagueByName = async (searchTerm) => {
     return err.response;
   }
 };
+
+export const getRegisteredTeamByID = async (leagueID) => {
+  try {
+    const response = await request.public.get(
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};

@@ -96,7 +96,7 @@ const CreateTeam = () => {
         </div>
       </div>
 
-      <div className={styles.createTeamForm}>
+      {/* <div className={styles.createTeamForm}>
         <DropdownShort
           label="Age Range"
           value={ageRange}
@@ -111,7 +111,7 @@ const CreateTeam = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div className={styles.createTeamForm}>
         <div className={styles.form5}>

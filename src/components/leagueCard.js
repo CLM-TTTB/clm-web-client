@@ -19,7 +19,7 @@ const LeagueCard = ({
   const getStatusStyle = () => {
     const lowercasedStatus = status && status.toLowerCase();
     console.log('lowercasedStatus:', lowercasedStatus);
-    return lowercasedStatus === 'closed'
+    return lowercasedStatus === 'false'
       ? styles.closedStatus
       : styles.openingStatus;
   };
@@ -27,7 +27,7 @@ const LeagueCard = ({
   const getStatusText = () => {
     const lowercasedStatus = status && status.toLowerCase();
     console.log('lowercasedStatus:', lowercasedStatus);
-    return lowercasedStatus === 'closed' ? 'Closed' : 'Opening';
+    return lowercasedStatus === 'false' ? 'Closed' : 'Opening';
   };
 
   return (

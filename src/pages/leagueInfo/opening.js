@@ -40,9 +40,9 @@ const Opening = ({ leagueID }) => {
       </Tabs>
       <div className={styles.colorLine}></div>
       {tabValue === 0 ? (
-        <Enroll onEnrollClick={handleEnrollClick} />
+        <Enroll leagueID={leagueID} onEnrollClick={handleEnrollClick} />
       ) : tabValue === 1 ? (
-        <RegistrationList />
+        <RegistrationList leagueID={leagueID} />
       ) : tabValue === 2 ? (
         <Schedule />
       ) : (

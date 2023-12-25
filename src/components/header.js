@@ -10,9 +10,12 @@ import localStorage from '~/utils/localStorage';
 import sessionStorage from '~/utils/sessionStorage';
 import StorageKey from '../constants/storageKeys';
 import useAuth from '~/hooks/useAuth';
+import { logout } from '~/apiServices/authService';
+import HttpStatus from '~/constants/httpStatusCode';
 
 const Header = () => {
-  const { userInfos } = useAuth();
+  const { userInfos, setUserInfos, setAccessToken, setRefreshToken } =
+    useAuth();
 
   const [isSubItemsLeaguesOpen, setSubItemsLeaguesOpen] = useState(false);
   const [isSubItemsTeamsOpen, setSubItemsTeamsOpen] = useState(false);
@@ -47,6 +50,55 @@ const Header = () => {
   const openSubItemsProfile = useCallback(() => {
     setSubItemsProfileOpen(!isSubItemsProfileOpen);
   }, [isSubItemsProfileOpen]);
+
+  // const onLogoutPress = async () => {
+  //   try{
+  //     const response = await logout();
+  //     if(response.status === '204'){
+
+  //       const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
+  //       if(rememberMe){
+  //         localStorage.removeItem(StorageKey.USER_INFOS);
+  //         localStorage.removeItem(StorageKey.ACCESS_TOKEN);
+  //         localStorage.removeItem(StorageKey.REFRESH_TOKEN);
+  //       }else{
+  //         sessionStorage.removeItem(StorageKey.USER_INFOS);
+  //         sessionStorage.removeItem(StorageKey.ACCESS_TOKEN);
+  //         sessionStorage.removeItem(StorageKey.REFRESH_TOKEN);
+  //       }
+  //       localStorage.removeItem(StorageKey.RESEND_VERI_LINK_TOKEN);
+  //       localStorage.removeItem(StorageKey.REMEMBER_ME);
+  //       navigate('/login');
+  //     }else if(response.status === HttpStatus.FORBIDDEN){
+  //       console.log('You not send refresh token in valid format');
+  //     } else if(response.status === HttpStatus.NOT_FOUND){
+  //       console.log('Refresh token may already expired');
+  //     } else{
+  //       console.log('Unexpected server error!!');
+  //     }
+  //   } catch(err){
+  //     console.log(err);
+  //   }
+  // };
+  const onLogoutPress = async () => {
+    const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
+    if (rememberMe) {
+      localStorage.removeItem(StorageKey.USER_INFOS);
+      localStorage.removeItem(StorageKey.ACCESS_TOKEN);
+      localStorage.removeItem(StorageKey.REFRESH_TOKEN);
+    } else {
+      sessionStorage.removeItem(StorageKey.USER_INFOS);
+      sessionStorage.removeItem(StorageKey.ACCESS_TOKEN);
+      sessionStorage.removeItem(StorageKey.REFRESH_TOKEN);
+    }
+    localStorage.removeItem(StorageKey.RESEND_VERI_LINK_TOKEN);
+    localStorage.removeItem(StorageKey.REMEMBER_ME);
+
+    setUserInfos();
+    setAccessToken('');
+    setRefreshToken('');
+    navigate('/login');
+  };
 
   return (
     <div className={styles.headerBgParent}>
@@ -128,10 +180,7 @@ const Header = () => {
                       >
                         Settings
                       </div>
-                      <div
-                        className={styles.subItem}
-                        onClick={() => navigate('/logout')}
-                      >
+                      <div className={styles.subItem} onClick={onLogoutPress}>
                         Logout
                       </div>
                     </div>

@@ -22,6 +22,7 @@ const AppRoutes = () => {
       <Route path="/test" element={<TestPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/searchLeague" element={<SearchLeague />} />
       {/* <<<<<<< HEAD */}
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route element={<PersistLogin />}>
@@ -29,7 +30,6 @@ const AppRoutes = () => {
         <Route element={<RequireAuth />}>
           <Route path="/createLeague" element={<CreateLeague />} />
           <Route path="/createTeam" element={<CreateTeam />} />
-          <Route path="/searchLeague" element={<SearchLeague />} />
           <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
           <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
           <Route path="/myLeagues" element={<MyLeagues />} />

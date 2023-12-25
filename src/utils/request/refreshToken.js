@@ -5,7 +5,7 @@ import AuthEndpoint from '~/endpoints/authEndpoints';
 import StorageKey from '~/constants/storageKeys';
 
 const refreshTokenFn = async () => {
-  const rememberMe = localStorage.getItem(StorageKey.REMEMBER_ME);
+  const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
 
   const refreshToken = rememberMe
     ? localStorage.getItem(StorageKey.REFRESH_TOKEN)
@@ -31,22 +31,21 @@ const refreshTokenFn = async () => {
     const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
       response.data;
 
-    if (response.status > 200 && response.status < 300) {
-      if (rememberMe) {
-        localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
-        localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
-      } else {
-        sessionStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
-        sessionStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
-      }
-      return newAccessToken;
+    if (rememberMe) {
+      localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+      localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
+    } else {
+      sessionStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
+      sessionStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
     }
-    return null;
+    return newAccessToken;
   } catch (error) {
     if (rememberMe) {
+      console.log('ERROR HERE');
       localStorage.removeItem(StorageKey.REFRESH_TOKEN);
       localStorage.removeItem(StorageKey.ACCESS_TOKEN);
     } else {
+      console.log('ERROR HERE');
       sessionStorage.removeItem(StorageKey.REFRESH_TOKEN);
       sessionStorage.removeItem(StorageKey.ACCESS_TOKEN);
     }

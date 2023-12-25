@@ -61,7 +61,7 @@ const LeagueDetailPage = () => {
           </div>
         </div>
 
-        {leagueData.status.toLowerCase() === 'opening' ? (
+        {leagueData.enrollmentOpen === true ? (
           <Opening leagueID={leagueId} />
         ) : (
           <Closed leagueID={leagueId} />

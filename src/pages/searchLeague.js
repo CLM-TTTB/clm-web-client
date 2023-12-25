@@ -200,7 +200,7 @@ const SearchLeague = () => {
                   competitionFormat={league.competitionType}
                   location={league.location}
                   profileSrc={league.image}
-                  status={league.status}
+                  status={league.enrollmentOpen.toString()}
                   numOfTeams={league.maxTeams}
                   onDetailClick={() =>
                     handleDetail(league.id ? league.id.toString() : '')

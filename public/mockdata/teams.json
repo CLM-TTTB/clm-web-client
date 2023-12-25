@@ -1,35 +1,35 @@
 [
     {
-      "id": 1,
+      "ID": 1,
       "teamName": "Team A",
-      "members": ["John", "Jane", "Bob"],
+      "numOfMembers": "12",
       "contactPerson": "Alice",
       "phone": "123-456-7890",
       "date": "2024-01-07",
       "status": "Active"
     },
     {
-      "id": 2,
+      "ID": 2,
       "teamName": "Team B",
-      "members": ["Charlie", "Diana", "Eva"],
+      "numOfMembers": "6",
       "contactPerson": "Frank",
       "phone": "987-654-3210",
       "date": "2024-01-08",
       "status": "Inactive"
     },
     {
-      "id": 3,
+      "ID": 3,
       "teamName": "Team C",
-      "members": ["Grace", "Harry", "Isaac"],
+      "numOfMembers": "8",
       "contactPerson": "Jack",
       "phone": "456-789-0123",
       "date": "2024-01-09",
       "status": "Active"
     },
     {
-      "id": 4,
+      "ID": 4,
       "teamName": "Team D",
-      "members": ["Katie", "Liam", "Mia"],
+      "numOfMembers": "10",
       "contactPerson": "Nathan",
       "phone": "789-012-3456",
       "date": "2024-01-10",

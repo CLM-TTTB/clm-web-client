@@ -20,6 +20,7 @@ const DataTable = ({ data }) => {
 
   const renderTableData = () => {
     if (!data || data.length === 0) return null;
+    console.log('Hello from render the table');
 
     return (
       <tbody>

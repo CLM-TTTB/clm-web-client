@@ -1,5 +1,6 @@
 import * as request from '~/utils/request';
 import AuthEndpoint from '~/endpoints/authEndpoints';
+import sessionStorage from '~/utils/sessionStorage';
 import localStorage from '~/utils/localStorage';
 import StorageKey from '~/constants/storageKeys';
 import axios from 'axios';
@@ -25,7 +26,26 @@ export const signUp = async (data) => {
   }
 };
 
-export const logout = async () => {};
+export const logout = async () => {
+  try {
+    const rememberMe = await localStorage.getItem(StorageKey.REMEMBER_ME);
+    const refreshToken = rememberMe
+      ? localStorage.getItem(StorageKey.REFRESH_TOKEN)
+      : sessionStorage.getItem(StorageKey.REFRESH_TOKEN);
+
+    console.log('Refresh token: ' + refreshToken);
+    const response = await axios.post(
+      AppProperty.CLM_API_URL + AuthEndpoint.LOGOUT,
+      null,
+      {
+        headers: { Authorization: 'Bearer ' + refreshToken },
+      },
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
 
 export const resendVerificationLink = async () => {
   const resendVeriLinkToken = await localStorage.getItem(
