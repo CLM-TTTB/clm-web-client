@@ -1,0 +1,12 @@
+.table {
+  display: flex;
+  flex-direction: column;
+}
+.tbody {
+  background-color: white;
+  color: black;
+}
+
+.point {
+  font-weight: bold;
+}

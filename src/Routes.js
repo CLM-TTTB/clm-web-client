@@ -13,6 +13,7 @@ import LeagueDetailPage from './pages/leagueInfo/leagueInfo-layout';
 import VerificationConfirm from './pages/verificationConfirm';
 import RequireAuth from './components/requireAuth';
 import PersistLogin from './components/persistLogin';
+import TeamInfo from './pages/teamInfo/teamInfo';
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/test" element={<TestPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      {/* <<<<<<< HEAD */}
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route element={<PersistLogin />}>
         <Route path="/" element={<HomePage />} />
@@ -28,8 +30,15 @@ const AppRoutes = () => {
           <Route path="/createTeam" element={<CreateTeam />} />
           <Route path="/searchLeague" element={<SearchLeague />} />
           <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
+          <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
         </Route>
       </Route>
+      {/* =======
+      <Route path="/createLeague" element={<CreateLeague />} />
+      <Route path="/createTeam" element={<CreateTeam />} />
+      <Route path="/searchLeague" element={<SearchLeague />} />
+      <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
+>>>>>>> dev */}
     </Routes>
   );
 };

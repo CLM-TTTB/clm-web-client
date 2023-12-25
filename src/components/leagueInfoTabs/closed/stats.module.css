@@ -1,0 +1,27 @@
+.table {
+  display: flex;
+  flex-direction: column;
+}
+.tbody {
+  padding: 1px;
+  background-color: white;
+  color: black;
+}
+
+.sorter {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.label {
+  align-self: center;
+}
+
+.arrow {
+  margin-top: 3px;
+  height: 20px;
+  justify-self: flex-end;
+}

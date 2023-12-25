@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import styles from './schedule.module.css';
 import Fixture from '../../fixture';
 import sampleFixtures from '../(test) sampleSchedule';
+import MatchResultModal from '~/components/matchResultModal';
 
 const RoundRobin = () => {
+  const [toggleModal, setToggleModal] = useState(false);
+  const [selectedFixture, setSelectedFixture] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const selectedRound = currentPage;
   const currentFixtures =
@@ -14,6 +17,7 @@ const RoundRobin = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   const uniqueRounds = [
     ...new Set(sampleFixtures.map((fixture) => fixture.round)),
   ];
@@ -21,6 +25,11 @@ const RoundRobin = () => {
 
   const handleShowAll = () => {
     setCurrentPage(0);
+  };
+
+  const handleResultClick = (fixture) => {
+    setSelectedFixture(fixture);
+    setToggleModal(true);
   };
 
   return (
@@ -47,7 +56,7 @@ const RoundRobin = () => {
             ROUND <span>{currentPage}</span>
           </div>
         )}
-        {currentPage == 0 && (
+        {currentPage === 0 && (
           <div className={styles.roundParent}>ALL FIXTURES</div>
         )}
 
@@ -57,11 +66,27 @@ const RoundRobin = () => {
             teamA={fixture.teamA}
             teamB={fixture.teamB}
             isCompleted={fixture.isCompleted}
-            result={fixture.result}
-            date={fixture.date}
-            time={fixture.time}
+            resultA={fixture.resultA}
+            resultB={fixture.resultB}
+            onDateTimeClick={() => handleResultClick(fixture)}
           />
         ))}
+
+        {toggleModal && selectedFixture && (
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setToggleModal(false)}
+          >
+            <div className={styles.modal}>
+              <MatchResultModal
+                teamName1={selectedFixture.teamA}
+                teamName2={selectedFixture.teamB}
+                score1={selectedFixture.resultA}
+                score2={selectedFixture.resultB}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
