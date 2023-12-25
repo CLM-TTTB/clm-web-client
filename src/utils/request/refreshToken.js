@@ -28,7 +28,9 @@ const refreshTokenFn = async () => {
       config,
     );
 
-    const { newAccessToken, newRefreshToken } = response.data;
+    const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
+      response.data;
+
     if (rememberMe) {
       localStorage.setItem(StorageKey.REFRESH_TOKEN, newRefreshToken);
       localStorage.setItem(StorageKey.ACCESS_TOKEN, newAccessToken);
