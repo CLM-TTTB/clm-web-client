@@ -57,22 +57,18 @@ const RegistrationList = () => {
               <td>{team.date}</td>
               <td>{team.status}</td>
               <td>
-                {team.status === 'Pending' && (
-                  <>
-                    <button
-                      className={styles.accept}
-                      onClick={() => handleAcceptReject(team.id, 'Accepted')}
-                    >
-                      Accept
-                    </button>
-                    <button
-                      className={styles.reject}
-                      onClick={() => handleAcceptReject(team.id, 'Rejected')}
-                    >
-                      Reject
-                    </button>
-                  </>
-                )}
+                <button
+                  className={styles.accept}
+                  onClick={() => handleAcceptReject(team.id, 'Accepted')}
+                >
+                  Accept
+                </button>
+                <button
+                  className={styles.reject}
+                  onClick={() => handleAcceptReject(team.id, 'Rejected')}
+                >
+                  Reject
+                </button>
               </td>
             </tr>
           ))}
