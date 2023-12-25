@@ -3,10 +3,39 @@
 
 .table {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   color: black;
   background-color: #d4d4d4;
   border-radius: 10px;
+  text-align: center;
+}
+
+.tbody {
+  padding: 1px;
+  background-color: white;
+  color: black;
+}
+
+.accept,
+.reject {
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.accept {
+  color: green;
+  border: green;
+}
+
+.accept:hover {
+  background-color: rgba(0, 128, 0, 0.2);
+}
+
+.reject {
+  color: red;
+  border: red;
+}
+
+.reject:hover {
+  background-color: rgba(255, 0, 0, 0.2);
 }
