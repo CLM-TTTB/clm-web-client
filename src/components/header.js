@@ -143,7 +143,10 @@ const Header = () => {
             <div onClick={() => navigate('/guide')} className={styles.navItem}>
               GUIDE
             </div>
-            <div onClick={() => navigate('/test')} className={styles.navItem}>
+            <div
+              onClick={() => navigate('/aboutUs')}
+              className={styles.navItem}
+            >
               ABOUT US
             </div>
 

@@ -15,6 +15,10 @@ import RequireAuth from './components/requireAuth';
 import PersistLogin from './components/persistLogin';
 import TeamInfo from './pages/teamInfo/teamInfo';
 import MyLeagues from './pages/myLeagues';
+import ProfileSettings from './pages/profileSettings';
+import Guide from './pages/guide';
+import CreateTeamTemplate from './pages/myTemplates';
+import AboutUs from './pages/aboutUs';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +27,8 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/searchLeague" element={<SearchLeague />} />
+      <Route path="/guide" element={<Guide />} />
+      <Route path="/aboutUs" element={<AboutUs />} />
       {/* <<<<<<< HEAD */}
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route element={<PersistLogin />}>
@@ -33,6 +39,8 @@ const AppRoutes = () => {
           <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
           <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
           <Route path="/myLeagues" element={<MyLeagues />} />
+          <Route path="/profileSettings" element={<ProfileSettings />} />
+          <Route path="/myTemplates" element={<CreateTeamTemplate />} />
         </Route>
       </Route>
       {/* =======
