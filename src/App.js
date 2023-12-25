@@ -10,6 +10,7 @@ import CreateLeague from './pages/createLeague';
 import GlobalNavigate from './components/globalNavigate';
 import ProfileSettings from './pages/profileSettings';
 import Guide from './pages/guide';
+import CreateTeamTemplate from './pages/myTemplates';
 // App.js
 import AppRoutes from '~/Routes';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/searchLeague" element={<SearchLeague />} />
             <Route path="/profileSettings" element={<ProfileSettings />} />
             <Route path="/guide" element={<Guide />} />
+            <Route path="/myTemplates" element={<CreateTeamTemplate />} />
           </Routes>
         </GlobalNavigate>
         <AppRoutes />

@@ -72,3 +72,7 @@ html {
   cursor: pointer;
   text-decoration: none;
 }
+
+.space {
+  margin-bottom: 50px;
+}
