@@ -21,10 +21,10 @@ const CreateTeamTemplate = () => {
 
   const [teamAvatar, setTeamAvatar] = useState('');
   const [teamName, setTeamName] = useState('');
-  const [contactName, setContactName] = useState('');
+  // const [contactName, setContactName] = useState('');
   const [contactPhoneNumber, setContactPhoneNumber] = useState('');
-  const [ageRange, setAgeRange] = useState('');
-  const [location, setLocation] = useState('');
+  // const [ageRange, setAgeRange] = useState('');
+  // const [location, setLocation] = useState('');
   const [uniform1, setUniform1] = useState('');
   const [uniform2, setUniform2] = useState('');
   const [uniform3, setUniform3] = useState('');
@@ -35,20 +35,21 @@ const CreateTeamTemplate = () => {
   const handleCreateTeam = () => {
     if (
       !teamName ||
-      !contactName ||
-      !contactPhoneNumber ||
-      !ageRange ||
-      !location
+      // !contactName ||
+      !contactPhoneNumber
+      //||
+      // !ageRange ||
+      // !location
     ) {
       toast.error('Please fill out all fields');
     } else {
       toast.success('Team created successfully!');
       setTeamAvatar('');
       setTeamName('');
-      setContactName('');
+      // setContactName('');
       setContactPhoneNumber('');
-      setAgeRange('');
-      setLocation('');
+      // setAgeRange('');
+      // setLocation('');
       setUniform1('');
       setUniform2('');
       setUniform3('');
@@ -75,12 +76,12 @@ const CreateTeamTemplate = () => {
             onChange={(e) => setTeamName(e.target.value)}
           />
 
-          <Input
+          {/* <Input
             label="Contact Name"
             placeholder="Contact Number"
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
-          />
+          /> */}
 
           <Input
             label="Contact Phone Number"
@@ -91,7 +92,7 @@ const CreateTeamTemplate = () => {
         </div>
       </div>
 
-      <div className={styles.createTeamForm}>
+      {/* <div className={styles.createTeamForm}>
         <DropdownShort
           label="Age Range"
           value={ageRange}
@@ -106,7 +107,7 @@ const CreateTeamTemplate = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-      </div>
+      </div> */}
 
       <div className={styles.form2}>
         <InputWide

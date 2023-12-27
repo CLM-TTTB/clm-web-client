@@ -18,6 +18,9 @@ import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
 import AddMembers from './addMembers';
 
+import { enrollTeamToLeague } from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const CreateTeam = () => {
   const navigate = useNavigate();
 
@@ -25,8 +28,8 @@ const CreateTeam = () => {
   const [teamName, setTeamName] = useState('');
   const [contactName, setContactName] = useState('');
   const [contactPhoneNumber, setContactPhoneNumber] = useState('');
-  const [ageRange, setAgeRange] = useState('');
-  const [location, setLocation] = useState('');
+  // const [ageRange, setAgeRange] = useState('');
+  // const [location, setLocation] = useState('');
   const [uniform1, setUniform1] = useState('');
   const [uniform2, setUniform2] = useState('');
   const [uniform3, setUniform3] = useState('');
@@ -37,20 +40,21 @@ const CreateTeam = () => {
   const handleCreateTeam = () => {
     if (
       !teamName ||
-      !contactName ||
-      !contactPhoneNumber ||
-      !ageRange ||
-      !location
+      // !contactName ||
+      !contactPhoneNumber
+      //||
+      // !ageRange ||
+      // !location
     ) {
       toast.error('Please fill out all fields');
     } else {
       toast.success('Team created successfully!');
       setTeamAvatar('');
       setTeamName('');
-      setContactName('');
+      // setContactName('');
       setContactPhoneNumber('');
-      setAgeRange('');
-      setLocation('');
+      // setAgeRange('');
+      // setLocation('');
       setUniform1('');
       setUniform2('');
       setUniform3('');

@@ -16,6 +16,18 @@ export const createLeague = async (data) => {
   }
 };
 
+export const enrollTeamToLeague = async (leagueID, data) => {
+  try {
+    const response = await request.private.post(
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams`,
+      data,
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const getAllMyLeagues = async () => {
   try {
     const response = await request.private.get(AuthEndpoint.GET_ALL_MY_LEAGUES);

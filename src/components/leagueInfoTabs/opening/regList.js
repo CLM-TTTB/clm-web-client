@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import styles from './regList.module.css';
 
-const RegistrationList = () => {
-  const [jsonData, setJsonData] = useState([]);
+import { getRegisteredTeamByID } from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
+
+const RegistrationList = ({ leagueID }) => {
+  const [registrationTeamData, setRegistrationTeamData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRegistrationTeamData = async () => {
       try {
-        const response = await fetch('/mockData/teams.json');
-        const data = await response.json();
-        const teamsWithStatus = data.map((team) => ({
-          ...team,
-          status: 'Pending',
-        }));
-        setJsonData(teamsWithStatus);
+        const response = await getRegisteredTeamByID(leagueID);
+        if (response.status === HttpStatus.OK) {
+          const tempData = response.data.content;
+          setRegistrationTeamData(tempData);
+        } else {
+          console.log('Unexpected server error!');
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data: ', error);
       }
     };
-
-    fetchData();
+    fetchRegistrationTeamData();
   }, []);
 
   const handleAcceptReject = (id, status) => {
     // Update the status of the clicked row based on the button clicked
-    const updatedData = jsonData.map((team) =>
+    const updatedData = registrationTeamData.map((team) =>
       team.id === id ? { ...team, status } : team,
     );
-    setJsonData(updatedData);
+    setRegistrationTeamData(updatedData);
   };
 
   return (
@@ -37,23 +39,21 @@ const RegistrationList = () => {
           <tr>
             <th>ID</th>
             <th>Team Name</th>
-            <th>Members</th>
-            <th>Contact Person</th>
+            <th>Number of Players</th>
             <th>Phone</th>
-            <th>Date</th>
+            <th>Created Date</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody className={styles.tbody}>
-          {jsonData.map((team) => (
+          {registrationTeamData.map((team) => (
             <tr key={team.id}>
               <td>{team.id}</td>
-              <td>{team.teamName}</td>
-              <td>{team.member}</td>
-              <td>{team.contactPerson}</td>
-              <td>{team.phone}</td>
-              <td>{team.date}</td>
+              <td>{team.name}</td>
+              <td>{team.member === undefined ? '0' : team.member.length}</td>
+              <td>{team.phoneNo}</td>
+              <td>{team.createdAt}</td>
               <td>{team.status}</td>
               <td>
                 <button
