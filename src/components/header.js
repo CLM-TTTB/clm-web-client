@@ -57,7 +57,9 @@ const Header = () => {
             <div onClick={openSubItemsLeagues}>LEAGUES ⮟</div>
             {isSubItemsLeaguesOpen && (
               <div className={styles.subList}>
-                <div onClick={() => navigate('/test')}>Create League</div>
+                <div onClick={() => navigate('/createLeague')}>
+                  Create League
+                </div>
                 <div onClick={() => navigate('/test')}>Search Leagues</div>
               </div>
             )}
@@ -66,7 +68,7 @@ const Header = () => {
             <div onClick={openSubItemsTeams}>TEAMS ⮟</div>
             {isSubItemsTeamsOpen && (
               <div className={styles.subList}>
-                <div onClick={() => navigate('/test')}>Create Team</div>
+                <div onClick={() => navigate('/createTeam')}>Create Team</div>
                 <div onClick={() => navigate('/test')}>Search Teams</div>
               </div>
             )}

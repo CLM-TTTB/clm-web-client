@@ -1,0 +1,80 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.createLeagueForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.form1 {
+  width: 196px;
+  margin-right: 40px;
+  align-items: left;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+}
+
+.form3 {
+  display: flex;
+  flex-direction: row;
+  margin-right: 120px;
+}
+
+.form4 {
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+}
+
+.title {
+  color: #ffdc11;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkboxRow {
+  margin-bottom: 30px;
+}
+
+.forgotPassword,
+.rememberMe {
+  padding: 29px;
+  color: #d4d4d4;
+}
+
+.line {
+  height: 1px;
+  width: 350px;
+  background-color: #d4d4d4;
+  opacity: 20%;
+  margin-top: 60px;
+}
+
+.createAccount {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 33px;
+}
+
+.createAccount a {
+  color: #ffdc11; /* or any other color you prefer */
+  cursor: pointer;
+  text-decoration: none;
+}
+.label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  width: 196px;
+  line-height: 24px;
+}
