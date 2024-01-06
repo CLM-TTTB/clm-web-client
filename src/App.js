@@ -5,6 +5,7 @@ import HomePage from './pages/homePage';
 import TestPage from './pages/test';
 import Login from './pages/login';
 import CreateLeague from './pages/createLeague';
+import CreateTeam from './pages/createTeam';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/createLeague" element={<CreateLeague />} />
+          <Route path="/createTeam" element={<CreateTeam />} />
         </Routes>
       </Router>
     </div>

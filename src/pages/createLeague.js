@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '../styles/createLeague.module.css';
@@ -13,7 +13,7 @@ import DropdownShort from '~/components/dropdown-short';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { DatePicker } from '@mui/x-date-pickers';
+import DatePickerComponent from '~/components/datePicker';
 
 const CreateLeague = () => {
   const navigate = useNavigate();
@@ -34,13 +34,10 @@ const CreateLeague = () => {
     if (privacy === 'Public') {
       return (
         <div className={styles.createLeagueForm}>
-          <InputShort
-            label="Enrollment Deadline"
-            placeholder="Enrollment deadline"
-            value={enrollmentDeadline}
-            onChange={(e) => setEnrollmentDeadline(e.target.value)}
-          />
-
+          <div className={styles.form1}>
+            <label className={styles.label}>Enrollment Deadline</label>
+            <DatePickerComponent />
+          </div>
           <Input
             label="Number of People"
             placeholder="Number of People"

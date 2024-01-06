@@ -3,7 +3,7 @@ import styles from '../styles/imageButton.module.css';
 import ImageFrame from '../../src/images/ImageFrame.png';
 import { FileInput } from 'react-image-file-resizer';
 
-const ImageButton = () => {
+const ImageButton = ({ label }) => {
   const inputRef = useRef(null);
   const [image, setImage] = useState(null);
 
@@ -93,7 +93,7 @@ const ImageButton = () => {
 
   return (
     <div className={styles.imageButtonContainer}>
-      <label className={styles.label}>League Image</label>
+      <label className={styles.label}>{label}</label>
       <div className={styles.imageButtonWrapper}>
         <div onClick={handleImageClick} style={{ cursor: 'pointer' }}>
           {image ? (
