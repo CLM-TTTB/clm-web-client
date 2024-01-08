@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from '../styles/createTeam.module.css';
+import styles from './createTeam.module.css';
 import Button from '~/components/button';
 import Layout from '~/components/layout';
 import Input from '~/components/input';
@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
+import AddMembers from './addMembers';
 
 const CreateTeam = () => {
   const navigate = useNavigate();
@@ -29,6 +30,8 @@ const CreateTeam = () => {
   const [uniform2, setUniform2] = useState('');
   const [uniform3, setUniform3] = useState('');
   const [description, setDescription] = useState('');
+
+  const [created, setCreated] = useState(false);
 
   const handleCreateTeam = () => {
     if (
@@ -51,12 +54,16 @@ const CreateTeam = () => {
       setUniform2('');
       setUniform3('');
       setDescription('');
+      setCreated(true);
     }
   };
 
-  return (
-    <Layout>
-      <hr class="horizontal-line" />
+  return created ? (
+    <>
+      <AddMembers></AddMembers>
+    </>
+  ) : (
+    <div>
       <h1 className={styles.title}>Create Team</h1>
 
       <div className={styles.createTeamForm}>
@@ -119,7 +126,7 @@ const CreateTeam = () => {
       </div>
 
       <ToastContainer />
-    </Layout>
+    </div>
   );
 };
 

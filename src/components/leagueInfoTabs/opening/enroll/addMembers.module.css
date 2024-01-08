@@ -1,0 +1,28 @@
+.parent {
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  color: #ffdc11;
+  align-self: center;
+}
+.cell {
+  background-color: transparent;
+  border: none;
+  color: #d4d4d4;
+  margin-left: -20px;
+  margin-right: -20px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.tr {
+  padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 15px;
+}

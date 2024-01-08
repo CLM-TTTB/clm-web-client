@@ -1,0 +1,62 @@
+/* chooseTeam.module.css */
+
+.parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.customSelect {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.customArrow {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../../images/arrow.png');
+  background-size: cover;
+}
+
+.customDropDown {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  font-size: large;
+  border-radius: 4px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 25px;
+  color: #ccc;
+  border: 1px solid #ccc;
+}
+
+.dropDown:hover {
+  border-color: #ffdc11;
+}
+
+.subItem {
+  border: none !important;
+  background-color: #27282a;
+  padding: 10px;
+}
+
+.subItem:hover,
+.subItem:active {
+  background-color: #ffdc11 !important;
+}
+
+.backButton {
+  align-self: flex-start;
+  color: #ffdc11;
+  text-decoration: underline;
+  cursor: pointer;
+}
