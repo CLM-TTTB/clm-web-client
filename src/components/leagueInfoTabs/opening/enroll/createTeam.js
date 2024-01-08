@@ -7,6 +7,7 @@ import Layout from '~/components/layout';
 import Input from '~/components/input';
 import InputShort from '~/components/input-short';
 import ImageButton from '~/components/imageButton';
+import ImageButtonUniform from '~/components/imageButtonUniform';
 import { FormControlLabel, FormGroup, Switch } from '@mui/material';
 import Dropdown from '~/components/dropdownn';
 import DropdownShort from '~/components/dropdown-short';
@@ -79,12 +80,12 @@ const CreateTeam = () => {
             onChange={(e) => setTeamName(e.target.value)}
           />
 
-          <Input
+          {/* <Input
             label="Contact Name"
             placeholder="Contact Number"
             value={contactName}
             onChange={(e) => setContactName(e.target.value)}
-          />
+          /> */}
 
           <Input
             label="Contact Phone Number"
@@ -110,6 +111,20 @@ const CreateTeam = () => {
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
+      </div>
+
+      <div className={styles.createTeamForm}>
+        <div className={styles.form5}>
+          <ImageButtonUniform label="Uniform 1" />
+        </div>
+
+        <div className={styles.form6}>
+          <ImageButtonUniform label="Uniform 2" />
+        </div>
+
+        <div className={styles.form7}>
+          <ImageButtonUniform label="Uniform 2" />
+        </div>
       </div>
 
       <div className={styles.form2}>

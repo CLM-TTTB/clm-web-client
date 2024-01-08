@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import styles from '../styles/imageButton.module.css';
-import ImageFrame from '../../src/images/ImageFrame.png';
+import styles from '../styles/imageButtonUniform.module.css';
+import ImageFrame from '../../src/images/UniformFrame.png';
 import { FileInput } from 'react-image-file-resizer';
 
-const ImageButton = ({ label }) => {
+const ImageButtonUniform = ({ label }) => {
   const inputRef = useRef(null);
   const [image, setImage] = useState(null);
 
@@ -43,4 +43,4 @@ const ImageButton = ({ label }) => {
   );
 };
 
-export default ImageButton;
+export default ImageButtonUniform;
