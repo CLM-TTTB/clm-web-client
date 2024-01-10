@@ -14,3 +14,28 @@ export const getAllMyTeamTemplates = async (getNameOnly) => {
     return err.response;
   }
 };
+
+export const createNewTemplate = async (data) => {
+  try {
+    const response = await request.private.post(
+      `${AuthEndpoint.TEAM_TEMPLATE_SERVICES}`,
+      data,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const getTemplateInfosByName = async (templateName) => {
+  try {
+    const response = await request.private.get(
+      `${AuthEndpoint.TEAM_TEMPLATE_SERVICES}/${templateName}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};

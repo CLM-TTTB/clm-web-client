@@ -17,12 +17,16 @@ import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
 import style2 from '../../src/styles/searchLeague.module.css';
 
+import { createNewTemplate } from '~/apiServices/teamService';
+import HttpStatus from '~/constants/httpStatusCode';
+import AuthEndpoint from '~/endpoints/authEndpoints';
+
 const CreateTeamTemplate = () => {
   const navigate = useNavigate();
 
   const [teamAvatar, setTeamAvatar] = useState('');
   const [teamName, setTeamName] = useState('');
-  //   const [contactName, setContactName] = useState('');
+  const [templateName, setTemplateName] = useState('');
   const [contactPhoneNumber, setContactPhoneNumber] = useState('');
   //   const [ageRange, setAgeRange] = useState('');
   //   const [location, setLocation] = useState('');
@@ -31,12 +35,10 @@ const CreateTeamTemplate = () => {
   const [uniform3, setUniform3] = useState('');
   const [description, setDescription] = useState('');
 
-  const [created, setCreated] = useState(false);
-
-  const handleCreateTeam = () => {
+  const handleCreateTeam = async () => {
     if (
       !teamName ||
-      //   !contactName ||
+      !templateName ||
       !contactPhoneNumber
       //   ||
       //   !ageRange ||
@@ -44,18 +46,33 @@ const CreateTeamTemplate = () => {
     ) {
       toast.error('Please fill out all fields');
     } else {
-      toast.success('Team created successfully!');
-      setTeamAvatar('');
-      setTeamName('');
-      //   setContactName('');
-      setContactPhoneNumber('');
-      //   setAgeRange('');
-      //   setLocation('');
-      setUniform1('');
-      setUniform2('');
-      setUniform3('');
-      setDescription('');
-      setCreated(true);
+      try {
+        const response = await createNewTemplate({
+          name: templateName,
+          teamName: teamName,
+          phoneNo: contactPhoneNumber,
+        });
+
+        if (response.status === HttpStatus.CREATED) {
+          toast.success('Team created successfully!');
+          setTeamAvatar('');
+          setTemplateName('');
+          setTeamName('');
+          setContactPhoneNumber('');
+          //   setAgeRange('');
+          //   setLocation('');
+          // setUniform1('');
+          // setUniform2('');
+          // setUniform3('');
+          setDescription('');
+        } else if (response.status === HttpStatus.FORBIDDEN) {
+          toast.error(response.message);
+        } else {
+          console.log('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -71,18 +88,18 @@ const CreateTeamTemplate = () => {
 
         <div className={styles.form2}>
           <Input
+            label="Template Name"
+            placeholder="Template Name"
+            value={templateName}
+            onChange={(e) => setTemplateName(e.target.value)}
+          />
+
+          <Input
             label="Team Name"
             placeholder="Team Name"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
           />
-
-          {/* <Input
-            label="Contact Name"
-            placeholder="Contact Number"
-            value={contactName}
-            onChange={(e) => setContactName(e.target.value)}
-          /> */}
 
           <Input
             label="Contact Phone Number"

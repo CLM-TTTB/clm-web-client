@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './createTeam.module.css';
@@ -19,9 +19,10 @@ import InputWide from '~/components/input-wide';
 import AddMembers from './addMembers';
 
 import { enrollTeamToLeague } from '~/apiServices/leagueService';
+import { getTemplateInfosByName } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
 
-const CreateTeam = ({ leagueID }) => {
+const CreateTeam = ({ leagueID, templateName }) => {
   const navigate = useNavigate();
 
   const [teamAvatar, setTeamAvatar] = useState('');
@@ -36,6 +37,29 @@ const CreateTeam = ({ leagueID }) => {
   const [description, setDescription] = useState('');
 
   const [created, setCreated] = useState(false);
+
+  useEffect(() => {
+    const fetchTemplateInfos = async () => {
+      try {
+        const response = await getTemplateInfosByName(templateName);
+
+        if (response.status === HttpStatus.CREATED) {
+          console.log(response.data);
+
+          setTeamAvatar(response.data?.image);
+          setDescription(response.data?.description);
+          setTeamName(response.data?.name);
+          setContactPhoneNumber(response.data?.phoneNo);
+        } else {
+          console.log('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    templateName !== 'Create New Team' && fetchTemplateInfos();
+  }, []);
 
   const handleCreateTeam = async () => {
     if (

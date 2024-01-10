@@ -5,13 +5,36 @@ import AddMembers from './addMembers';
 import styles from './chooseTeam.module.css';
 import Button from '~/components/button';
 
+import { getAllMyTeamTemplates } from '~/apiServices/teamService';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const ChooseTeam = ({ leagueID, onEnrollClick }) => {
   const [selectedValue, setSelectedValue] = useState('From Template');
   const [showNextComponent, setShowNextComponent] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
-  const [showAddMembers, setShowAddMembers] = useState(false);
+  // const [showAddMembers, setShowAddMembers] = useState(false);
+  const [templates, setTemplates] = useState([]);
 
-  const templates = ['Template 1', 'Template 2', 'Template 3']; // Add your template names here
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      try {
+        const response = await getAllMyTeamTemplates(true);
+
+        if (response.status === HttpStatus.OK) {
+          setTemplates(response.data);
+        } else if (response.status === HttpStatus.UNAUTHORIZED) {
+          console.log('Unauthorized user!!');
+        } else {
+          console.log('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchTemplates();
+  }, []);
+
   const templateOptions = templates.map((template, index) => (
     <option key={index} value={template} className={styles.subItem}>
       {`From ${template}`}
@@ -31,27 +54,33 @@ const ChooseTeam = ({ leagueID, onEnrollClick }) => {
     setShowNextComponent(false);
     setShowDropdown(true);
     setSelectedValue('From Template');
-    setShowAddMembers(false);
+    // setShowAddMembers(false);
   };
 
-  const handleCreateTeam = () => {
-    setShowAddMembers(true);
-  };
+  // const handleCreateTeam = () => {
+  //   setShowAddMembers(true);
+  // };
 
   const renderComponent = () => {
-    if (showAddMembers) {
-      return <AddMembers />;
-    }
-
-    switch (selectedValue) {
-      case 'Create New Team':
-        return (
-          <CreateTeam onCreateTeam={handleCreateTeam} leagueID={leagueID} />
-        );
-      default:
-        //HANDLE TEMPLATE CHOICES
-        return <CreateTeam onCreateTeam={handleCreateTeam} />;
-    }
+    // if (showAddMembers) {
+    //   return <AddMembers />;
+    // }
+    return (
+      <CreateTeam
+        // onCreateTeam={handleCreateTeam}
+        leagueID={leagueID}
+        templateName={selectedValue}
+      />
+    );
+    // switch (selectedValue) {
+    //   case 'Create New Team':
+    //     return (
+    //       <CreateTeam onCreateTeam={handleCreateTeam} leagueID={leagueID} />
+    //     );
+    //   default:
+    //     //HANDLE TEMPLATE CHOICES
+    //     return <CreateTeam onCreateTeam={handleCreateTeam} />;
+    // }
   };
 
   useEffect(() => {

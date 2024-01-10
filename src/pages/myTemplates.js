@@ -16,15 +16,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
 import MyLeaguesStyle from '../../src/styles/myLeagues.module.css';
-import LeagueCard from '~/components/leagueCard';
-import SearchLeagueStyle from '../../src/styles/searchLeague.module.css';
+import TeamCard from '~/components/teamCard';
 
 import { getAllMyTeamTemplates } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const CreateTeamTemplate = () => {
   const navigate = useNavigate();
-  const [leagues, setLeagues] = useState([]);
+  const [teams, setTeams] = useState([]);
 
   useEffect(() => {
     const fetchAllMyTemplates = async () => {
@@ -32,8 +31,7 @@ const CreateTeamTemplate = () => {
         const response = await getAllMyTeamTemplates(false);
 
         if (response.status === HttpStatus.OK) {
-          console.log(response.data);
-          setLeagues(response.data);
+          setTeams(response.data);
         } else if (response.status === HttpStatus.UNAUTHORIZED) {
           console.log('Unauthorized user!!');
         } else {
@@ -69,17 +67,21 @@ const CreateTeamTemplate = () => {
               className={MyLeaguesStyle.button}
             />
           </div>
-          <div className={SearchLeagueStyle.leagueGrid}>
-            {leagues.map((league, index) => (
-              <LeagueCard
-                key={index}
-                leagueName={league.leagueName}
-                onDetailClick={() =>
-                  handleDetail(league.id ? league.id.toString() : '')
-                }
+          {teams.map((team) => (
+            <div
+              className={styles.link} // Add your styling for the link
+            >
+              <TeamCard
+                teamName={team.name}
+                profileSrc={team.image}
+                // win={team.wdl.win}
+                // draw={team.wdl.draw}
+                // lost={team.wdl.lost}
+                onDetailClick={() => handleDetail(team)}
+                numOfPlayers={team.members.length}
               />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 

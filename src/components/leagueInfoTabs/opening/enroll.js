@@ -14,7 +14,6 @@ const Enroll = ({ leagueID, onEnrollClick }) => {
   useEffect(() => {
     const fetchLeagueByID = async () => {
       try {
-        console.log(leagueID);
         const response = await getLeagueByID(leagueID);
 
         if (response.status === HttpStatus.OK) {
