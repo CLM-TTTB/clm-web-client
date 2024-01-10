@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from './regList.module.css';
 
 import { getRegisteredTeamByID } from '~/apiServices/leagueService';
@@ -6,6 +7,8 @@ import HttpStatus from '~/constants/httpStatusCode';
 
 const RegistrationList = ({ leagueID }) => {
   const [registrationTeamData, setRegistrationTeamData] = useState([]);
+  const location = useLocation();
+  const source = location.state && location.state.source;
 
   useEffect(() => {
     const fetchRegistrationTeamData = async () => {
@@ -43,7 +46,7 @@ const RegistrationList = ({ leagueID }) => {
             <th>Phone</th>
             <th>Created Date</th>
             <th>Status</th>
-            <th>Action</th>
+            {source === 'from myLeague' && <th>Action</th>}
           </tr>
         </thead>
         <tbody className={styles.tbody}>
@@ -55,20 +58,22 @@ const RegistrationList = ({ leagueID }) => {
               <td>{team.phoneNo}</td>
               <td>{team.createdAt}</td>
               <td>{team.status}</td>
-              <td>
-                <button
-                  className={styles.accept}
-                  onClick={() => handleAcceptReject(team.id, 'Accepted')}
-                >
-                  Accept
-                </button>
-                <button
-                  className={styles.reject}
-                  onClick={() => handleAcceptReject(team.id, 'Rejected')}
-                >
-                  Reject
-                </button>
-              </td>
+              {source === 'from myLeague' && (
+                <td>
+                  <button
+                    className={styles.accept}
+                    onClick={() => handleAcceptReject(team.id, 'Accepted')}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className={styles.reject}
+                    onClick={() => handleAcceptReject(team.id, 'Rejected')}
+                  >
+                    Reject
+                  </button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

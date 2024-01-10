@@ -5,7 +5,7 @@ import AddMembers from './addMembers';
 import styles from './chooseTeam.module.css';
 import Button from '~/components/button';
 
-const ChooseTeam = ({ onEnrollClick }) => {
+const ChooseTeam = ({ leagueID, onEnrollClick }) => {
   const [selectedValue, setSelectedValue] = useState('From Template');
   const [showNextComponent, setShowNextComponent] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
@@ -45,7 +45,9 @@ const ChooseTeam = ({ onEnrollClick }) => {
 
     switch (selectedValue) {
       case 'Create New Team':
-        return <CreateTeam onCreateTeam={handleCreateTeam} />;
+        return (
+          <CreateTeam onCreateTeam={handleCreateTeam} leagueID={leagueID} />
+        );
       default:
         //HANDLE TEMPLATE CHOICES
         return <CreateTeam onCreateTeam={handleCreateTeam} />;

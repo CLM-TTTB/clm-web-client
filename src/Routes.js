@@ -17,8 +17,9 @@ import TeamInfo from './pages/teamInfo/teamInfo';
 import MyLeagues from './pages/myLeagues';
 import ProfileSettings from './pages/profileSettings';
 import Guide from './pages/guide';
-import CreateTeamTemplate from './pages/myTemplates';
+import MyTemplate from './pages/myTemplates';
 import AboutUs from './pages/aboutUs';
+import TeamTemplate from './pages/teamTemplate';
 
 const AppRoutes = () => {
   return (
@@ -29,7 +30,6 @@ const AppRoutes = () => {
       <Route path="/searchLeague" element={<SearchLeague />} />
       <Route path="/guide" element={<Guide />} />
       <Route path="/aboutUs" element={<AboutUs />} />
-      {/* <<<<<<< HEAD */}
       <Route path="/verificationConfirm" element={<VerificationConfirm />} />
       <Route element={<PersistLogin />}>
         <Route path="/" element={<HomePage />} />
@@ -40,15 +40,10 @@ const AppRoutes = () => {
           <Route path="/teamInfo/:teamId" element={<TeamInfo />} />
           <Route path="/myLeagues" element={<MyLeagues />} />
           <Route path="/profileSettings" element={<ProfileSettings />} />
-          <Route path="/myTemplates" element={<CreateTeamTemplate />} />
+          <Route path="/myTemplates" element={<MyTemplate />} />
+          <Route path="/teamTemplate" element={<TeamTemplate />} />
         </Route>
       </Route>
-      {/* =======
-      <Route path="/createLeague" element={<CreateLeague />} />
-      <Route path="/createTeam" element={<CreateTeam />} />
-      <Route path="/searchLeague" element={<SearchLeague />} />
-      <Route path="/league/:leagueId" element={<LeagueDetailPage />} />
->>>>>>> dev */}
     </Routes>
   );
 };

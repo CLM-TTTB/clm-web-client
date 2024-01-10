@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '../../src/components/leagueInfoTabs/opening/enroll/createTeam.module.css';
@@ -15,111 +15,72 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
+import MyLeaguesStyle from '../../src/styles/myLeagues.module.css';
+import LeagueCard from '~/components/leagueCard';
+import SearchLeagueStyle from '../../src/styles/searchLeague.module.css';
+
+import { getAllMyTeamTemplates } from '~/apiServices/teamService';
+import HttpStatus from '~/constants/httpStatusCode';
 
 const CreateTeamTemplate = () => {
   const navigate = useNavigate();
+  const [leagues, setLeagues] = useState([]);
 
-  const [teamAvatar, setTeamAvatar] = useState('');
-  const [teamName, setTeamName] = useState('');
-  // const [contactName, setContactName] = useState('');
-  const [contactPhoneNumber, setContactPhoneNumber] = useState('');
-  // const [ageRange, setAgeRange] = useState('');
-  // const [location, setLocation] = useState('');
-  const [uniform1, setUniform1] = useState('');
-  const [uniform2, setUniform2] = useState('');
-  const [uniform3, setUniform3] = useState('');
-  const [description, setDescription] = useState('');
+  useEffect(() => {
+    const fetchAllMyTemplates = async () => {
+      try {
+        const response = await getAllMyTeamTemplates(false);
 
-  const [created, setCreated] = useState(false);
+        if (response.status === HttpStatus.OK) {
+          console.log(response.data);
+          setLeagues(response.data);
+        } else if (response.status === HttpStatus.UNAUTHORIZED) {
+          console.log('Unauthorized user!!');
+        } else {
+          console.log('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  const handleCreateTeam = () => {
-    if (
-      !teamName ||
-      // !contactName ||
-      !contactPhoneNumber
-      //||
-      // !ageRange ||
-      // !location
-    ) {
-      toast.error('Please fill out all fields');
-    } else {
-      toast.success('Team created successfully!');
-      setTeamAvatar('');
-      setTeamName('');
-      // setContactName('');
-      setContactPhoneNumber('');
-      // setAgeRange('');
-      // setLocation('');
-      setUniform1('');
-      setUniform2('');
-      setUniform3('');
-      setDescription('');
-      setCreated(true);
-    }
+    fetchAllMyTemplates();
+  }, []);
+
+  const handleDetail = (leagueId) => {
+    navigate(`/myTemplates/${encodeURIComponent(leagueId)}`);
+  };
+
+  const onCreateNewTemplatePress = () => {
+    navigate('/teamTemplate');
   };
 
   return (
     <Layout>
       <hr class="horizontal-line" />
-      <h1 className={styles.title}>Create Team Template</h1>
+      <div className={MyLeaguesStyle.myLeaguesForm}>
+        <h1 className={MyLeaguesStyle.title}>My Templates</h1>
 
-      <div className={styles.createTeamForm}>
-        <div className={styles.form1}>
-          <ImageButton label="Team Avatar" />
+        <div className={MyLeaguesStyle.container}>
+          <div className={MyLeaguesStyle.buttonContainer}>
+            <Button
+              onClick={onCreateNewTemplatePress}
+              text="Create New Template"
+              className={MyLeaguesStyle.button}
+            />
+          </div>
+          <div className={SearchLeagueStyle.leagueGrid}>
+            {leagues.map((league, index) => (
+              <LeagueCard
+                key={index}
+                leagueName={league.leagueName}
+                onDetailClick={() =>
+                  handleDetail(league.id ? league.id.toString() : '')
+                }
+              />
+            ))}
+          </div>
         </div>
-
-        <div className={styles.form2}>
-          <Input
-            label="Team Name"
-            placeholder="Team Name"
-            value={teamName}
-            onChange={(e) => setTeamName(e.target.value)}
-          />
-
-          {/* <Input
-            label="Contact Name"
-            placeholder="Contact Number"
-            value={contactName}
-            onChange={(e) => setContactName(e.target.value)}
-          /> */}
-
-          <Input
-            label="Contact Phone Number"
-            placeholder="Contact Phone Number"
-            value={contactPhoneNumber}
-            onChange={(e) => setContactPhoneNumber(e.target.value)}
-          />
-        </div>
-      </div>
-
-      {/* <div className={styles.createTeamForm}>
-        <DropdownShort
-          label="Age Range"
-          value={ageRange}
-          onChange={(e) => setAgeRange(e.target.value)}
-          options={['Under 18', '18-25', '26-35', '36-45', '46-55', '56+']}
-          defaultValue="Under 18"
-        />
-
-        <Input
-          label="Location*"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-      </div> */}
-
-      <div className={styles.form2}>
-        <InputWide
-          label="Description"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-
-      <div className={styles.createTeamForm}>
-        <Button text="Save Template" onClick={handleCreateTeam}></Button>
       </div>
 
       <ToastContainer />

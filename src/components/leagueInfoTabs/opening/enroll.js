@@ -44,7 +44,7 @@ const Enroll = ({ leagueID, onEnrollClick }) => {
   return (
     <div>
       {enrollClicked ? (
-        <ChooseTeam />
+        <ChooseTeam leagueID={leagueID} />
       ) : (
         <>
           <div className={styles.parrentContainer}>

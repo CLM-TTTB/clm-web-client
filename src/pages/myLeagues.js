@@ -35,7 +35,9 @@ const MyLeagues = () => {
   }, []);
 
   const handleDetail = (leagueId) => {
-    navigate(`/league/${encodeURIComponent(leagueId)}`);
+    navigate(`/league/${encodeURIComponent(leagueId)}`, {
+      state: { source: 'from myLeague' },
+    });
   };
 
   const onCreateNewLeaguePress = () => {
