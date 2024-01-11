@@ -45,7 +45,7 @@ const CreateTeamTemplate = () => {
   }, []);
 
   const handleDetail = (leagueId) => {
-    navigate(`/myTemplates/${encodeURIComponent(leagueId)}`);
+    navigate(`/templateDetail/${encodeURIComponent(leagueId)}`);
   };
 
   const onCreateNewTemplatePress = () => {
@@ -75,7 +75,7 @@ const CreateTeamTemplate = () => {
                 // win={team.wdl.win}
                 // draw={team.wdl.draw}
                 // lost={team.wdl.lost}
-                onDetailClick={() => handleDetail(team)}
+                onDetailClick={() => handleDetail(team.id)}
                 numOfPlayers={team.members.length}
               />
             ))}
