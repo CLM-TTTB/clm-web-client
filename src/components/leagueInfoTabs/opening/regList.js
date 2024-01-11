@@ -86,7 +86,7 @@ const RegistrationList = ({ leagueID }) => {
         <tbody className={styles.tbody}>
           {registrationTeamData.map((team, index) => (
             <tr key={team.id}>
-              <td>{team.id}</td>
+              <td>{index + 1}</td>
               <td>{team.name}</td>
               <td>{team.members.length}</td>
               <td>{team.phoneNo}</td>

@@ -52,6 +52,18 @@ export const getTeamInfosByTeamID = async (teamID) => {
   }
 };
 
+export const getRegisteredTeamOfUser = async () => {
+  try {
+    const response = await request.private.get(
+      `${AuthEndpoint.GET_ALL_MY_REGISTERED_TEAMS}?size=20`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const editTeamPlayersInfos = async (teamID, newInfos) => {
   try {
     const response = await request.private.patch(
