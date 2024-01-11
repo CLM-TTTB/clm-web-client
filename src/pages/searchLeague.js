@@ -20,7 +20,7 @@ const SearchLeague = () => {
   const [totalPages, setTotalPages] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [leagues, setLeagues] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTeam, setsearchTeam] = useState('');
   const [formatFilter, setFormatFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sortBy, setSortBy] = useState('');
@@ -59,9 +59,9 @@ const SearchLeague = () => {
     }
   };
 
-  const searchLeague = async (searchTerm) => {
+  const searchLeague = async (searchTeam) => {
     try {
-      const response = await searchLeagueByName(searchTerm);
+      const response = await searchLeagueByName(searchTeam);
 
       if (response.status === HttpStatus.OK) {
         setLeagues(response.data.content);
@@ -76,7 +76,7 @@ const SearchLeague = () => {
 
   const handleSearch = (event) => {
     const searchValue = event.target.value.toLowerCase();
-    setSearchTerm(searchValue);
+    setsearchTeam(searchValue);
     searchLeague(searchValue);
     setCurrentPage(1);
   };
@@ -157,7 +157,7 @@ const SearchLeague = () => {
                 <Input
                   type="text"
                   placeholder="Search by League Name"
-                  value={searchTerm}
+                  value={searchTeam}
                   onChange={handleSearch}
                 />
                 <img
