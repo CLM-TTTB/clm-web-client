@@ -1,0 +1,85 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.myLeaguesForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: #ffdc11;
+}
+
+.searchBar {
+  position: relative;
+  margin-top: -8px;
+}
+
+.searchIcon {
+  width: 25px;
+  position: absolute;
+  top: 28%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+
+.filterContainer {
+  justify-content: center;
+  align-items: start;
+  width: 955px;
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+.leagueGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /*  Adjust the minmax value based on your card height */
+  gap: 30px;
+  max-width: 1200px; /* Adjust the max-width as needed */
+  margin-top: 0px;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pageButton {
+  background-color: transparent;
+  border: solid #d4d4d4 1px;
+  color: #d4d4d4;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.space {
+  margin-bottom: 50px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

@@ -45,6 +45,13 @@ const CreateTeamTemplate = () => {
       //   !location
     ) {
       toast.error('Please fill out all fields');
+    } else if (
+      contactPhoneNumber.length < 10 ||
+      contactPhoneNumber.length > 10
+    ) {
+      toast.error('Phone number must only contain 10 digits');
+    } else if (contactPhoneNumber[0] !== '0') {
+      toast.error('Phone number should start with 0');
     } else {
       try {
         const response = await createNewTemplate({
