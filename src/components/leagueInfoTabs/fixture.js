@@ -11,13 +11,13 @@ const Fixture = ({
   resultB,
   date,
   time,
-  onDateTimeClick,
+  onResultClick,
 }) => {
   return (
     <div className={styles.fixtureContainer}>
       <div className={styles.team}>{teamA}</div>
 
-      <div className={styles.dateTime} onClick={onDateTimeClick}>
+      <div className={styles.dateTime} onClick={onResultClick}>
         <div className={styles.result}>
           <div>{resultA}</div>
           <div>{' - '}</div>

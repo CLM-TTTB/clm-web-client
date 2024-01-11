@@ -1,0 +1,291 @@
+{
+  "tournamentId": "659e962c151b602115177df9",
+  "type": "KNOCKOUT",
+  "teamIds": [
+    "team1",
+    "team2",
+    "team3",
+    "team4",
+    "team5",
+    "team6",
+    "team7",
+    "team8",
+    "team9",
+    "team10",
+    "team11",
+    "team12",
+    "team13",
+    "team14",
+    "team15",
+    "team16"
+  ],
+  "rounds": [
+    {
+      "games": [
+        {
+          "teams": {
+            "first": {
+              "id": "team1",
+              "score": 0
+            },
+            "second": {
+              "id": "team2",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team1team21704899775934",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team3",
+              "score": 0
+            },
+            "second": {
+              "id": "team4",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team3team41704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team5",
+              "score": 0
+            },
+            "second": {
+              "id": "team6",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team5team61704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team7",
+              "score": 0
+            },
+            "second": {
+              "id": "team8",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team7team81704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team99999999999",
+              "score": 0
+            },
+            "second": {
+              "id": "team10",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team9team101704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team11",
+              "score": 0
+            },
+            "second": {
+              "id": "team12",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team11team121704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team13",
+              "score": 0
+            },
+            "second": {
+              "id": "team14",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team13team141704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": {
+              "id": "team15",
+              "score": 0
+            },
+            "second": {
+              "id": "team16",
+              "score": 0
+            },
+            "enough": true
+          },
+          "gameId": "659e962c151b602115177df90team15team161704899775935",
+          "winnerId": null,
+          "enoughTeams": true,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        }
+      ],
+      "winners": [],
+      "finished": false
+    },
+    {
+      "games": [
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df901704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df901704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df901704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df901704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        }
+      ],
+      "winners": [],
+      "finished": false
+    },
+    {
+      "games": [
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df911704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        },
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df911704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        }
+      ],
+      "winners": [],
+      "finished": false
+    },
+    {
+      "games": [
+        {
+          "teams": {
+            "first": null,
+            "second": null,
+            "enough": false
+          },
+          "gameId": "659e962c151b602115177df921704899775935",
+          "winnerId": null,
+          "enoughTeams": false,
+          "winner": null,
+          "loser": null,
+          "finished": false
+        }
+      ],
+      "winners": [],
+      "finished": false
+    }
+  ]
+}

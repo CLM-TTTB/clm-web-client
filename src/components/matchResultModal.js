@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styles from '../../src/styles/matchResultModal.module.css';
 import cardStyle from '../../src/styles/leagueCard.module.css';
 
@@ -9,12 +10,45 @@ const MatchResultModal = ({
   score2,
   property1,
   property2,
+  onScoreChange,
 }) => {
+  const location = useLocation();
+  const source = location.state && location.state.source;
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editedScore1, setEditedScore1] = useState(score1);
+  const [editedScore2, setEditedScore2] = useState(score2);
+
+  const handleEditClick = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  const handleSaveClick = () => {
+    onScoreChange(editedScore1, editedScore2);
+    setIsEditMode(false);
+  };
+
   return (
     <>
       <div className={styles.modalContainer}>
         <div className={styles.titleContainer}>
-          <h3>MATCH RESULT</h3>
+          <div></div>
+          <h3 className={styles.title}>MATCH RESULT</h3>
+          <div className={styles.buttonContainer}>
+            {source === 'from myLeague' && (
+              <div>
+                {isEditMode ? (
+                  <button className={styles.button} onClick={handleSaveClick}>
+                    Save
+                  </button>
+                ) : (
+                  <button className={styles.button} onClick={handleEditClick}>
+                    Edit
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className={styles.contentContainer}>
@@ -31,9 +65,29 @@ const MatchResultModal = ({
             </div>
 
             <div className={styles.score}>
-              <h1>{score1}</h1>
-              <h1 className={styles.devider}> - </h1>
-              <h1>{score2}</h1>
+              {isEditMode ? (
+                <>
+                  <input
+                    className={styles.scoreEdit}
+                    type="text"
+                    value={editedScore1}
+                    onChange={(e) => setEditedScore1(e.target.value)}
+                  />
+                  <h1 className={styles.devider}> - </h1>
+                  <input
+                    className={styles.scoreEdit}
+                    type="text"
+                    value={editedScore2}
+                    onChange={(e) => setEditedScore2(e.target.value)}
+                  />
+                </>
+              ) : (
+                <>
+                  <h1>{score1}</h1>
+                  <h1 className={styles.devider}> - </h1>
+                  <h1>{score2}</h1>
+                </>
+              )}
             </div>
 
             <div className={styles.team2}>

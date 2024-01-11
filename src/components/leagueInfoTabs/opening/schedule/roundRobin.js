@@ -7,7 +7,12 @@ import MatchResultModal from '~/components/matchResultModal';
 const RoundRobin = () => {
   const [toggleModal, setToggleModal] = useState(false);
   const [selectedFixture, setSelectedFixture] = useState(null);
+
+  const [score1, setScore1] = useState(0);
+  const [score2, setScore2] = useState(0);
+
   const [currentPage, setCurrentPage] = useState(1);
+
   const selectedRound = currentPage;
   const currentFixtures =
     currentPage === 0
@@ -29,7 +34,22 @@ const RoundRobin = () => {
 
   const handleResultClick = (fixture) => {
     setSelectedFixture(fixture);
+    setScore1(fixture.resultA);
+    setScore2(fixture.resultB);
     setToggleModal(true);
+  };
+
+  const handleScoreChange = (newScore1, newScore2) => {
+    setScore1(newScore1);
+    setScore2(newScore2);
+  };
+
+  const handleOverlayClick = () => {
+    setToggleModal(false);
+  };
+
+  const handleModalClick = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -68,21 +88,19 @@ const RoundRobin = () => {
             isCompleted={fixture.isCompleted}
             resultA={fixture.resultA}
             resultB={fixture.resultB}
-            onDateTimeClick={() => handleResultClick(fixture)}
+            onResultClick={() => handleResultClick(fixture)}
           />
         ))}
 
         {toggleModal && selectedFixture && (
-          <div
-            className={styles.modalOverlay}
-            onClick={() => setToggleModal(false)}
-          >
-            <div className={styles.modal}>
+          <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+            <div className={styles.modal} onClick={handleModalClick}>
               <MatchResultModal
                 teamName1={selectedFixture.teamA}
                 teamName2={selectedFixture.teamB}
-                score1={selectedFixture.resultA}
-                score2={selectedFixture.resultB}
+                score1={score1}
+                score2={score2}
+                onScoreChange={handleScoreChange}
               />
             </div>
           </div>

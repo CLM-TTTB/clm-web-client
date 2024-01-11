@@ -1,12 +1,24 @@
-.table {
+.buttonParent {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
-.tbody {
-  background-color: white;
-  color: black;
+.button {
+  background-color: transparent;
+  border: none;
+  font-family: Manrope;
+  font-size: 16px;
+  color: #ffdc11;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-.point {
-  font-weight: bold;
+.button:hover {
+  background-color: #ffdb111c;
+}
+
+.button:active {
+  color: black;
 }
