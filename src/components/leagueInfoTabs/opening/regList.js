@@ -36,14 +36,6 @@ const RegistrationList = ({ leagueID }) => {
     fetchRegistrationTeamData();
   }, []);
 
-  // const handleAcceptReject = (id, status) => {
-  //   // Update the status of the clicked row based on the button clicked
-  //   const updatedData = registrationTeamData.map((team) =>
-  //     team.id === id ? { ...team, status } : team,
-  //   );
-  //   setRegistrationTeamData(updatedData);
-  // };
-
   const handleAcceptReject = async (teamID, isAcceptAction) => {
     try {
       const response = await acceptRejectTeamEnrollment(
@@ -69,6 +61,14 @@ const RegistrationList = ({ leagueID }) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <div>
       <table className={styles.table}>
@@ -90,8 +90,8 @@ const RegistrationList = ({ leagueID }) => {
               <td>{team.name}</td>
               <td>{team.members.length}</td>
               <td>{team.phoneNo}</td>
-              <td>{team.createdAt}</td>
-              <td>{team.status}</td>
+              <td>{formatDate(team.createdAt)}</td>
+              <td style={{ fontWeight: 'bold' }}>{team.status}</td>
               {source === 'from myLeague' && (
                 <td>
                   <button
