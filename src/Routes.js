@@ -20,6 +20,7 @@ import Guide from './pages/guide';
 import MyTemplate from './pages/myTemplates';
 import AboutUs from './pages/aboutUs';
 import TeamTemplate from './pages/teamTemplate';
+import TemplateDetail from './pages/templateDetail';
 
 const AppRoutes = () => {
   return (
@@ -42,6 +43,11 @@ const AppRoutes = () => {
           <Route path="/profileSettings" element={<ProfileSettings />} />
           <Route path="/myTemplates" element={<MyTemplate />} />
           <Route path="/teamTemplate" element={<TeamTemplate />} />
+          <Route
+            path="/templateDetail/:templateId"
+            element={<TemplateDetail />}
+          />
+          "
         </Route>
       </Route>
     </Routes>

@@ -10,8 +10,6 @@ const Members = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>DOB</th>
-            <th>Phone</th>
             <th>Jersey Number</th>
             <th>Note</th>
           </tr>
