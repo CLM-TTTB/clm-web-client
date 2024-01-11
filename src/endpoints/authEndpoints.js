@@ -13,6 +13,7 @@ const AuthEndpoint = {
   SEARCH_LEAGUE_BY_NAME: '/v1/tournaments/searcher',
 
   TEAM_TEMPLATE_SERVICES: '/v1/team-templates',
+  TEAM_SERVICES: '/v1/teams',
 };
 
 export default AuthEndpoint;
