@@ -21,7 +21,8 @@ html {
 .form2 {
   display: flex;
   flex-direction: column;
-  align-items: right;
+  align-items: top; /* Updated */
+  justify-content: flex-start; /* Updated */
 }
 
 .form3 {

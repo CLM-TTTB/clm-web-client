@@ -11,6 +11,7 @@ import StorageKey from '~/constants/storageKeys';
 import { login } from '~/apiServices/authService';
 import useAuth from '~/hooks/useAuth';
 import HttpStatus from '~/constants/httpStatusCode';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
   useEffect(() => {
@@ -118,7 +119,10 @@ const Login = () => {
       setEmailErrorInfo('');
     } else {
       setEmailError(true);
-      setEmailErrorInfo('The email format should be "yourname@gmail.com"');
+      setEmailErrorInfo('This must be a valid email');
+      toast.error(
+        'The format should be "yourname@gmail.com" or "yourname@gm.uit.edu.vn", etc',
+      );
     }
 
     if (isValidPassword) {
@@ -126,7 +130,8 @@ const Login = () => {
       setPasswordErrorInfo('');
     } else {
       setPasswordError(true);
-      setPasswordErrorInfo(
+      setPasswordErrorInfo('The password is wrong');
+      toast.error(
         'The password must be at least 8 characters long and at least 1 uppercase character',
       );
     }
@@ -200,6 +205,7 @@ const Login = () => {
           </div>
         </div>
 
+        <ToastContainer />
         <hr className="horizontal-line" />
       </Layout>
     </>
