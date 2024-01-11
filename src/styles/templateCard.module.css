@@ -1,4 +1,4 @@
-.leagueCardParent {
+.teamCardParent {
   position: relative;
   border-radius: 5px;
   background-color: #fff;
@@ -33,7 +33,7 @@
   width: 100px;
   height: 100px;
 }
-.leagueName {
+.teamName {
   position: relative;
   font-weight: bold;
   overflow: hidden;

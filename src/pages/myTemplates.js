@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styles from '../../src/components/leagueInfoTabs/opening/enroll/createTeam.module.css';
 import Button from '~/components/button';
 import Layout from '~/components/layout';
 import Input from '~/components/input';
@@ -15,8 +14,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
-import MyLeaguesStyle from '../../src/styles/myLeagues.module.css';
-import TeamCard from '~/components/teamCard';
+import styles from '../../src/styles/myTemplates.module.css';
+import TemplateCard from '~/components/templateCard';
 
 import { getAllMyTeamTemplates } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
@@ -56,22 +55,21 @@ const CreateTeamTemplate = () => {
   return (
     <Layout>
       <hr class="horizontal-line" />
-      <div className={MyLeaguesStyle.myLeaguesForm}>
-        <h1 className={MyLeaguesStyle.title}>My Templates</h1>
+      <div className={styles.myLeaguesForm}>
+        <h1 className={styles.title}>My Templates</h1>
 
-        <div className={MyLeaguesStyle.container}>
-          <div className={MyLeaguesStyle.buttonContainer}>
+        <div>
+          <div className={styles.buttonContainer}>
             <Button
               onClick={onCreateNewTemplatePress}
               text="Create New Template"
-              className={MyLeaguesStyle.button}
+              className={styles.button}
             />
           </div>
-          {teams.map((team) => (
-            <div
-              className={styles.link} // Add your styling for the link
-            >
-              <TeamCard
+
+          <div className={styles.cardContainer}>
+            {teams.map((team) => (
+              <TemplateCard
                 teamName={team.name}
                 profileSrc={team.image}
                 // win={team.wdl.win}
@@ -80,14 +78,13 @@ const CreateTeamTemplate = () => {
                 onDetailClick={() => handleDetail(team)}
                 numOfPlayers={team.members.length}
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       <ToastContainer />
       <div className={styles.space} />
-      <hr class="horizontal-line" />
     </Layout>
   );
 };
