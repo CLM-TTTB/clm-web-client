@@ -28,6 +28,21 @@ export const enrollTeamToLeague = async (leagueID, data) => {
   }
 };
 
+export const acceptRejectTeamEnrollment = async (
+  leagueID,
+  teamID,
+  isAcceptAction,
+) => {
+  try {
+    const response = await request.private.post(
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/approval/teams/${teamID}?accepted=${isAcceptAction}`,
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const getAllMyLeagues = async () => {
   try {
     const response = await request.private.get(AuthEndpoint.GET_ALL_MY_LEAGUES);

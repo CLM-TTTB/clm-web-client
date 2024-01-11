@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from './regList.module.css';
 
-import { getRegisteredTeamByID } from '~/apiServices/leagueService';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  getRegisteredTeamByID,
+  acceptRejectTeamEnrollment,
+} from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const RegistrationList = ({ leagueID }) => {
@@ -10,29 +17,56 @@ const RegistrationList = ({ leagueID }) => {
   const location = useLocation();
   const source = location.state && location.state.source;
 
-  useEffect(() => {
-    const fetchRegistrationTeamData = async () => {
-      try {
-        const response = await getRegisteredTeamByID(leagueID);
-        if (response.status === HttpStatus.OK) {
-          const tempData = response.data.content;
-          setRegistrationTeamData(tempData);
-        } else {
-          console.log('Unexpected server error!');
-        }
-      } catch (error) {
-        console.error('Error fetching data: ', error);
+  const fetchRegistrationTeamData = async () => {
+    try {
+      const response = await getRegisteredTeamByID(leagueID);
+      if (response.status === HttpStatus.OK) {
+        const tempData = response.data.content;
+        console.log(tempData);
+        setRegistrationTeamData(tempData);
+      } else {
+        console.log('Unexpected server error!');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
+
+  useEffect(() => {
     fetchRegistrationTeamData();
   }, []);
 
-  const handleAcceptReject = (id, status) => {
-    // Update the status of the clicked row based on the button clicked
-    const updatedData = registrationTeamData.map((team) =>
-      team.id === id ? { ...team, status } : team,
-    );
-    setRegistrationTeamData(updatedData);
+  // const handleAcceptReject = (id, status) => {
+  //   // Update the status of the clicked row based on the button clicked
+  //   const updatedData = registrationTeamData.map((team) =>
+  //     team.id === id ? { ...team, status } : team,
+  //   );
+  //   setRegistrationTeamData(updatedData);
+  // };
+
+  const handleAcceptReject = async (teamID, isAcceptAction) => {
+    try {
+      const response = await acceptRejectTeamEnrollment(
+        leagueID,
+        teamID,
+        isAcceptAction,
+      );
+
+      if (response.status === HttpStatus.NO_CONTENT) {
+        toast.success('Status changed successfully !!');
+        fetchRegistrationTeamData();
+      } else if (response.status === HttpStatus.NOT_FOUND) {
+        console.log('Team or League not found!!');
+      } else if (response.status === HttpStatus.FORBIDDEN) {
+        toast.error(
+          'The number of teams has reached the max number of teams or the number of team players is not valid !!',
+        );
+      } else {
+        console.log('Unexpected error message');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -54,7 +88,7 @@ const RegistrationList = ({ leagueID }) => {
             <tr key={team.id}>
               <td>{index + 1}</td>
               <td>{team.name}</td>
-              <td>{team.member === undefined ? '0' : team.member.length}</td>
+              <td>{team.members.length}</td>
               <td>{team.phoneNo}</td>
               <td>{team.createdAt}</td>
               <td>{team.status}</td>
@@ -62,15 +96,15 @@ const RegistrationList = ({ leagueID }) => {
                 <td>
                   <button
                     className={styles.accept}
-                    onClick={() => handleAcceptReject(team.id, 'Accepted')}
+                    onClick={() => handleAcceptReject(team.id, true)}
                   >
                     Accept
                   </button>
                   <button
                     className={styles.reject}
-                    onClick={() => handleAcceptReject(team.id, 'Rejected')}
+                    onClick={() => handleAcceptReject(team.id, false)}
                   >
-                    Reject
+                    Refused
                   </button>
                 </td>
               )}
@@ -78,6 +112,8 @@ const RegistrationList = ({ leagueID }) => {
           ))}
         </tbody>
       </table>
+
+      <ToastContainer />
     </div>
   );
 };

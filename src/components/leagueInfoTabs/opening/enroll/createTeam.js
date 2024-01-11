@@ -38,6 +38,8 @@ const CreateTeam = ({ leagueID, templateName }) => {
 
   const [created, setCreated] = useState(false);
 
+  const [enrolledTeamID, setEnrolledTeamID] = useState('');
+
   useEffect(() => {
     const fetchTemplateInfos = async () => {
       try {
@@ -79,6 +81,8 @@ const CreateTeam = ({ leagueID, templateName }) => {
         }); //handle Uniform later
 
         if (response.status === HttpStatus.CREATED) {
+          setEnrolledTeamID(response.data.id);
+
           toast.success('Team created successfully!');
           setTeamAvatar('');
           setTeamName('');
@@ -94,7 +98,9 @@ const CreateTeam = ({ leagueID, templateName }) => {
         } else if (response.status === HttpStatus.NOT_FOUND) {
           console.log('Tournament with id not found');
         } else if (response.status === HttpStatus.FORBIDDEN) {
-          console.log('Tournament is view only, user can not enroll the team');
+          toast.error(
+            'Tournament is view only, or user has already enrolled a team to this tournament',
+          );
         } else {
           console.log('Unexpected server error!!');
         }
@@ -106,7 +112,7 @@ const CreateTeam = ({ leagueID, templateName }) => {
 
   return created ? (
     <>
-      <AddMembers></AddMembers>
+      <AddMembers teamID={enrolledTeamID}></AddMembers>
     </>
   ) : (
     <div>

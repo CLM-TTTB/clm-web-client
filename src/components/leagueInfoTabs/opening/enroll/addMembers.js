@@ -1,12 +1,40 @@
 // AddMembers.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import members from './(test) sampleMembers';
 import styles from './addMembers.module.css';
 import Button from '~/components/button';
 
-const AddMembers = () => {
-  const [data, setData] = useState(members);
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  getTeamInfosByTeamID,
+  editTeamPlayersInfos,
+} from '~/apiServices/teamService';
+import HttpStatus from '~/constants/httpStatusCode';
+
+const AddMembers = ({ teamID }) => {
+  const [data, setData] = useState([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
+
+  useEffect(() => {
+    const fetchTeamInfos = async () => {
+      try {
+        const response = await getTeamInfosByTeamID(teamID);
+
+        if (response.status === HttpStatus.OK) {
+          setData(response.data.members);
+        } else {
+          console.log('Unexpected server error!!');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchTeamInfos();
+  }, []);
 
   const handleRowClick = (index) => {
     setSelectedRowIndex(index);
@@ -19,22 +47,35 @@ const AddMembers = () => {
   };
 
   const handleAddRow = () => {
-    const newId = data.length + 1;
+    // const newId = data.length + 1;
     setData((prevData) => [
       ...prevData,
       {
-        ID: newId,
-        Name: '',
-        DOB: '',
-        Phone: '',
-        'Jersey Number': '',
-        Note: '',
+        // ID: newId,
+        name: '',
+        age: '',
+        // Phone: '',
+        shirtNumber: '',
+        description: '',
       },
     ]);
     setSelectedRowIndex(data.length);
   };
 
-  const handleSave = () => {};
+  const handleSave = async () => {
+    try {
+      const response = await editTeamPlayersInfos(teamID, data);
+
+      if (response.status === HttpStatus.OK) {
+        console.log(response.data.members);
+        toast.success('Players info update successfully!!');
+      } else {
+        toast.error('Unexpected server errors');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.parent}>
@@ -44,8 +85,8 @@ const AddMembers = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>DOB</th>
-            <th>Phone</th>
+            <th>Age</th>
+            {/* <th>Phone</th> */}
             <th>Jersey Number</th>
             <th>Note</th>
           </tr>
@@ -54,29 +95,29 @@ const AddMembers = () => {
           {data.map((row, index) => (
             <tr
               className={styles.tr}
-              key={row.ID}
+              key={index} //
               onClick={() => handleRowClick(index)}
             >
-              <td>{row.ID}</td>
+              <td>{index + 1}</td>
               <td>
                 <input
                   className={styles.cell}
                   type="text"
                   value={
-                    selectedRowIndex === index ? data[index].Name : row.Name
+                    selectedRowIndex === index ? data[index].name : row.name
                   }
-                  onChange={(e) => handleInputChange(e, 'Name')}
+                  onChange={(e) => handleInputChange(e, 'name')}
                 />
               </td>
               <td>
                 <input
                   className={styles.cell}
                   type="text"
-                  value={selectedRowIndex === index ? data[index].DOB : row.DOB}
-                  onChange={(e) => handleInputChange(e, 'DOB')}
+                  value={selectedRowIndex === index ? data[index].age : row.age}
+                  onChange={(e) => handleInputChange(e, 'age')}
                 />
               </td>
-              <td>
+              {/* <td>
                 <input
                   className={styles.cell}
                   type="text"
@@ -85,17 +126,17 @@ const AddMembers = () => {
                   }
                   onChange={(e) => handleInputChange(e, 'Phone')}
                 />
-              </td>
+              </td> */}
               <td>
                 <input
                   className={styles.cell}
                   type="text"
                   value={
                     selectedRowIndex === index
-                      ? data[index]['Jersey Number']
-                      : row['Jersey Number']
+                      ? data[index].shirtNumber
+                      : row.shirtNumber
                   }
-                  onChange={(e) => handleInputChange(e, 'Jersey Number')}
+                  onChange={(e) => handleInputChange(e, 'shirtNumber')}
                 />
               </td>
               <td>
@@ -103,9 +144,11 @@ const AddMembers = () => {
                   className={styles.cell}
                   type="text"
                   value={
-                    selectedRowIndex === index ? data[index].Note : row.Note
+                    selectedRowIndex === index
+                      ? data[index].description
+                      : row.description
                   }
-                  onChange={(e) => handleInputChange(e, 'Note')}
+                  onChange={(e) => handleInputChange(e, 'description')}
                 />
               </td>
             </tr>
@@ -124,6 +167,7 @@ const AddMembers = () => {
           text="Save"
         ></Button>
       </div>
+      <ToastContainer />
     </div>
   );
 };
