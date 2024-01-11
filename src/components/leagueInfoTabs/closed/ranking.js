@@ -7,7 +7,7 @@ import styles from './ranking.module.css';
 
 const Ranking = () => {
   //SET THE FORMAT ('round-robin' => Leaderboard, 'knock-out'=> TREE, 'mixed' => Both)
-  const [format, setFormat] = useState('round-robin');
+  const [format, setFormat] = useState('mixed');
   const [activeTab, setActiveTab] = useState('leaderboard');
 
   const handleTabChange = (tab) => {

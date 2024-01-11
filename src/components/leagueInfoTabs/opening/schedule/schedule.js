@@ -4,7 +4,7 @@ import styles from './schedule.module.css';
 import RoundRobin from './roundRobin';
 import KnockOut from './knockOut';
 
-const FootballSchedule = () => {
+const FootballSchedule = (leagueStatus) => {
   const [format, setFormat] = useState('Round Robin');
 
   return (

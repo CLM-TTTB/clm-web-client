@@ -33,20 +33,14 @@ const Opening = ({ leagueID }) => {
           label="Registration List"
           className={`${styles.tab} ${tabValue === 1 && styles.activeTab}`}
         />
-        <Tab
-          label="Schedule"
-          className={`${styles.tab} ${tabValue === 2 && styles.activeTab}`}
-        />
       </Tabs>
       <div className={styles.colorLine}></div>
       {tabValue === 0 ? (
         <Enroll leagueID={leagueID} onEnrollClick={handleEnrollClick} />
       ) : tabValue === 1 ? (
         <RegistrationList leagueID={leagueID} />
-      ) : tabValue === 2 ? (
-        <Schedule />
       ) : (
-        <ChooseTeam />
+        tabValue === 2(<ChooseTeam />)
       )}
     </div>
   );

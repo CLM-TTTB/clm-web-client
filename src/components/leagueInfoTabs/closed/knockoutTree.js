@@ -23,8 +23,8 @@ const KnockoutTree = () => {
   const generateGames = (games) => {
     return games.map((game) => ({
       id: game.gameId,
-      teamA: game.teams.first ? game.teams.first.id : 'none',
-      teamB: game.teams.second ? game.teams.second.id : 'none',
+      teamA: game.teams.first ? game.teams.first.id : '-',
+      teamB: game.teams.second ? game.teams.second.id : '-',
     }));
   };
 
