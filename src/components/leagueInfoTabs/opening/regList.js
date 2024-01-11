@@ -86,7 +86,7 @@ const RegistrationList = ({ leagueID }) => {
         <tbody className={styles.tbody}>
           {registrationTeamData.map((team, index) => (
             <tr key={team.id}>
-              <td>{index + 1}</td>
+              <td>{team.id}</td>
               <td>{team.name}</td>
               <td>{team.members.length}</td>
               <td>{team.phoneNo}</td>
@@ -104,7 +104,7 @@ const RegistrationList = ({ leagueID }) => {
                     className={styles.reject}
                     onClick={() => handleAcceptReject(team.id, false)}
                   >
-                    Reject
+                    Refused
                   </button>
                 </td>
               )}

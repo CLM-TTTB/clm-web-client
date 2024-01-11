@@ -98,8 +98,8 @@ const CreateTeam = ({ leagueID, templateName }) => {
         } else if (response.status === HttpStatus.NOT_FOUND) {
           console.log('Tournament with id not found');
         } else if (response.status === HttpStatus.FORBIDDEN) {
-          console.log(
-            'Tournament is view only, or user has already enroll a team to this tournament',
+          toast.error(
+            'Tournament is view only, or user has already enrolled a team to this tournament',
           );
         } else {
           console.log('Unexpected server error!!');

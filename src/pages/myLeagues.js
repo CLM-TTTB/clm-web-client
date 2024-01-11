@@ -69,7 +69,7 @@ const MyLeagues = () => {
                   location={league.location}
                   profileSrc={league.image}
                   numOfTeams={league.maxTeams}
-                  status={league.status} //
+                  status={league.enrollmentOpen.toString()}
                   onDetailClick={() =>
                     handleDetail(league.id ? league.id.toString() : '')
                   }
