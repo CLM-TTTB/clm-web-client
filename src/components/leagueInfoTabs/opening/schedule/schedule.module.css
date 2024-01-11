@@ -16,7 +16,7 @@
 .formats {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
   cursor: pointer;
 }
@@ -112,4 +112,22 @@
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  font-family: Manrope;
+  font-size: 16px;
+  color: #ffdc11;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.button:hover {
+  background-color: #ffdb111c;
+}
+
+.button:active {
+  color: black;
 }

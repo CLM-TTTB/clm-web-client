@@ -10,20 +10,22 @@ const FootballSchedule = () => {
   return (
     <>
       <div className={styles.formats}>
-        <div
+        <button
+          className={styles.button}
           onClick={() => {
             setFormat('Round Robin');
           }}
         >
-          ROUND ROBIN
-        </div>
-        <div
+          ROUND-ROBIN
+        </button>
+        <button
+          className={styles.button}
           onClick={() => {
             setFormat('Knock Out');
           }}
         >
-          KNOCK OUT
-        </div>
+          KNOCK-OUT
+        </button>
       </div>
 
       {format === 'Round Robin' ? <RoundRobin /> : <KnockOut />}
