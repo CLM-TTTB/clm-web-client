@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-// import { getTemplateByID } from '~/apiServices/teamService';
 
 import styles from '../../src/components/leagueInfoTabs/opening/enroll/createTeam.module.css';
 import Button from '~/components/button';
@@ -13,8 +12,13 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputWide from '~/components/input-wide';
 import style2 from '../../src/styles/templateDetail.module.css';
+import stylesAddMembers from '~/components/leagueInfoTabs/opening/enroll/addMembers.module.css';
 
-import { createNewTemplate } from '~/apiServices/teamService';
+import {
+  createNewTemplate,
+  getTemplateInfosByID,
+  editTemplatePlayersInfos,
+} from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
 import AuthEndpoint from '~/endpoints/authEndpoints';
 import TeamInfo from './teamInfo/teamInfo';
@@ -26,41 +30,79 @@ const TemplateDetail = () => {
   const navigate = useNavigate();
 
   const { templateId } = useParams();
-  const { templateData, setTemplateData } = useState(null);
 
   const [teamAvatar, setTeamAvatar] = useState('');
   const [teamName, setTeamName] = useState('');
   const [templateName, setTemplateName] = useState('');
   const [contactPhoneNumber, setContactPhoneNumber] = useState('');
-  //   const [ageRange, setAgeRange] = useState('');
-  //   const [location, setLocation] = useState('');
-  const [uniform1, setUniform1] = useState('');
-  const [uniform2, setUniform2] = useState('');
-  const [uniform3, setUniform3] = useState('');
   const [description, setDescription] = useState('');
 
-  //   useEffect(() => {
-  //     const fetchTemplateByID = async () => {
-  //         try {
-  //             const response = await getTemplateByID(templateId);
-  //             if (response.status === HttpStatus.OK) {
-  //                 const tempData = response.data;
-  //                 console.log(tempData);
-  //                 setTemplateData(tempData);
-  //             } else {
-  //                 console.log('Unexpected server error!');
-  //             }
-  //         } catch (error) {
-  //             console.error('Error fetching data: ', error);
-  //         }
-  //     };
+  const [data, setData] = useState([]);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
 
-  //     fetchTemplateByID();
-  //   }, []);
+  const fetchTemplateInfos = async () => {
+    try {
+      const response = await getTemplateInfosByID(templateId);
+      if (response.status === HttpStatus.OK) {
+        setTeamAvatar(response.data?.image);
+        setTemplateName(response.data?.name);
+        setTeamName(response.data?.teamName);
+        setContactPhoneNumber(response.data?.phoneNo);
+        setDescription(response.data?.description);
+        setData(response.data?.members);
+        console.log(response.data?.members);
+      } else {
+        console.log('Unexpected server error!');
+      }
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  };
 
-  //   if (!templateData) {
-  //     return <div>Loading...</div>;
-  //   }
+  useEffect(() => {
+    fetchTemplateInfos();
+  }, []);
+
+  // if (!templateData) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const handleRowClick = (index) => {
+    setSelectedRowIndex(index);
+  };
+
+  const handleInputChange = (e, fieldName) => {
+    const updatedData = [...data];
+    updatedData[selectedRowIndex][fieldName] = e.target.value;
+    setData(updatedData);
+  };
+
+  const handleAddRow = () => {
+    // const newId = data.length + 1;
+    setData((prevData) => [
+      ...prevData,
+      {
+        // ID: newId,
+        name: '',
+        age: '',
+        // Phone: '',
+        shirtNumber: '',
+        description: '',
+      },
+    ]);
+    setSelectedRowIndex(data.length);
+  };
+
+  const handleRemoveRow = () => {
+    if (data.length === 0) {
+      toast.error('No row to remove');
+      return;
+    }
+    const updatedData = [...data];
+    updatedData.splice(selectedRowIndex, 1);
+    setData(updatedData);
+    setSelectedRowIndex(null);
+  };
 
   const handleSaveTemplate = async () => {
     if (
@@ -81,28 +123,32 @@ const TemplateDetail = () => {
       toast.error('Phone number should start with 0');
     } else {
       try {
-        const response = await createNewTemplate({
+        console.log(data);
+
+        const response = await editTemplatePlayersInfos(templateId, {
+          image: teamAvatar,
           name: templateName,
           teamName: teamName,
           phoneNo: contactPhoneNumber,
+          description: description,
+          members: data,
         });
 
-        if (response.status === HttpStatus.CREATED) {
-          toast.success('Team created successfully!');
+        if (response.status === HttpStatus.OK) {
+          toast.success('Template updated successfully!');
+
           setTeamAvatar('');
           setTemplateName('');
           setTeamName('');
           setContactPhoneNumber('');
-          //   setAgeRange('');
-          //   setLocation('');
-          // setUniform1('');
-          // setUniform2('');
-          // setUniform3('');
           setDescription('');
-        } else if (response.status === HttpStatus.FORBIDDEN) {
-          toast.error(response.message);
+          setData([]);
+
+          fetchTemplateInfos();
+        } else if (response.status === HttpStatus.NOT_FOUND) {
+          console.log('User are not the creator of this template');
         } else {
-          console.log('Unexpected server error!!');
+          toast.error('Unexpected server error!!');
         }
       } catch (err) {
         console.log(err);
@@ -154,7 +200,98 @@ const TemplateDetail = () => {
       </div>
 
       <div className={styles.createTeamForm}>
-        <AddMembersInTemplate className={styles.nested} />
+        <div className={stylesAddMembers.parent}>
+          <h2 className={stylesAddMembers.title}>Add Members</h2>
+          <table className={stylesAddMembers.table}>
+            <thead>
+              <tr className={stylesAddMembers.head}>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                {/* <th>Phone</th> */}
+                <th>Jersey Number</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody className={stylesAddMembers.tbody}>
+              {data.map((row, index) => (
+                <tr
+                  className={stylesAddMembers.tr}
+                  key={index} //
+                  onClick={() => handleRowClick(index)}
+                >
+                  <td>{index + 1}</td>
+                  <td>
+                    <input
+                      className={stylesAddMembers.cell}
+                      type="text"
+                      value={
+                        selectedRowIndex === index ? data[index].name : row.name
+                      }
+                      onChange={(e) => handleInputChange(e, 'name')}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className={stylesAddMembers.cell}
+                      type="text"
+                      value={
+                        selectedRowIndex === index ? data[index].age : row.age
+                      }
+                      onChange={(e) => handleInputChange(e, 'age')}
+                    />
+                  </td>
+                  {/* <td>
+                <input
+                  className={stylesAddMembers.cell}
+                  type="text"
+                  value={
+                    selectedRowIndex === index ? data[index].Phone : row.Phone
+                  }
+                  onChange={(e) => handleInputChange(e, 'Phone')}
+                />
+              </td> */}
+                  <td>
+                    <input
+                      className={stylesAddMembers.cell}
+                      type="text"
+                      value={
+                        selectedRowIndex === index
+                          ? data[index].shirtNumber
+                          : row.shirtNumber
+                      }
+                      onChange={(e) => handleInputChange(e, 'shirtNumber')}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className={stylesAddMembers.cell}
+                      type="text"
+                      value={
+                        selectedRowIndex === index
+                          ? data[index].description
+                          : row.description
+                      }
+                      onChange={(e) => handleInputChange(e, 'description')}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className={stylesAddMembers.buttons}>
+            <Button
+              className={stylesAddMembers.addButton}
+              onClick={handleAddRow}
+              text="Add"
+            ></Button>
+            <Button
+              className={stylesAddMembers.addButton}
+              onClick={handleRemoveRow}
+              text="Remove"
+            ></Button>
+          </div>
+        </div>
       </div>
 
       <div className={styles.createTeamForm}>

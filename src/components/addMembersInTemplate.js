@@ -8,22 +8,23 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import {
-  getTeamInfosByTeamID,
-  editTeamPlayersInfos,
+  getTemplateInfosByID,
+  editTemplatePlayersInfos,
 } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
 
-const AddMembersInTemplate = ({ teamID }) => {
+const AddMembersInTemplate = ({ templateID }) => {
   const [data, setData] = useState([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
 
   useEffect(() => {
     const fetchTeamInfos = async () => {
       try {
-        const response = await getTeamInfosByTeamID(teamID);
+        const response = await getTemplateInfosByID(templateID);
 
         if (response.status === HttpStatus.OK) {
           setData(response.data.members);
+          console.log(response.data?.members);
         } else {
           console.log('Unexpected server error!!');
         }

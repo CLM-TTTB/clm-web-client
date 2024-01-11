@@ -9,7 +9,7 @@ import { getAllMyTeamTemplates } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const ChooseTeam = ({ leagueID, onEnrollClick }) => {
-  const [selectedValue, setSelectedValue] = useState('From Template');
+  const [selectedValue, setSelectedValue] = useState('Create New Team');
   const [showNextComponent, setShowNextComponent] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
   // const [showAddMembers, setShowAddMembers] = useState(false);
@@ -53,7 +53,7 @@ const ChooseTeam = ({ leagueID, onEnrollClick }) => {
   const handleBackClick = () => {
     setShowNextComponent(false);
     setShowDropdown(true);
-    setSelectedValue('From Template');
+    setSelectedValue('Create New Team');
     // setShowAddMembers(false);
   };
 
@@ -84,7 +84,7 @@ const ChooseTeam = ({ leagueID, onEnrollClick }) => {
   };
 
   useEffect(() => {
-    setSelectedValue('From Template');
+    setSelectedValue('Create New Team');
   }, []);
 
   return (

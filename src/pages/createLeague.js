@@ -106,9 +106,9 @@ const CreateLeague = () => {
       try {
         const response = await createLeague({
           maxTeams: numOfTeams,
-          minTeams: numOfTeams,
+          minTeams: 2,
           maxPlayersPerTeam: numOfPlayers,
-          minPlayersPerTeam: numOfPlayers,
+          minPlayersPerTeam: 2,
           name: leagueName,
           phoneNo: phoneNumber,
           location: location,

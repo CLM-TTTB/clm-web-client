@@ -40,6 +40,31 @@ export const getTemplateInfosByName = async (templateName) => {
   }
 };
 
+export const getTemplateInfosByID = async (templateID) => {
+  try {
+    const response = await request.private.get(
+      `${AuthEndpoint.TEAM_TEMPLATE_SERVICES}/info/${templateID}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const editTemplatePlayersInfos = async (templateID, newInfos) => {
+  try {
+    const response = await request.private.patch(
+      `${AuthEndpoint.TEAM_TEMPLATE_SERVICES}/${templateID}`,
+      newInfos,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const getTeamInfosByTeamID = async (teamID) => {
   try {
     const response = await request.private.get(

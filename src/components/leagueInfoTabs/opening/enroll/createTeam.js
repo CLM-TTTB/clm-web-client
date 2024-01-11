@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from '@mui/x-date-pickers';
 import InputWide from '~/components/input-wide';
 import AddMembers from './addMembers';
+import stylesAddMembers from '~/components/leagueInfoTabs/opening/enroll/addMembers.module.css';
 
 import { enrollTeamToLeague } from '~/apiServices/leagueService';
 import { getTemplateInfosByName } from '~/apiServices/teamService';
@@ -27,14 +28,9 @@ const CreateTeam = ({ leagueID, templateName }) => {
 
   const [teamAvatar, setTeamAvatar] = useState('');
   const [teamName, setTeamName] = useState('');
-  const [contactName, setContactName] = useState('');
   const [contactPhoneNumber, setContactPhoneNumber] = useState('');
-  // const [ageRange, setAgeRange] = useState('');
-  // const [location, setLocation] = useState('');
-  const [uniform1, setUniform1] = useState('');
-  const [uniform2, setUniform2] = useState('');
-  const [uniform3, setUniform3] = useState('');
   const [description, setDescription] = useState('');
+  const [data, setData] = useState([]);
 
   const [created, setCreated] = useState(false);
 
@@ -52,6 +48,7 @@ const CreateTeam = ({ leagueID, templateName }) => {
           setDescription(response.data?.description);
           setTeamName(response.data?.name);
           setContactPhoneNumber(response.data?.phoneNo);
+          setData(response.data?.members);
         } else {
           console.log('Unexpected server error!!');
         }
@@ -78,6 +75,7 @@ const CreateTeam = ({ leagueID, templateName }) => {
         const response = await enrollTeamToLeague(leagueID, {
           name: teamName,
           phoneNo: contactPhoneNumber,
+          members: data,
         }); //handle Uniform later
 
         if (response.status === HttpStatus.CREATED) {
@@ -86,13 +84,7 @@ const CreateTeam = ({ leagueID, templateName }) => {
           toast.success('Team created successfully!');
           setTeamAvatar('');
           setTeamName('');
-          // setContactName('');
           setContactPhoneNumber('');
-          // setAgeRange('');
-          // setLocation('');
-          setUniform1('');
-          setUniform2('');
-          setUniform3('');
           setDescription('');
           setCreated(true);
         } else if (response.status === HttpStatus.NOT_FOUND) {
@@ -185,6 +177,80 @@ const CreateTeam = ({ leagueID, templateName }) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+      </div>
+
+      <div className={stylesAddMembers.parent}>
+        <h2 className={stylesAddMembers.title}>Add Members</h2>
+        <table className={stylesAddMembers.table}>
+          <thead>
+            <tr className={stylesAddMembers.head}>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              {/* <th>Phone</th> */}
+              <th>Jersey Number</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody className={stylesAddMembers.tbody}>
+            {data.map((row, index) => (
+              <tr
+                className={stylesAddMembers.tr}
+                key={index} //
+              >
+                <td>{index + 1}</td>
+                <td>
+                  <input
+                    className={stylesAddMembers.cell}
+                    type="text"
+                    value={data[index].name}
+                  />
+                </td>
+                <td>
+                  <input
+                    className={stylesAddMembers.cell}
+                    type="text"
+                    value={data[index].age}
+                  />
+                </td>
+                {/* <td>
+                <input
+                  className={stylesAddMembers.cell}
+                  type="text"
+                  value={
+                    selectedRowIndex === index ? data[index].Phone : row.Phone
+                  }
+                  onChange={(e) => handleInputChange(e, 'Phone')}
+                />
+              </td> */}
+                <td>
+                  <input
+                    className={stylesAddMembers.cell}
+                    type="text"
+                    value={data[index].shirtNumber}
+                  />
+                </td>
+                <td>
+                  <input
+                    className={stylesAddMembers.cell}
+                    type="text"
+                    value={data[index].description}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* <div className={stylesAddMembers.buttons}>
+          <Button
+            className={stylesAddMembers.addButton}
+            text="Add"
+          ></Button>
+          <Button
+            className={stylesAddMembers.addButton}
+            onClick={handleRemoveRow}
+          ></Button>
+        </div> */}
       </div>
 
       <div className={styles.createTeamForm}>
