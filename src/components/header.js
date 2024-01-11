@@ -179,7 +179,7 @@ const Header = () => {
                       </div>
                       <div
                         className={styles.subItem}
-                        onClick={() => navigate('/settings')}
+                        onClick={() => navigate('/profileSettings')}
                       >
                         Settings
                       </div>

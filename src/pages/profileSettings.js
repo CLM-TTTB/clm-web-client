@@ -19,7 +19,6 @@ const ProfileSettings = () => {
 
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
 
   const handleSaveProfile = () => {
     toast.success('Profile saved successfully');
@@ -47,13 +46,6 @@ const ProfileSettings = () => {
             placeholder="Phone Number"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-
-          <Input
-            label="Email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
       </div>

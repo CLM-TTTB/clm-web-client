@@ -35,7 +35,7 @@ function Stats() {
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Number</th>
+            <th>Jersey Number</th>
             <th>Team</th>
             <th onClick={() => handleSort('goals')}>
               <div className={styles.sorter}>

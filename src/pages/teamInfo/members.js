@@ -2,7 +2,7 @@ import React from 'react';
 import members from '~/components/leagueInfoTabs/opening/enroll/(test) sampleMembers';
 import styles from '~/styles/teamInfo.module.css';
 
-const Members = () => {
+const Members = ({ teamMemberInfos }) => {
   return (
     <div className={styles.table}>
       <table>
@@ -10,21 +10,17 @@ const Members = () => {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>DOB</th>
-            <th>Phone</th>
             <th>Jersey Number</th>
             <th>Note</th>
           </tr>
         </thead>
         <tbody>
-          {members.map((member) => (
-            <tr key={member.ID}>
-              <td>{member.ID}</td>
-              <td>{member.Name}</td>
-              <td>{member.DOB}</td>
-              <td>{member.Phone}</td>
-              <td>{member['Jersey Number']}</td>
-              <td>{member.Note}</td>
+          {teamMemberInfos.map((member, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{member.name}</td>
+              <td>{member.shirtNumber}</td>
+              <td>{member.description}</td>
             </tr>
           ))}
         </tbody>

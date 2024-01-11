@@ -7,9 +7,16 @@ html {
 .profileSettingsForm {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   box-sizing: border-box;
+}
+
+.title {
+  color: #ffdc11;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .form1 {
