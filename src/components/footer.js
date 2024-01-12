@@ -42,8 +42,8 @@ const Footer = () => {
                   CLM - Champion League Management
                 </div>
                 <div className={styles.textContainer}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Welcome to Champion League Management, where passion meets
+                  precision in the world of sports management.
                 </div>
               </div>
             </div>

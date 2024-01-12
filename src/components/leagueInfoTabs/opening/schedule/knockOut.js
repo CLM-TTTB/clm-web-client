@@ -6,7 +6,10 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { updateKnockoutScheduleTree } from '~/apiServices/leagueService';
+import {
+  updateKnockoutScheduleTree,
+  generateKnockoutScheduleTree,
+} from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
 
 const KnockOut = ({ leagueStatus, leagueID }) => {
@@ -107,8 +110,7 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
   };
 
   const handleScoreChange = (newScore1, newScore2) => {
-    setScore1(newScore1);
-    setScore2(newScore2);
+    fetchScheduleByTree();
   };
 
   const handleOverlayClick = () => {
@@ -170,6 +172,9 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
           <div className={styles.modalOverlay} onClick={handleOverlayClick}>
             <div className={styles.modal} onClick={handleModalClick}>
               <MatchResultModal
+                leagueID={leagueID}
+                team1ID={selectedFixture.teams?.first?.id}
+                team2ID={selectedFixture.teams?.second?.id}
                 teamName1={selectedFixture.teams?.first?.name}
                 teamName2={selectedFixture.teams?.second?.name}
                 score1={selectedFixture.teams?.first?.goalsFor}
@@ -178,6 +183,7 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
                 // leagueStatus={leagueStatus}
                 date={selectedGamesPeRound.startTime}
                 gameLocation={selectedGamesPeRound.stadium}
+                gameID={selectedFixture.id}
               />
             </div>
           </div>

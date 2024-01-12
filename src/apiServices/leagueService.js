@@ -89,6 +89,36 @@ export const updateKnockoutScheduleTree = async (leagueID) => {
   }
 };
 
+export const generateKnockoutScheduleTree = async (leagueID) => {
+  try {
+    const response = await request.private.post(
+      `${AuthEndpoint.GET_KNOCKOUT_SCHEDULE_TREE}/${leagueID}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const updateKnockoutGameResult = async (
+  leagueID,
+  gameID,
+  winnerID,
+  winnerGoalsFor,
+  winnerGoalsAgainst,
+) => {
+  try {
+    const response = await request.private.patch(
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/games/${gameID}/winner/${winnerID}?winnerGoalsFor=${winnerGoalsFor}&&winnerGoalsAgainst=${winnerGoalsAgainst}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 //PUBLIC SERVICE
 export const getPublishLeagueByPage = async (currentPage, isSortByName) => {
   try {

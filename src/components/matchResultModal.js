@@ -4,7 +4,18 @@ import styles from '../../src/styles/matchResultModal.module.css';
 import cardStyle from '../../src/styles/leagueCard.module.css';
 import MatchDetailModal from './matchDetailModal';
 
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { updateKnockoutGameResult } from '~/apiServices/leagueService';
+import HttpStatus from '~/constants/httpStatusCode';
+
 const MatchResultModal = ({
+  leagueID,
+  gameID,
+  team1ID,
+  team2ID,
   teamName1,
   teamName2,
   score1,
@@ -37,55 +48,73 @@ const MatchResultModal = ({
   const [redCardsTeam1, setRedCardsTeam1] = useState({});
   const [redCardsTeam2, setRedCardsTeam2] = useState({});
 
-  const handleAddGoal = (team, playerId) => {
-    if (team === 'Team1') {
-      setGoalCountsTeam1((prevCounts) => ({
-        ...prevCounts,
-        [playerId]: (prevCounts[playerId] || 0) + 1,
-      }));
-    } else if (team === 'Team2') {
-      setGoalCountsTeam2((prevCounts) => ({
-        ...prevCounts,
-        [playerId]: (prevCounts[playerId] || 0) + 1,
-      }));
-    }
-  };
+  // const handleAddGoal = (team, playerId) => {
+  //   if (team === 'Team1') {
+  //     setGoalCountsTeam1((prevCounts) => ({
+  //       ...prevCounts,
+  //       [playerId]: (prevCounts[playerId] || 0) + 1,
+  //     }));
+  //   } else if (team === 'Team2') {
+  //     setGoalCountsTeam2((prevCounts) => ({
+  //       ...prevCounts,
+  //       [playerId]: (prevCounts[playerId] || 0) + 1,
+  //     }));
+  //   }
+  // };
 
-  const handleYellowCardChange = (team, playerId) => {
-    if (team === 'Team1') {
-      setYellowCardsTeam1((prevCards) => ({
-        ...prevCards,
-        [playerId]: !prevCards[playerId],
-      }));
-    } else if (team === 'Team2') {
-      setYellowCardsTeam2((prevCards) => ({
-        ...prevCards,
-        [playerId]: !prevCards[playerId],
-      }));
-    }
-  };
+  // const handleYellowCardChange = (team, playerId) => {
+  //   if (team === 'Team1') {
+  //     setYellowCardsTeam1((prevCards) => ({
+  //       ...prevCards,
+  //       [playerId]: !prevCards[playerId],
+  //     }));
+  //   } else if (team === 'Team2') {
+  //     setYellowCardsTeam2((prevCards) => ({
+  //       ...prevCards,
+  //       [playerId]: !prevCards[playerId],
+  //     }));
+  //   }
+  // };
 
-  const handleRedCardChange = (team, playerId) => {
-    if (team === 'Team1') {
-      setRedCardsTeam1((prevCards) => ({
-        ...prevCards,
-        [playerId]: !prevCards[playerId],
-      }));
-    } else if (team === 'Team2') {
-      setRedCardsTeam2((prevCards) => ({
-        ...prevCards,
-        [playerId]: !prevCards[playerId],
-      }));
-    }
-  };
+  // const handleRedCardChange = (team, playerId) => {
+  //   if (team === 'Team1') {
+  //     setRedCardsTeam1((prevCards) => ({
+  //       ...prevCards,
+  //       [playerId]: !prevCards[playerId],
+  //     }));
+  //   } else if (team === 'Team2') {
+  //     setRedCardsTeam2((prevCards) => ({
+  //       ...prevCards,
+  //       [playerId]: !prevCards[playerId],
+  //     }));
+  //   }
+  // };
 
   const handleEditClick = () => {
     setIsEditMode(!isEditMode);
   };
 
-  const handleSaveClick = () => {
-    onScoreChange(editedScore1, editedScore2);
-    setIsEditMode(false);
+  const handleSaveClick = async () => {
+    const winner = editedScore1 > editedScore2 ? team1ID : team2ID;
+    console.log(gameID);
+    try {
+      const response = await updateKnockoutGameResult(
+        leagueID,
+        gameID,
+        winner,
+        editedScore1,
+        editedScore2,
+      );
+      if (response.status === HttpStatus.OK) {
+        toast.success('Score updated successfully');
+        setIsEditMode(false);
+        onScoreChange();
+      } else {
+        toast.error('Unexpected server error, please try again later');
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleTeamClick = (teamName) => {
@@ -253,7 +282,7 @@ const MatchResultModal = ({
             </div>
           </div>
         </div>
-        {toggleDetailModal && (
+        {/* {toggleDetailModal && (
           <MatchDetailModal
             className={styles.modal}
             team={selectedTeam}
@@ -274,7 +303,7 @@ const MatchResultModal = ({
               handleRedCardChange(selectedTeam, playerId)
             }
           />
-        )}
+        )} */}
       </div>
     </>
   );

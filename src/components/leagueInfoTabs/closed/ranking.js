@@ -39,30 +39,31 @@ const Ranking = ({ leagueID }) => {
 
   return (
     <div>
-      {format === 'round-robin' && <Leaderboard />}
+      {/* {format === 'round-robin' && <Leaderboard />}
       {format === 'knock-out' && <KnockoutTree leagueRounds={leagueRounds} />}
-      {format === 'mixed' && (
-        <div>
-          <div className={styles.buttonParent}>
-            <button
+      {format === 'mixed' && ( */}
+      <div>
+        <div className={styles.buttonParent}>
+          {/* <button
               className={styles.button}
               onClick={() => handleTabChange('leaderboard')}
             >
               ROUND-ROBIN
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => handleTabChange('knockout-tree')}
-            >
-              KNOCK-OUT
-            </button>
-          </div>
-          {activeTab === 'leaderboard' && <Leaderboard />}
+            </button> */}
+          <button
+            className={styles.button}
+            onClick={() => handleTabChange('knockout-tree')}
+          >
+            KNOCK-OUT
+          </button>
+        </div>
+        <KnockoutTree leagueRounds={leagueRounds} />
+        {/* {activeTab === 'leaderboard' && <Leaderboard />}
           {activeTab === 'knockout-tree' && (
             <KnockoutTree leagueRounds={leagueRounds} />
-          )}
-        </div>
-      )}
+          )} */}
+      </div>
+      {/* )} */}
     </div>
   );
 };

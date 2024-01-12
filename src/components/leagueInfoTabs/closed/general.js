@@ -4,7 +4,7 @@ import styles from './general.module.css';
 function General() {
   return (
     <h1>
-      <div className={styles.parrentContainer}>banner</div>
+      <div className={styles.parrentContainer}>* INSERT YOUR BANNER HERE *</div>
     </h1>
   );
 }
