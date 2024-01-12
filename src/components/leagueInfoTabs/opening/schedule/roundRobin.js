@@ -92,6 +92,8 @@ const RoundRobin = () => {
           />
         ))}
 
+        <button className={styles.button}>Generate Schedule</button>
+
         {toggleModal && selectedFixture && (
           <div className={styles.modalOverlay} onClick={handleOverlayClick}>
             <div className={styles.modal} onClick={handleModalClick}>
