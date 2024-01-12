@@ -122,6 +122,8 @@ const KnockOut = (leagueStatus, leagueFormat) => {
             resultA={fixture.resultA}
             resultB={fixture.resultB}
             onResultClick={() => handleResultClick(fixture)}
+            date={fixture.date}
+            location={fixture.location}
           />
         ))}
 
@@ -135,6 +137,8 @@ const KnockOut = (leagueStatus, leagueFormat) => {
                 score2={score2}
                 onScoreChange={handleScoreChange}
                 leagueStatus={leagueStatus}
+                date={selectedFixture.date}
+                gameLocation={selectedFixture.location}
               />
             </div>
           </div>
