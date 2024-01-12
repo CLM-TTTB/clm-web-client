@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styles from '../styles/guide.module.css';
 import Layout from '~/components/layout';
-import { CL1, CL2, SL2, SU1 } from '../../src/images/guidePage';
+import { CL1, CL2, SL2, SU1, SU4, SU5 } from '../../src/images/guidePage';
 import { SU2 } from '../../src/images/guidePage';
 import { SU3 } from '../../src/images/guidePage';
 import { LI11 } from '../../src/images/guidePage';
@@ -55,25 +55,31 @@ const Guide = () => {
         <text className={styles.step}> Step 4: </text>
         <text>
           {' '}
-          You may be navigated to a Authenticate page, which makes you enter the
-          code sent through email.
+          You may have to wait for about 5 seconds, then you'll be navigated to
+          the verification page.
         </text>
+      </div>
+
+      <div className={styles.imgContainer}>
+        <img src={SU4} className={styles.img} />
       </div>
 
       <div className={styles.contentContainer}>
         <text className={styles.step}> Step 5: </text>
         <text>
           {' '}
-          Just take a look in you email message and type the code into the page.
+          Now, just take a look in you email message and click the verification
+          link.
         </text>
+      </div>
+
+      <div className={styles.imgContainer}>
+        <img src={SU5} className={styles.img} />
       </div>
 
       <div className={styles.contentContainer}>
         <text className={styles.step}> Step 6: </text>
-        <text>
-          You just need to wait for a second, if nothing wrong, you will be
-          notified as successfully signed up.
-        </text>
+        <text>Successfully, your account is created!</text>
       </div>
 
       {/* Section 2 */}
