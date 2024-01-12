@@ -159,7 +159,7 @@ const TemplateDetail = () => {
   return (
     <Layout>
       <hr class="horizontal-line" />
-      <h1 className={styles.title}>Template: {templateName}</h1>
+      <h1 className={styles.title}>Edit Template</h1>
 
       <div className={styles.createTeamForm}>
         <div className={styles.form1}>
