@@ -68,9 +68,11 @@ const AddMembersInTemplate = ({ templateID }) => {
       return;
     }
     const updatedData = [...data];
-    updatedData.splice(selectedRowIndex, 1);
+    updatedData.pop();
     setData(updatedData);
-    setSelectedRowIndex(null);
+
+    const newLastIndex = updatedData.length - 1;
+    setSelectedRowIndex(newLastIndex >= 0 ? newLastIndex : null);
   };
 
   return (

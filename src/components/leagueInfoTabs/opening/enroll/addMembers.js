@@ -77,12 +77,25 @@ const AddMembers = ({ teamID }) => {
     }
   };
 
+  const handleRemoveRow = () => {
+    if (data.length === 0) {
+      toast.error('No row to remove');
+      return;
+    }
+    const updatedData = [...data];
+    updatedData.pop();
+    setData(updatedData);
+
+    const newLastIndex = updatedData.length - 1;
+    setSelectedRowIndex(newLastIndex >= 0 ? newLastIndex : null);
+  };
+
   return (
     <div className={styles.parent}>
       <h1 className={styles.title}>Add Members</h1>
-      <table border="1">
+      <table className={styles.table}>
         <thead>
-          <tr>
+          <tr className={styles.head}>
             <th>ID</th>
             <th>Name</th>
             <th>Age</th>
@@ -91,7 +104,7 @@ const AddMembers = ({ teamID }) => {
             <th>Note</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           {data.map((row, index) => (
             <tr
               className={styles.tr}
@@ -160,6 +173,11 @@ const AddMembers = ({ teamID }) => {
           className={styles.addButton}
           onClick={handleAddRow}
           text="Add"
+        ></Button>
+        <Button
+          className={styles.addButton}
+          onClick={handleRemoveRow}
+          text="Remove"
         ></Button>
         <Button
           className={styles.addButton}
