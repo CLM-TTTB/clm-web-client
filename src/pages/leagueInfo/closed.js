@@ -8,7 +8,7 @@ import Stats from '~/components/leagueInfoTabs/closed/stats';
 
 import styles from '~/styles/leagueInfo/opening.module.css';
 
-const Closed = ({ leagueID }) => {
+const Closed = ({ leagueID, leagueFormat }) => {
   const [tabValue, setTabValue] = useState(0);
 
   const handleTabChange = (event, newValue) => {
@@ -52,7 +52,7 @@ const Closed = ({ leagueID }) => {
       {tabValue === 0 ? (
         <General />
       ) : tabValue === 1 ? (
-        <Schedule />
+        <Schedule leagueID={leagueID} leagueFormat={leagueFormat} />
       ) : tabValue === 2 ? (
         <Ranking />
       ) : tabValue === 3 ? (

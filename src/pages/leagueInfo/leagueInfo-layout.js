@@ -64,7 +64,10 @@ const LeagueDetailPage = () => {
         {leagueData.enrollmentOpen === true ? (
           <Opening leagueID={leagueId} />
         ) : (
-          <Closed leagueID={leagueId} />
+          <Closed
+            leagueID={leagueId}
+            leagueFormat={leagueData.competitionType}
+          />
         )}
       </div>
 

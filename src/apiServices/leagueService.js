@@ -78,7 +78,7 @@ export const getTeamsInLeagueByID = async (leagueID) => {
 };
 
 //PUBLIC SERVICE
-export const getPublishLeagueByPage = async (currentPage) => {
+export const getPublishLeagueByPage = async (currentPage, isSortByName) => {
   try {
     const response = await request.public.get(
       `${AuthEndpoint.LEAGUE_SERVICES}?page=${currentPage}&size=12&visibility=PUBLISH`,

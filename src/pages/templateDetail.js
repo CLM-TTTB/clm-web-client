@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from '../../src/components/leagueInfoTabs/opening/enroll/createTeam.module.css';
@@ -11,24 +10,15 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InputWide from '~/components/input-wide';
-import style2 from '../../src/styles/templateDetail.module.css';
 import stylesAddMembers from '~/components/leagueInfoTabs/opening/enroll/addMembers.module.css';
 
 import {
-  createNewTemplate,
   getTemplateInfosByID,
   editTemplatePlayersInfos,
 } from '~/apiServices/teamService';
 import HttpStatus from '~/constants/httpStatusCode';
-import AuthEndpoint from '~/endpoints/authEndpoints';
-import TeamInfo from './teamInfo/teamInfo';
-import Members from './teamInfo/members';
-import AddMembers from '~/components/leagueInfoTabs/opening/enroll/addMembers';
-import AddMembersInTemplate from '~/components/addMembersInTemplate';
 
 const TemplateDetail = () => {
-  const navigate = useNavigate();
-
   const { templateId } = useParams();
 
   const [teamAvatar, setTeamAvatar] = useState('');

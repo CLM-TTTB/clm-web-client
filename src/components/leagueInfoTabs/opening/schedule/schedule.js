@@ -4,8 +4,8 @@ import styles from './schedule.module.css';
 import RoundRobin from './roundRobin';
 import KnockOut from './knockOut';
 
-const FootballSchedule = (leagueStatus) => {
-  const [format, setFormat] = useState('Round Robin');
+const FootballSchedule = ({ leagueID, leagueFormat }) => {
+  const [format, setFormat] = useState();
 
   return (
     <>
@@ -13,7 +13,7 @@ const FootballSchedule = (leagueStatus) => {
         <button
           className={styles.button}
           onClick={() => {
-            setFormat('Round Robin');
+            setFormat('ROUND_ROBIN');
           }}
         >
           ROUND-ROBIN
@@ -21,14 +21,14 @@ const FootballSchedule = (leagueStatus) => {
         <button
           className={styles.button}
           onClick={() => {
-            setFormat('Knock Out');
+            setFormat('KNOCKOUT');
           }}
         >
           KNOCK-OUT
         </button>
       </div>
 
-      {format === 'Round Robin' ? <RoundRobin /> : <KnockOut />}
+      {format === 'KNOCKOUT' ? <KnockOut /> : <RoundRobin />}
     </>
   );
 };
