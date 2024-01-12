@@ -88,4 +88,21 @@
 .table {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  color: black;
+  background-color: #ffdc11;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  border: none;
+}
+
+.table .head {
+  line-height: 30px;
+}
+
+.tbody {
+  padding: 1px;
+  background-color: white;
+  color: black;
 }
