@@ -3,10 +3,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 560px;
-  width: 490px;
+  width: 480px;
   border-radius: 10px;
   background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 12000;
 }
 
 .titleContainer {
@@ -19,14 +21,58 @@
   justify-content: space-between;
   align-items: center;
   border-radius: 10px 10px 0 0;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .title {
-  margin-right: -60px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  margin-top: -15px;
+  align-items: center;
+}
+
+.location {
+  font-size: 14px;
+  margin-top: -20px;
+}
+
+.locationEdit {
+  font-family: 'Manrope';
+  border-radius: 5px;
+  text-align: center;
+  border: solid 1px black;
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.dateEdit {
+  font-family: 'Manrope';
+  font-weight: bold;
+  font-size: 19px;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 5px;
+  border: solid black 1px;
+  width: 180px;
 }
 
 .buttonContainer {
   width: 60px;
+}
+
+.yellowCard,
+.redCard {
+  color: #000;
+}
+
+.yellowCard {
+  transform: translateY(65px);
+}
+
+.redCard {
+  transform: translateY(95px);
 }
 
 .button {
@@ -56,6 +102,27 @@
   border-radius: 0px 0px 10px 10px;
 }
 
+.teamName {
+  cursor: pointer;
+  color: black;
+  position: relative;
+  font-weight: bold;
+  overflow: hidden;
+  font-size: 23px;
+}
+
+.teamName:hover {
+  text-decoration: underline;
+}
+
+.scoreParent {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  text-align: center;
+  align-items: center;
+}
+
 .scoreContainer {
   display: flex;
   flex-direction: row;
@@ -71,10 +138,6 @@
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  width: 100%;
-  align-items: center;
-  align-content: center;
-  margin-left: 45px;
 }
 
 .scoreContainer .team2 {
@@ -82,10 +145,8 @@
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  width: 100%;
   align-items: center;
   align-content: center;
-  margin-right: 45px;
 }
 
 .score {
@@ -93,7 +154,6 @@
   flex-direction: row;
   color: black;
   font-weight: bold;
-  margin-top: -50px;
 }
 
 .scoreEdit {
@@ -119,14 +179,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
 .property {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 100%;
+  gap: 150px;
   height: 50px;
   color: #000;
   font-weight: normal;
@@ -140,7 +198,6 @@
   width: 100%;
   align-items: center;
   align-content: center;
-  margin-left: 35px;
 }
 
 .property .num2 {
@@ -161,5 +218,8 @@
   width: 100%;
   align-items: center;
   align-content: center;
-  margin-right: 35px;
+}
+
+.modal {
+  flex: none;
 }
