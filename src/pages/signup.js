@@ -11,6 +11,8 @@ import HttpStatus from '~/constants/httpStatusCode';
 import localStorage from '~/utils/localStorage';
 import StorageKey from '~/constants/storageKeys';
 
+import { toast, ToastContainer } from 'react-toastify';
+
 const Signup = () => {
   const navigate = useNavigate();
 
@@ -135,7 +137,11 @@ const Signup = () => {
     }
 
     //Signup inputs satisfied
+
     signupVerify();
+    toast.success(
+      'Plese wait about 5 seconds to receive the verification link via email',
+    );
   };
 
   const handleLogin = () => {
@@ -197,6 +203,7 @@ const Signup = () => {
           </div>
         </div>
 
+        <ToastContainer />
         <hr className="horizontal-line" />
       </Layout>
     </>
