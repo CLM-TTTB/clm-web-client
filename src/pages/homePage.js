@@ -194,7 +194,7 @@ const HOME = () => {
               <Button
                 text="View more ➔"
                 onClick={() => {
-                  navigate('/test');
+                  navigate('/guide');
                 }}
               />
             </div>

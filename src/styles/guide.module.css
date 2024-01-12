@@ -25,6 +25,32 @@ html {
 
 .contentContainer {
   display: flex;
+  width: 1200px;
+  justify-content: left;
+  color: white;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 50px;
+  font-size: 20px;
+  text-wrap: wrap;
+  flex-direction: row;
+}
+
+.contentContainer2 {
+  display: flex;
+  width: 1200px;
+  justify-content: left;
+  color: white;
+  margin-left: 170px;
+  margin-right: 100px;
+  margin-top: 10px;
+  font-size: 20px;
+  text-wrap: wrap;
+  flex-direction: row;
+}
+
+.contentContainer3 {
+  display: flex;
   width: 1300px;
   justify-content: left;
   color: white;
@@ -33,6 +59,8 @@ html {
   margin-top: 50px;
   font-size: 20px;
   text-wrap: wrap;
+  flex-direction: column;
+  text-align: justify;
 }
 
 .imgContainer {
@@ -49,4 +77,13 @@ html {
 
 .img {
   width: 50%;
+}
+
+.img2 {
+  width: 25%;
+}
+
+.step {
+  color: #ffdc11;
+  margin-right: 5px;
 }

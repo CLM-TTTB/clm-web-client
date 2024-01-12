@@ -56,6 +56,7 @@ const Leaderboard = () => {
                       : team.goalsScored - team.goalsConceded < 0
                         ? 'red'
                         : 'black',
+                  fontWeight: 'bold',
                 }}
               >
                 {`${team.goalsScored} / ${team.goalsConceded} ( ${

@@ -6,7 +6,7 @@ const Members = ({ teamMemberInfos }) => {
   return (
     <div className={styles.table}>
       <table>
-        <thead>
+        <thead className={styles.head}>
           <tr>
             <th>ID</th>
             <th>Name</th>
@@ -14,7 +14,7 @@ const Members = ({ teamMemberInfos }) => {
             <th>Note</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tbody}>
           {teamMemberInfos.map((member, index) => (
             <tr key={index}>
               <td>{index + 1}</td>

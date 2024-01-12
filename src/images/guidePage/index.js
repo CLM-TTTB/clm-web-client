@@ -11,3 +11,5 @@ export { default as LI12 } from '~/images/guidePage/LI12.png';
 export { default as SU1 } from '~/images/guidePage/SU1.png';
 export { default as SU2 } from '~/images/guidePage/SU2.png';
 export { default as SU3 } from '~/images/guidePage/SU3.png';
+export { default as SU4 } from '~/images/guidePage/SU4.png';
+export { default as SU5 } from '~/images/guidePage/SU5.png';
