@@ -91,7 +91,19 @@ const RegistrationList = ({ leagueID }) => {
               <td>{team.members.length}</td>
               <td>{team.phoneNo}</td>
               <td>{formatDate(team.createdAt)}</td>
-              <td style={{ fontWeight: 'bold' }}>{team.status}</td>
+              <td
+                style={{
+                  fontWeight: 'bold',
+                  color:
+                    team.status === 'ACCEPTED'
+                      ? 'green'
+                      : team.status === 'REFUSED'
+                        ? 'red'
+                        : 'inherit',
+                }}
+              >
+                {team.status}
+              </td>
               {source === 'from myLeague' && (
                 <td>
                   <button
