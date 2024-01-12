@@ -180,7 +180,7 @@ const CreateTeam = ({ leagueID, templateName }) => {
       </div>
 
       <div className={stylesAddMembers.parent}>
-        <h2 className={stylesAddMembers.title}>Add Members</h2>
+        <h2 className={stylesAddMembers.title}>Current Members</h2>
         <table className={stylesAddMembers.table}>
           <thead>
             <tr className={stylesAddMembers.head}>
