@@ -17,7 +17,7 @@ import HttpStatus from '~/constants/httpStatusCode';
 const SearchLeague = () => {
   const navigate = useNavigate();
 
-  const [totalPages, setTotalPages] = useState();
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [leagues, setLeagues] = useState([]);
   const [searchTeam, setsearchTeam] = useState('');
@@ -83,7 +83,7 @@ const SearchLeague = () => {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    fetchLeagues(newPage); //because we have already -1 for the currentPage when calling it
+    fetchLeagues(newPage); //because we have already minus 1 for the currentPage when calling it
   };
 
   const handleFormatChange = (selectedFormat) => {
@@ -173,7 +173,7 @@ const SearchLeague = () => {
                   '',
                   'KNOCKOUT',
                   'ROUND_ROBIN',
-                  'ROUND_ROBIN_WITH_KNOCKOUT',
+                  'KNOCKOUT_WITH_ROUND_ROBIN',
                 ]}
                 onChange={handleFormatChange}
                 value={formatFilter}

@@ -126,11 +126,11 @@ const CreateLeague = () => {
           setLeagueName('');
           setPhoneNumber('');
           setLocation('');
-          setAgeRange('');
+          setAgeRange('U21');
           setNumOfPlayers('');
-          setCompetitionFormat('');
+          setCompetitionFormat('KNOCKOUT');
           setNumOfTeams('');
-          setPrivacy('');
+          setPrivacy('Publish');
           setStartEstimateDate();
           setEndEstimateDate();
           setEnrollmentDeadline();
@@ -220,7 +220,7 @@ const CreateLeague = () => {
           placeholder="Competition Format"
           value={competitionFormat}
           onChange={(e) => setCompetitionFormat(e.target.value)}
-          options={['Knockout', 'Round-robin', 'Round-robin-with-Knockout']}
+          options={['Knockout', 'Round-robin', 'Knockout-with-Round-robin']}
           defaultValue="Knockout"
         />
 
