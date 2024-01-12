@@ -8,6 +8,12 @@
 
 .team {
   color: black;
+  text-align: center;
+  width: 100px;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dateTime {

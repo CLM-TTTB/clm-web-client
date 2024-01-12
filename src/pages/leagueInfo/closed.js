@@ -54,7 +54,7 @@ const Closed = ({ leagueID, leagueFormat }) => {
       ) : tabValue === 1 ? (
         <Schedule leagueID={leagueID} leagueFormat={leagueFormat} />
       ) : tabValue === 2 ? (
-        <Ranking />
+        <Ranking leagueID={leagueID} />
       ) : tabValue === 3 ? (
         <Teams leagueID={leagueID} />
       ) : (

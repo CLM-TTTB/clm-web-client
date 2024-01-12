@@ -77,6 +77,18 @@ export const getTeamsInLeagueByID = async (leagueID) => {
   }
 };
 
+export const updateKnockoutScheduleTree = async (leagueID) => {
+  try {
+    const response = await request.private.patch(
+      `${AuthEndpoint.GET_KNOCKOUT_SCHEDULE_TREE}/${leagueID}`,
+    );
+
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 //PUBLIC SERVICE
 export const getPublishLeagueByPage = async (currentPage, isSortByName) => {
   try {
