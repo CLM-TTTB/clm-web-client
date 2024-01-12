@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './schedule.module.css';
-
 import RoundRobin from './roundRobin';
 import KnockOut from './knockOut';
 
