@@ -5,6 +5,7 @@ import MatchResultModal from '~/components/matchResultModal';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation, Location } from 'react-router-dom';
 
 import { updateKnockoutScheduleTree } from '~/apiServices/leagueService';
 import HttpStatus from '~/constants/httpStatusCode';
@@ -19,6 +20,9 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const [leagueRounds, setLeaguesRounds] = useState([]);
+
+  const location = useLocation();
+  const source = location.state && location.state.source;
 
   const fetchScheduleByTree = async () => {
     try {
@@ -166,7 +170,9 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
           ));
         })}
 
-        <button className={styles.button}>Generate Schedule</button>
+        {source === 'from myLeague' && !leagueRounds && (
+          <button className={styles.button}>Generate Schedule</button>
+        )}
 
         {toggleModal && selectedFixture && (
           <div className={styles.modalOverlay} onClick={handleOverlayClick}>
