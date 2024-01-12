@@ -1,6 +1,6 @@
 import styles from '~/styles/teamCard.module.css';
 import people from '~/images/leagueCard/people.png';
-import pin from '~/images/leagueCard/pin.png';
+import phone from '~/images/leagueCard/TelephoneFill.png';
 
 const TeamCard = ({
   profileSrc,
@@ -8,7 +8,7 @@ const TeamCard = ({
   win,
   draw,
   lost,
-  location,
+  contactPhoneNumber,
   onDetailClick,
   numOfPlayers,
 }) => {
@@ -29,8 +29,8 @@ const TeamCard = ({
           >{`${win} Wins - ${draw} Draws -  ${lost} Losses`}</div> */}
         </div>
         <div className={styles.iconPinOutlineParent}>
-          <img className={styles.iconCalendar} alt="" src={pin} />
-          <div className={styles.text}>{location}</div>
+          <img className={styles.iconCalendar} alt="" src={phone} />
+          <div className={styles.text}>{contactPhoneNumber}</div>
         </div>
       </div>
 
