@@ -5,11 +5,11 @@ import RoundRobin from './roundRobin';
 import KnockOut from './knockOut';
 
 const FootballSchedule = ({ leagueID, leagueFormat }) => {
-  const [format, setFormat] = useState();
+  const [format, setFormat] = useState(leagueFormat);
 
-  return (
-    <>
-      <div className={styles.formats}>
+  const renderScheduleChoosingButton = () => {
+    if (leagueFormat === 'ROUND_ROBIN') {
+      return (
         <button
           className={styles.button}
           onClick={() => {
@@ -18,6 +18,9 @@ const FootballSchedule = ({ leagueID, leagueFormat }) => {
         >
           ROUND-ROBIN
         </button>
+      );
+    } else if (leagueFormat === 'KNOCKOUT') {
+      return (
         <button
           className={styles.button}
           onClick={() => {
@@ -26,9 +29,40 @@ const FootballSchedule = ({ leagueID, leagueFormat }) => {
         >
           KNOCK-OUT
         </button>
-      </div>
+      );
+    } else {
+      return (
+        <>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setFormat('ROUND_ROBIN');
+            }}
+          >
+            ROUND-ROBIN
+          </button>
+          <button
+            className={styles.button}
+            onClick={() => {
+              setFormat('KNOCKOUT');
+            }}
+          >
+            KNOCK-OUT
+          </button>
+        </>
+      );
+    }
+  };
 
-      {format === 'KNOCKOUT' ? <KnockOut /> : <RoundRobin />}
+  return (
+    <>
+      <div className={styles.formats}>{renderScheduleChoosingButton()}</div>
+
+      {format === 'KNOCKOUT' ? (
+        <KnockOut leagueID={leagueID} />
+      ) : (
+        <RoundRobin />
+      )}
     </>
   );
 };

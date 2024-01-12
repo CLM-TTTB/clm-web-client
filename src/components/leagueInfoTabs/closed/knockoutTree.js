@@ -3,28 +3,30 @@ import styles from './knockoutTree.module.css';
 
 import cup from '~/images/cup.png';
 
-const KnockoutTree = () => {
+const KnockoutTree = ({ leagueRounds }) => {
   const [tournamentData, setTournamentData] = useState(null);
   let gap = 50;
 
-  useEffect(() => {
-    //USE TEST DATA
-    import('./(test) message.json')
-      .then((data) => setTournamentData(data.default))
-      .catch((error) => console.error('Error importing data:', error));
-  }, []);
+  console.log(leagueRounds);
 
-  if (!tournamentData) {
-    return <div>Loading...</div>;
-  }
+  // useEffect(() => {
+  //   //USE TEST DATA
+  //   import('./(test) message.json')
+  //     .then((data) => setTournamentData(data.default))
+  //     .catch((error) => console.error('Error importing data:', error));
+  // }, []);
 
-  const { rounds } = tournamentData;
+  // if (!tournamentData) {
+  //   return <div>Loading...</div>;
+  // }
+
+  const rounds = leagueRounds;
 
   const generateGames = (games) => {
     return games.map((game) => ({
       id: game.gameId,
-      teamA: game.teams.first ? game.teams.first.id : '-',
-      teamB: game.teams.second ? game.teams.second.id : '-',
+      teamA: game.teams.first ? game.teams.first.name : '-',
+      teamB: game.teams.second ? game.teams.second.name : '-',
     }));
   };
 
@@ -38,7 +40,7 @@ const KnockoutTree = () => {
         return (
           <div key={columnIndex} className={styles.column}>
             {roundGames.map((game, rowIndex) => (
-              <div key={game.id} className={styles.game}>
+              <div key={rowIndex} className={styles.game}>
                 {rowIndex % 2 === 1 && rowIndex > 0 && (
                   <div style={{ height: `${gap}px` }}></div>
                 )}

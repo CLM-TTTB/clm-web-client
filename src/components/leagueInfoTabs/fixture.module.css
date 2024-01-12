@@ -42,9 +42,18 @@
   font-weight: bold;
 }
 
-.date {
-  margin-top: -15px;
+.date,
+.location {
+  position: absolute;
+  color: black;
   font-weight: bold;
+}
+
+.date {
+  left: 80px;
+}
+.location {
+  right: 80px;
 }
 
 .time {

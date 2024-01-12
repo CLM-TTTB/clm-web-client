@@ -1,0 +1,42 @@
+.parent {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.teamName {
+  font-weight: bold;
+}
+
+.table {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.tr {
+  gap: 10px;
+}
+
+.td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.button {
+  position: relative;
+  border: solid 1px;
+  border-radius: 5px;
+  margin-left: 5px;
+}

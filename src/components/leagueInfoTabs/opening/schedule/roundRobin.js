@@ -85,6 +85,8 @@ const RoundRobin = () => {
             key={index}
             teamA={fixture.teamA}
             teamB={fixture.teamB}
+            date={fixture.date}
+            location={fixture.location}
             isCompleted={fixture.isCompleted}
             resultA={fixture.resultA}
             resultB={fixture.resultB}
@@ -103,6 +105,8 @@ const RoundRobin = () => {
                 score1={score1}
                 score2={score2}
                 onScoreChange={handleScoreChange}
+                date={selectedFixture.date}
+                gameLocation={selectedFixture.location}
               />
             </div>
           </div>

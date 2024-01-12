@@ -1,5 +1,3 @@
-// Fixture.js
-
 import React from 'react';
 import styles from './fixture.module.css';
 
@@ -10,11 +8,12 @@ const Fixture = ({
   resultA,
   resultB,
   date,
-  time,
+  location,
   onResultClick,
 }) => {
   return (
     <div className={styles.fixtureContainer}>
+      <div className={styles.date}>{date}</div>
       <div className={styles.team}>{teamA}</div>
 
       <div className={styles.dateTime} onClick={onResultClick}>
@@ -25,6 +24,7 @@ const Fixture = ({
         </div>
       </div>
 
+      <div className={styles.location}>{location}</div>
       <div className={styles.team}>{teamB}</div>
     </div>
   );

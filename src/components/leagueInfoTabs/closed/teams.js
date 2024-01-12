@@ -57,6 +57,7 @@ const Teams = ({ leagueID }) => {
                   // win={team.wdl.win}
                   // draw={team.wdl.draw}
                   // lost={team.wdl.lost}
+                  contactPhoneNumber={team.phoneNo}
                   onDetailClick={() => handleDetail(team)}
                   numOfPlayers={team.members.length}
                 />
