@@ -95,25 +95,37 @@ const MatchResultModal = ({
   };
 
   const handleSaveClick = async () => {
-    const winner = editedScore1 > editedScore2 ? team1ID : team2ID;
-    console.log(gameID);
-    try {
-      const response = await updateKnockoutGameResult(
-        leagueID,
-        gameID,
-        winner,
-        editedScore1,
-        editedScore2,
-      );
-      if (response.status === HttpStatus.OK) {
-        toast.success('Score updated successfully');
-        setIsEditMode(false);
-        onScoreChange();
+    if (editedScore1 === editedScore2) {
+      toast.error('Knock out match result cannot be draw, please re-check!!');
+    } else {
+      let winnerGoalsFor, winnerGoalsAgainst, winner;
+      if (editedScore1 > editedScore2) {
+        winner = team1ID;
+        winnerGoalsFor = editedScore1;
+        winnerGoalsAgainst = editedScore2;
       } else {
-        toast.error('Unexpected server error, please try again later');
+        winner = team2ID;
+        winnerGoalsFor = editedScore2;
+        winnerGoalsAgainst = editedScore1;
       }
-    } catch (err) {
-      console.log(err);
+      try {
+        const response = await updateKnockoutGameResult(
+          leagueID,
+          gameID,
+          winner,
+          winnerGoalsFor,
+          winnerGoalsAgainst,
+        );
+        if (response.status === HttpStatus.OK) {
+          toast.success('Score updated successfully');
+          setIsEditMode(false);
+          onScoreChange();
+        } else {
+          toast.error('Unexpected server error, please try again later');
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -217,8 +229,8 @@ const MatchResultModal = ({
                 )}
               </div>
 
-              <div className={styles.yellowCard}>YELLOW CARD</div>
-              <div className={styles.redCard}>RED CARD</div>
+              {/* <div className={styles.yellowCard}>YELLOW CARD</div>
+              <div className={styles.redCard}>RED CARD</div> */}
             </div>
 
             <div>
@@ -235,10 +247,11 @@ const MatchResultModal = ({
                   {teamName2}
                 </div>
               </div>
+              <div className={styles.space} />
             </div>
           </div>
 
-          <div className={styles.propertyContainer}>
+          {/* <div className={styles.propertyContainer}>
             <div className={styles.property}>
               <div className={styles.num1}>
                 <h4>
@@ -258,9 +271,9 @@ const MatchResultModal = ({
                 </h4>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className={styles.propertyContainer}>
+          {/* <div className={styles.propertyContainer}>
             <div className={styles.property}>
               <div className={styles.num1}>
                 <h4>
@@ -280,7 +293,7 @@ const MatchResultModal = ({
                 </h4>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* {toggleDetailModal && (
           <MatchDetailModal

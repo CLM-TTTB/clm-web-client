@@ -27,6 +27,21 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
   const location = useLocation();
   const source = location.state && location.state.source;
 
+  const regenerateSchedule = async () => {
+    try {
+      const response = await generateKnockoutScheduleTree(leagueID);
+
+      if (response.status === HttpStatus.OK) {
+        // console.log(response.data?.rounds);
+        setLeaguesRounds(response.data?.rounds);
+      } else {
+        toast.error('Unexpected server errors');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const fetchScheduleByTree = async () => {
     try {
       const response = await updateKnockoutScheduleTree(leagueID);
@@ -40,6 +55,10 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const onGenerateSchedulePress = () => {
+    regenerateSchedule();
   };
 
   useEffect(() => {
@@ -163,8 +182,8 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
               teamA={game.teams?.first?.name}
               teamB={game.teams?.second?.name}
               isCompleted={gamesPerRound.finished}
-              resultA={game.teams?.first?.goalsFor}
-              resultB={game.teams?.second?.goalsFor}
+              resultA={game.score[0]}
+              resultB={game.score[1]}
               onResultClick={() => handleResultClick(game, gamesPerRound)}
               date={gamesPerRound.startTime}
               location={gamesPerRound.stadium}
@@ -172,8 +191,11 @@ const KnockOut = ({ leagueStatus, leagueID }) => {
           ));
         })}
 
-        {source === 'from myLeague' && !leagueRounds && (
-          <button className={styles.button}>Generate Schedule</button>
+        {source === 'from myLeague' && leagueRounds !== [] && (
+          <button className={styles.button} onClick={onGenerateSchedulePress}>
+            Generate New Schedule (Caution!! This action will regenerate the
+            schedule and result of League)
+          </button>
         )}
 
         {toggleModal && selectedFixture && (
