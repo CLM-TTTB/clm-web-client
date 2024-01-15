@@ -9,17 +9,6 @@ const KnockoutTree = ({ leagueRounds }) => {
 
   console.log(leagueRounds);
 
-  // useEffect(() => {
-  //   //USE TEST DATA
-  //   import('./(test) message.json')
-  //     .then((data) => setTournamentData(data.default))
-  //     .catch((error) => console.error('Error importing data:', error));
-  // }, []);
-
-  // if (!tournamentData) {
-  //   return <div>Loading...</div>;
-  // }
-
   const rounds = leagueRounds;
 
   const generateGames = (games) => {
@@ -37,6 +26,7 @@ const KnockoutTree = ({ leagueRounds }) => {
     <div className={styles.treeContainer}>
       {games.map((roundGames, columnIndex) => {
         gap *= 2;
+
         return (
           <div key={columnIndex} className={styles.column}>
             {roundGames.map((game, rowIndex) => (
@@ -67,12 +57,25 @@ const KnockoutTree = ({ leagueRounds }) => {
                     </div>
                   </div>
                 </div>
-
                 {rowIndex % 2 === 0 && (
                   <div style={{ height: `${gap}px` }}></div>
                 )}
               </div>
             ))}
+            {roundGames.length % 2 != 0 && columnIndex === 0 && (
+              <>
+                <div style={{ height: '20px' }}></div>
+                <div className={styles.gameBoxContainer}>
+                  <div className={styles.gameBoxDecorator}></div>
+                  <div className={styles.gameBox}>
+                    {' '}
+                    <div className={styles.team}>-</div>
+                    {' vs '}
+                    <div className={styles.team}>-</div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         );
       })}
