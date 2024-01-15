@@ -16,7 +16,7 @@
   flex-direction: row;
   background-color: #ffdc11;
   width: 100%;
-  height: 56px;
+  height: 70px;
   color: black;
   justify-content: space-between;
   align-items: center;
@@ -29,9 +29,10 @@
   display: flex;
   flex-direction: column;
   margin-left: 60px;
-  margin-top: -15px;
+  margin-top: 11px;
   align-items: center;
   margin-bottom: 20px;
+  gap: 10px;
 }
 
 .location {
@@ -40,23 +41,38 @@
 }
 
 .locationEdit {
+  margin-top: 15px;
   font-family: 'Manrope';
   border-radius: 5px;
   text-align: center;
   border: solid 1px black;
   background-color: transparent;
   font-size: 14px;
+  width: 190px;
 }
 
+.yearEdit,
 .dateEdit {
   font-family: 'Manrope';
-  font-weight: bold;
-  font-size: 19px;
   text-align: center;
   background-color: transparent;
   border-radius: 5px;
   border: solid black 1px;
-  width: 180px;
+  width: 25px;
+}
+
+.space {
+  width: 10px;
+}
+
+.yearEdit {
+  width: 40px;
+}
+
+.dateInput {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
 }
 
 .buttonContainer {
@@ -123,6 +139,7 @@
   white-space: nowrap;
   text-align: center;
   align-items: center;
+  margin-top: -60px;
 }
 
 .scoreContainer {

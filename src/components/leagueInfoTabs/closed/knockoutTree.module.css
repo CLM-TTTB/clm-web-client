@@ -92,8 +92,22 @@
 }
 
 .cup {
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
-  margin-right: -60px;
+  width: 60px;
+  height: 60px;
+}
+
+.winnerColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 50px;
+  margin-top: -20px;
+  gap: 10px;
+}
+
+.winner {
+  color: #ffdc11;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
 }

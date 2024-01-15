@@ -23,7 +23,6 @@ const MatchResultModal = ({
   property1,
   property2,
   onScoreChange,
-  date,
   gameLocation, //the name 'location' is already use for routing
 }) => {
   const location = useLocation();
@@ -33,7 +32,6 @@ const MatchResultModal = ({
   const [editedScore1, setEditedScore1] = useState(score1);
   const [editedScore2, setEditedScore2] = useState(score2);
 
-  const [editedDate, setEditedDate] = useState(date);
   const [editedLocation, setEditedLocation] = useState(gameLocation);
 
   const [selectedTeam, setSelectedTeam] = useState('');
@@ -47,6 +45,14 @@ const MatchResultModal = ({
 
   const [redCardsTeam1, setRedCardsTeam1] = useState({});
   const [redCardsTeam2, setRedCardsTeam2] = useState({});
+
+  const [inputYear, setInputYear] = useState('');
+  const [inputMonth, setInputMonth] = useState(''); // Assuming the default month is January (01)
+  const [inputDay, setInputDay] = useState(''); // Assuming the default day is the first day (01)
+  const [inputHour, setInputHour] = useState(''); // Assuming the default hour is midnight (00)
+  const [inputMinute, setInputMinute] = useState(''); // Assuming the default minute is 00
+
+  const formattedDate = `${inputYear}-${inputMonth}-${inputDay}T${inputHour}:${inputMinute}:00.000z`;
 
   // const handleAddGoal = (team, playerId) => {
   //   if (team === 'Team1') {
@@ -140,23 +146,63 @@ const MatchResultModal = ({
         <div className={styles.titleContainer}>
           <div></div>
           <div className={styles.title}>
-            <h3 className={styles.date}>
+            <div className={styles.date}>
               {isEditMode ? (
-                <input
-                  className={styles.dateEdit}
-                  type="text"
-                  value={editedDate}
-                  onChange={(e) => setEditedDate(e.target.value)}
-                />
+                <div className={styles.dateInput}>
+                  <input
+                    className={styles.yearEdit}
+                    type="text"
+                    placeholder="YYYY"
+                    value={inputYear}
+                    onChange={(e) => setInputYear(e.target.value)}
+                  />
+                  -
+                  <input
+                    className={styles.dateEdit}
+                    type="text"
+                    placeholder="MM"
+                    value={inputMonth}
+                    onChange={(e) => setInputMonth(e.target.value)}
+                  />
+                  -
+                  <input
+                    className={styles.dateEdit}
+                    type="text"
+                    placeholder="DD"
+                    value={inputDay}
+                    onChange={(e) => setInputDay(e.target.value)}
+                  />
+                  <div className={styles.space} />
+                  <input
+                    className={styles.dateEdit}
+                    type="text"
+                    placeholder="hh"
+                    value={inputHour}
+                    onChange={(e) => setInputHour(e.target.value)}
+                  />
+                  :
+                  <input
+                    className={styles.dateEdit}
+                    type="text"
+                    placeholder="mm"
+                    value={inputMinute}
+                    onChange={(e) => setInputMinute(e.target.value)}
+                  />
+                </div>
               ) : (
-                editedDate
+                //RETURN STRING: formattedDate (2023-01-11T08:23:00.000z)
+
+                <p>
+                  {inputYear}-{inputMonth}-{inputDay} {inputHour}:{inputMinute}
+                </p>
               )}
-            </h3>
+            </div>
 
             <div className={styles.location}>
               {isEditMode ? (
                 <input
                   className={styles.locationEdit}
+                  placeholder="Location"
                   type="text"
                   value={editedLocation}
                   onChange={(e) => setEditedLocation(e.target.value)}
@@ -222,9 +268,9 @@ const MatchResultModal = ({
                   </>
                 ) : (
                   <>
-                    <h1>{score1}</h1>
+                    <h1>{editedScore1}</h1>
                     <h1 className={styles.devider}> - </h1>
-                    <h1>{score2}</h1>
+                    <h1>{editedScore2}</h1>
                   </>
                 )}
               </div>

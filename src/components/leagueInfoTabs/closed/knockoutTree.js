@@ -77,7 +77,10 @@ const KnockoutTree = ({ leagueRounds }) => {
         );
       })}
 
-      <img className={styles.cup} alt="cup" src={cup}></img>
+      <div className={styles.winnerColumn}>
+        <img className={styles.cup} alt="cup" src={cup}></img>
+        <div className={styles.winner}>CHAMPIONS</div>
+      </div>
     </div>
   );
 };
