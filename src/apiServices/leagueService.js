@@ -68,7 +68,7 @@ export const getLeagueByID = async (id) => {
 export const getTeamsInLeagueByID = async (leagueID) => {
   try {
     const response = await request.private.get(
-      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams`,
+      `${AuthEndpoint.LEAGUE_SERVICES}/${leagueID}/teams?size=32`,
     );
 
     return response;
