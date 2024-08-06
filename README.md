@@ -11,6 +11,10 @@
 | [react-toastify](https://github.com/fkhadra/react-toastify)                             | Make toast notification       |
 | [babel-plugin-module-resolver](https://github.com/tleunen/babel-plugin-module-resolver) | To import with alias          |
 
+## DEMO
+
+[Demo video](https://drive.google.com/file/d/10nSUVCWJ82ilFlEhpscdzam2YPuAxbsH/view)
+
 ## How to use
 
 1. Clone this project
