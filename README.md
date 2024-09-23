@@ -17,9 +17,10 @@
 
 ## How to use
 
-1. Clone this project
-2. Run `yarn` or `npm install`
-3. Run `yarn start` or `npm start` to start project
+1. Clone the back-end repository: [https://github.com/CLM-TTTB/clm-service]([url](https://github.com/CLM-TTTB/clm-service))
+2. Clone this project
+3. Run `yarn` or `npm install`
+4. Run `yarn start` or `npm start` to start project
 
 ## Convention:
 
